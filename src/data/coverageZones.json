@@ -1,0 +1,152 @@
+[
+  {
+    "id": "zone-001",
+    "name": "Borrowdale Phase 1",
+    "province": "Harare",
+    "city": "Harare",
+    "suburb": "Borrowdale",
+    "status": "LIVE",
+    "description": "Fibre is currently available in Borrowdale. Installations are active and ongoing.",
+    "isActive": true,
+    "polygonGeoJson": {
+      "type": "Polygon",
+      "coordinates": [
+        [
+          [31.086, -17.770],
+          [31.100, -17.773],
+          [31.113, -17.770],
+          [31.115, -17.760],
+          [31.108, -17.752],
+          [31.090, -17.752],
+          [31.084, -17.762],
+          [31.086, -17.770]
+        ]
+      ]
+    }
+  },
+  {
+    "id": "zone-002",
+    "name": "Avondale Phase 1",
+    "province": "Harare",
+    "city": "Harare",
+    "suburb": "Avondale",
+    "status": "IN_PROGRESS",
+    "description": "Fibre rollout is currently in progress in Avondale. Infrastructure installation has begun.",
+    "isActive": true,
+    "polygonGeoJson": {
+      "type": "Polygon",
+      "coordinates": [
+        [
+          [31.020, -17.804],
+          [31.034, -17.806],
+          [31.044, -17.802],
+          [31.046, -17.792],
+          [31.040, -17.786],
+          [31.024, -17.787],
+          [31.018, -17.795],
+          [31.020, -17.804]
+        ]
+      ]
+    }
+  },
+  {
+    "id": "zone-003",
+    "name": "Mount Pleasant Phase 1",
+    "province": "Harare",
+    "city": "Harare",
+    "suburb": "Mount Pleasant",
+    "status": "PLANNED",
+    "description": "Mount Pleasant is included in our next rollout phase. Expected to begin soon.",
+    "isActive": true,
+    "polygonGeoJson": {
+      "type": "Polygon",
+      "coordinates": [
+        [
+          [31.046, -17.778],
+          [31.060, -17.780],
+          [31.072, -17.776],
+          [31.073, -17.765],
+          [31.064, -17.759],
+          [31.049, -17.760],
+          [31.044, -17.769],
+          [31.046, -17.778]
+        ]
+      ]
+    }
+  },
+  {
+    "id": "zone-004",
+    "name": "Southgate Phase 3",
+    "province": "Harare",
+    "city": "Harare",
+    "suburb": "Southgate",
+    "status": "LIVE",
+    "description": "Fibre is live in Southgate. 3,600 households now covered with active drops.",
+    "isActive": true,
+    "polygonGeoJson": {
+      "type": "Polygon",
+      "coordinates": [
+        [
+          [31.033, -17.897],
+          [31.048, -17.900],
+          [31.062, -17.896],
+          [31.064, -17.884],
+          [31.055, -17.878],
+          [31.037, -17.879],
+          [31.031, -17.888],
+          [31.033, -17.897]
+        ]
+      ]
+    }
+  },
+  {
+    "id": "zone-005",
+    "name": "Eastlea Phase 1",
+    "province": "Harare",
+    "city": "Harare",
+    "suburb": "Eastlea",
+    "status": "INVESTIGATION",
+    "description": "We are currently assessing demand and infrastructure feasibility in Eastlea.",
+    "isActive": true,
+    "polygonGeoJson": {
+      "type": "Polygon",
+      "coordinates": [
+        [
+          [31.063, -17.823],
+          [31.076, -17.825],
+          [31.087, -17.821],
+          [31.088, -17.811],
+          [31.080, -17.805],
+          [31.066, -17.806],
+          [31.061, -17.815],
+          [31.063, -17.823]
+        ]
+      ]
+    }
+  },
+  {
+    "id": "zone-006",
+    "name": "Highlands Phase 1",
+    "province": "Harare",
+    "city": "Harare",
+    "suburb": "Highlands",
+    "status": "IN_PROGRESS",
+    "description": "Active cable laying underway in Highlands. Expected to go live in coming weeks.",
+    "isActive": true,
+    "polygonGeoJson": {
+      "type": "Polygon",
+      "coordinates": [
+        [
+          [31.057, -17.798],
+          [31.070, -17.800],
+          [31.081, -17.796],
+          [31.082, -17.785],
+          [31.073, -17.779],
+          [31.059, -17.780],
+          [31.055, -17.789],
+          [31.057, -17.798]
+        ]
+      ]
+    }
+  }
+]
