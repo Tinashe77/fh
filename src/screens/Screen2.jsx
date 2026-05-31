@@ -1,23 +1,38 @@
 import React from 'react';
+import heroImage from '../assets/hero.png';
 
 const Screen2 = () => {
   return (
-    <main className="pt-40 pb-20">
-      <header className="px-8 max-w-7xl mx-auto text-center md:text-left mb-20">
-        <div className="max-w-3xl">
-          <span className="inline-block px-4 py-1.5 mb-8 text-xs font-bold uppercase tracking-widest bg-secondary-container text-on-secondary-fixed rounded-full shadow-sm">
-            Infrastructure Deployment
-          </span>
-          <h1 className="text-5xl md:text-7xl font-extrabold text-primary tracking-tight mb-8 font-headline">
-            Installation Pathways
-          </h1>
-          <p className="text-xl text-on-surface-variant leading-relaxed opacity-80">
-            Streamlined fiber-to-the-home and business solutions tailored for every architectural landscape. Discover the right connection journey for your property.
-          </p>
+    <main className="pb-20 overflow-hidden">
+      <header className="relative min-h-[680px] w-full overflow-hidden pt-32 pb-24 flex items-center bg-primary">
+        <div
+          aria-hidden="true"
+          className="absolute inset-0 bg-cover bg-center opacity-35"
+          style={{ backgroundImage: `url(${heroImage})` }}
+        />
+        <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(1,2,48,0.96)_0%,rgba(3,5,104,0.86)_44%,rgba(3,5,104,0.5)_72%,rgba(3,5,104,0.2)_100%)]" />
+        <img
+          aria-hidden="true"
+          className="absolute right-[-8rem] top-1/2 hidden w-[48rem] max-w-none -translate-y-1/2 opacity-80 lg:block"
+          src={heroImage}
+          alt=""
+        />
+        <div className="relative z-10 mx-auto w-full max-w-7xl px-8 text-center md:text-left">
+          <div className="max-w-3xl">
+            <span className="inline-block px-4 py-1.5 mb-8 text-xs font-bold uppercase tracking-widest bg-secondary-container text-on-secondary-fixed rounded-full shadow-sm">
+              Infrastructure Deployment
+            </span>
+            <h1 className="text-5xl md:text-7xl font-extrabold text-white tracking-tight mb-8 font-headline">
+              Installation Pathways
+            </h1>
+            <p className="text-xl text-white/80 leading-relaxed">
+              Streamlined fiber-to-the-home and business solutions tailored for every architectural landscape. Discover the right connection journey for your property.
+            </p>
+          </div>
         </div>
       </header>
 
-      <div className="px-8 max-w-7xl mx-auto pb-32">
+      <div className="px-8 max-w-7xl mx-auto py-32">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-10">
 
           <div className="glass-card group relative p-10 rounded-4xl transition-all duration-500 hover:shadow-[0_32px_64px_rgba(3,5,104,0.1)] hover:-translate-y-1">

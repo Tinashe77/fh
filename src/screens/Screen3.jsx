@@ -1,202 +1,156 @@
 import React from 'react';
 
+const residentialPlans = [
+  {
+    name: 'Essential Home',
+    speed: '25 Mbps',
+    price: 'US$40',
+    description: 'Reliable fibre for everyday browsing, streaming, school work and messaging.',
+  },
+  {
+    name: 'Family Home',
+    speed: '50 Mbps',
+    price: 'US$60',
+    description: 'Built for busy households with multiple devices, HD streaming and remote work.',
+    featured: true,
+  },
+  {
+    name: 'Power Home',
+    speed: '100 Mbps+',
+    price: 'Custom',
+    description: 'High-capacity fibre for gaming, 4K entertainment and smart home devices.',
+  },
+];
+
+const smePlans = [
+  'Symmetric speeds for cloud tools and video meetings',
+  'Priority support for business-critical connectivity',
+  'Static IP options available on request',
+  'Scalable packages for teams and small offices',
+];
+
 const Screen3 = () => {
   return (
-    <main className="pt-40 pb-20">
-      <section className="max-w-7xl mx-auto px-8 mb-20 text-center md:text-left">
-        <div className="max-w-3xl">
-          <span className="inline-block py-1.5 px-4 bg-secondary-fixed/50 backdrop-blur-sm text-on-secondary-fixed text-xs font-bold tracking-widest uppercase rounded-full mb-6">
-            Premium Connectivity
-          </span>
-          <h1 className="text-5xl md:text-7xl font-extrabold text-primary mb-6 tracking-tight font-headline">
-            Architected for Speed.
-          </h1>
-          <p className="text-xl text-on-surface-variant leading-relaxed">
-            Choose a plan that matches your digital lifestyle. Transparent pricing, no hidden fees, and the most reliable fiber network in Zimbabwe.
-          </p>
+    <main className="bg-white pb-20">
+      <section
+        className="relative flex min-h-[620px] items-center overflow-hidden pt-28"
+        style={{
+          backgroundImage:
+            'linear-gradient(90deg, rgba(1,15,61,0.92), rgba(3,5,104,0.7), rgba(3,5,104,0.28)), url(https://images.unsplash.com/photo-1551434678-e076c223a692?auto=format&fit=crop&w=1800&q=85)',
+          backgroundPosition: 'center',
+          backgroundSize: 'cover',
+        }}
+      >
+        <div className="mx-auto w-full max-w-7xl px-8">
+          <div className="max-w-3xl">
+            <span className="mb-6 inline-flex rounded-full bg-secondary-container px-4 py-2 text-xs font-black uppercase tracking-[0.25em] text-on-secondary-fixed">
+              Service Plans
+            </span>
+            <h1 className="font-headline text-5xl font-extrabold leading-tight text-white md:text-7xl">
+              Fibre packages for homes and businesses.
+            </h1>
+            <p className="mt-7 max-w-2xl text-xl leading-relaxed text-white/82">
+              Choose residential, SME or tailored business connectivity with clear speed tiers, local support and installation guidance.
+            </p>
+          </div>
         </div>
       </section>
 
-      <section className="max-w-7xl mx-auto px-8 mb-32">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
-
-          <div className="glass-card p-10 rounded-2xl shadow-[0_30px_60px_-15px_rgba(0,0,0,0.05)] transition-all duration-500 hover:shadow-[0_40px_80px_-15px_rgba(0,0,0,0.1)] hover:-translate-y-1">
-            <div className="flex justify-between items-start mb-8">
-              <div>
-                <h3 className="text-2xl font-bold text-primary-container mb-2 font-headline">Residential Home Connect</h3>
-                <p className="text-on-surface-variant">Perfect for households and streaming.</p>
-              </div>
-              <div className="text-right">
-                <span className="text-sm font-semibold text-outline">Starting at</span>
-                <div className="text-4xl font-black text-primary font-headline">US$40<span className="text-lg font-normal text-outline">/pm</span></div>
-              </div>
-            </div>
-            <ul className="space-y-4 mb-10">
-              <li className="flex items-center gap-3">
-                <span className="material-symbols-outlined text-secondary" style={{fontVariationSettings: "'FILL' 1"}}>check_circle</span>
-                <span className="text-on-surface font-medium">Speeds up to 25 Mbps</span>
-              </li>
-              <li className="flex items-center gap-3">
-                <span className="material-symbols-outlined text-secondary" style={{fontVariationSettings: "'FILL' 1"}}>check_circle</span>
-                <span className="text-on-surface font-medium">Unlimited Data Allowance</span>
-              </li>
-              <li className="flex items-center gap-3">
-                <span className="material-symbols-outlined text-secondary" style={{fontVariationSettings: "'FILL' 1"}}>check_circle</span>
-                <span className="text-on-surface font-medium">Dual-band Wi-Fi 6 Router</span>
-              </li>
-              <li className="flex items-center gap-3">
-                <span className="material-symbols-outlined text-secondary" style={{fontVariationSettings: "'FILL' 1"}}>check_circle</span>
-                <span className="text-on-surface font-medium">Next-Day Installation</span>
-              </li>
-            </ul>
-            <button className="w-full py-4 bg-primary-container text-on-primary font-bold rounded-full hover:opacity-95 transition-all flex items-center justify-center gap-2 group">
-              Get Started <span className="material-symbols-outlined transition-transform group-hover:translate-x-1" data-icon="arrow_forward">arrow_forward</span>
-            </button>
+      <section className="bg-surface-container-low py-20">
+        <div className="mx-auto max-w-7xl px-8">
+          <div className="mb-12 max-w-3xl">
+            <span className="text-xs font-black uppercase tracking-[0.25em] text-secondary">Residential</span>
+            <h2 className="mt-3 font-headline text-4xl font-extrabold text-primary-container">
+              Home service plans
+            </h2>
+            <p className="mt-4 text-lg leading-relaxed text-on-surface-variant">
+              These starter tiers follow the package direction in the website notes. Final package names and flyer pricing can be swapped in when the service flyers are ready.
+            </p>
           </div>
 
-          <div className="glass-glow relative p-10 rounded-2xl transform md:-translate-y-4 transition-all duration-500 hover:shadow-[0_50px_90px_-20px_rgba(253,204,0,0.3)]">
-            <div className="absolute top-0 right-10 -translate-y-1/2 px-5 py-1.5 bg-secondary-container text-on-secondary-container text-xs font-black rounded-full uppercase tracking-tight shadow-md">
-              Recommended
-            </div>
-            <div className="flex justify-between items-start mb-8">
-              <div>
-                <h3 className="text-2xl font-bold text-primary-container mb-2 font-headline">SME Business Plans</h3>
-                <p className="text-on-surface-variant">Enterprise reliability for growing teams.</p>
-              </div>
-              <div className="text-right">
-                <span className="text-sm font-semibold text-outline">Starting at</span>
-                <div className="text-4xl font-black text-primary font-headline">US$75<span className="text-lg font-normal text-outline">/pm</span></div>
-              </div>
-            </div>
-            <ul className="space-y-4 mb-10">
-              <li className="flex items-center gap-3">
-                <span className="material-symbols-outlined text-secondary-container" style={{fontVariationSettings: "'FILL' 1"}}>verified</span>
-                <span className="text-on-surface font-medium">Symmetric Speeds (50 Mbps+)</span>
-              </li>
-              <li className="flex items-center gap-3">
-                <span className="material-symbols-outlined text-secondary-container" style={{fontVariationSettings: "'FILL' 1"}}>verified</span>
-                <span className="text-on-surface font-medium">Dedicated Priority Support</span>
-              </li>
-              <li className="flex items-center gap-3">
-                <span className="material-symbols-outlined text-secondary-container" style={{fontVariationSettings: "'FILL' 1"}}>verified</span>
-                <span className="text-on-surface font-medium">Static IP Address Included</span>
-              </li>
-              <li className="flex items-center gap-3">
-                <span className="material-symbols-outlined text-secondary-container" style={{fontVariationSettings: "'FILL' 1"}}>verified</span>
-                <span className="text-on-surface font-medium">99.95% SLA Guarantee</span>
-              </li>
-            </ul>
-            <button className="w-full py-4 bg-secondary-container text-on-secondary-container font-black rounded-full hover:brightness-105 transition-all flex items-center justify-center gap-2 group shadow-lg">
-              Sign Up Now <span className="material-symbols-outlined transition-transform group-hover:-translate-y-1 group-hover:translate-x-1" data-icon="rocket_launch">rocket_launch</span>
-            </button>
-          </div>
-
-        </div>
-      </section>
-
-      <section className="mb-32">
-        <div className="bg-surface-container-low/50 py-24 rounded-[3rem] mx-4">
-          <div className="max-w-7xl mx-auto px-8 grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
-            <div>
-              <h2 className="text-4xl md:text-5xl font-extrabold text-primary-container mb-8 leading-tight font-headline">
-                Uptime Guaranteed.<br />Value Engineered.
-              </h2>
-              <div className="space-y-8">
-                <div className="flex gap-6 items-start">
-                  <div className="w-14 h-14 shrink-0 bg-white shadow-sm rounded-2xl flex items-center justify-center text-primary-container">
-                    <span className="material-symbols-outlined text-3xl" style={{fontVariationSettings: "'FILL' 1"}}>speed</span>
-                  </div>
+          <div className="grid gap-6 lg:grid-cols-3">
+            {residentialPlans.map((plan) => (
+              <article
+                key={plan.name}
+                className={`rounded-2xl border p-8 shadow-sm ${
+                  plan.featured
+                    ? 'border-secondary-container bg-primary-container text-white'
+                    : 'border-outline-variant/30 bg-white text-on-surface'
+                }`}
+              >
+                {plan.featured && (
+                  <span className="mb-6 inline-flex rounded-full bg-secondary-container px-3 py-1 text-xs font-black uppercase tracking-widest text-on-secondary-fixed">
+                    Popular
+                  </span>
+                )}
+                <h3 className="font-headline text-2xl font-extrabold">{plan.name}</h3>
+                <p className={`mt-3 ${plan.featured ? 'text-white/70' : 'text-on-surface-variant'}`}>
+                  {plan.description}
+                </p>
+                <div className="mt-8 flex items-end justify-between gap-6">
                   <div>
-                    <h4 className="font-bold text-xl mb-1 font-headline">99.95% Network Availability</h4>
-                    <p className="text-on-surface-variant">Our self-healing infrastructure ensures your business stays online when it matters most.</p>
+                    <p className={`text-xs font-bold uppercase tracking-widest ${plan.featured ? 'text-white/55' : 'text-outline'}`}>
+                      Speed
+                    </p>
+                    <p className="font-headline text-3xl font-extrabold">{plan.speed}</p>
+                  </div>
+                  <div className="text-right">
+                    <p className={`text-xs font-bold uppercase tracking-widest ${plan.featured ? 'text-white/55' : 'text-outline'}`}>
+                      From
+                    </p>
+                    <p className="font-headline text-3xl font-extrabold">{plan.price}</p>
                   </div>
                 </div>
-                <div className="flex gap-6 items-start">
-                  <div className="w-14 h-14 shrink-0 bg-white shadow-sm rounded-2xl flex items-center justify-center text-primary-container">
-                    <span className="material-symbols-outlined text-3xl" style={{fontVariationSettings: "'FILL' 1"}}>local_atm</span>
-                  </div>
-                  <div>
-                    <h4 className="font-bold text-xl mb-1 font-headline">Best Value in Zimbabwe</h4>
-                    <p className="text-on-surface-variant">Competitive pricing models designed to bring high-speed fiber to every neighborhood.</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className="relative h-[450px] overflow-hidden rounded-3xl shadow-2xl">
-              <img alt="Server room with blue lighting" className="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDGRDuD1Kx7PA_PFyLf_cLT2TAtzjp9CcyJwQvYG69xXx4qSj4BgD74EDLb0uOiG1oXKgDvkwrbAQrAsaB5HPRM7CXCgXwiK6JTbLhobIsZrW46iP1vbYg1xfHN76hk0Sa7qZwIq8LV-NDWxg8Un6wEcA1LnfHr75LHRDSpGEpKQ_HowZLjILmFSuVY-5CHtT5SeAjp33lV-Qv7RaDMBodpH7cnKwfTpjN9NRkBs5QaRwVQVRRu7s7B1FbCsb28dKmTXpjvg2kPXVM" />
-              <div className="absolute inset-0 bg-gradient-to-t from-primary-container/80 via-transparent to-transparent flex items-end p-10">
-                <p className="text-white text-xl font-bold italic leading-relaxed">"Powering the next generation of Zimbabwean digital entrepreneurs."</p>
-              </div>
-            </div>
+                <button
+                  className={`mt-8 w-full rounded-full px-6 py-4 font-extrabold transition ${
+                    plan.featured
+                      ? 'bg-secondary-container text-on-secondary-fixed hover:bg-yellow-300'
+                      : 'bg-primary-container text-white hover:bg-black'
+                  }`}
+                >
+                  Sign Up
+                </button>
+              </article>
+            ))}
           </div>
         </div>
       </section>
 
-      <section className="max-w-7xl mx-auto px-8 mb-32">
-        <div className="text-center mb-16">
-          <h2 className="text-4xl font-extrabold mb-4 tracking-tight font-headline">Detailed Matrix</h2>
-          <p className="text-on-surface-variant text-lg">Compare speed tiers and intended activities.</p>
-        </div>
-        <div className="overflow-x-auto rounded-3xl bg-surface-container-lowest border border-outline-variant/30 shadow-xl">
-          <table className="w-full text-left border-collapse min-w-[600px]">
-            <thead>
-              <tr className="bg-surface-container-low/50">
-                <th className="p-8 font-bold text-primary-container border-b border-outline-variant/30 text-lg">Activity Comparison</th>
-                <th className="p-8 font-bold text-primary-container border-b border-outline-variant/30 text-center text-lg">10 Mbps</th>
-                <th className="p-8 font-bold text-primary-container border-b border-outline-variant/30 text-center text-lg">25 Mbps</th>
-                <th className="p-8 font-bold text-primary-container border-b border-outline-variant/30 text-center text-lg">50 Mbps+</th>
-              </tr>
-            </thead>
-            <tbody className="divide-y divide-outline-variant/10">
-              <tr className="hover:bg-surface-container-low/20 transition-colors">
-                <td className="p-8 font-medium">Standard Browsing &amp; Email</td>
-                <td className="p-8 text-center"><span className="material-symbols-outlined text-green-600 bg-green-50 p-2 rounded-full" data-icon="check">check</span></td>
-                <td className="p-8 text-center"><span className="material-symbols-outlined text-green-600 bg-green-50 p-2 rounded-full" data-icon="check">check</span></td>
-                <td className="p-8 text-center"><span className="material-symbols-outlined text-green-600 bg-green-50 p-2 rounded-full" data-icon="check">check</span></td>
-              </tr>
-              <tr className="bg-surface-container-low/10 hover:bg-surface-container-low/20 transition-colors">
-                <td className="p-8 font-medium">HD Video Streaming (1 Device)</td>
-                <td className="p-8 text-center"><span className="material-symbols-outlined text-green-600 bg-green-50 p-2 rounded-full" data-icon="check">check</span></td>
-                <td className="p-8 text-center"><span className="material-symbols-outlined text-green-600 bg-green-50 p-2 rounded-full" data-icon="check">check</span></td>
-                <td className="p-8 text-center"><span className="material-symbols-outlined text-green-600 bg-green-50 p-2 rounded-full" data-icon="check">check</span></td>
-              </tr>
-              <tr className="hover:bg-surface-container-low/20 transition-colors">
-                <td className="p-8 font-medium">4K Ultra HD Streaming</td>
-                <td className="p-8 text-center text-outline-variant">—</td>
-                <td className="p-8 text-center"><span className="material-symbols-outlined text-green-600 bg-green-50 p-2 rounded-full" data-icon="check">check</span></td>
-                <td className="p-8 text-center"><span className="material-symbols-outlined text-green-600 bg-green-50 p-2 rounded-full" data-icon="check">check</span></td>
-              </tr>
-              <tr className="bg-surface-container-low/10 hover:bg-surface-container-low/20 transition-colors">
-                <td className="p-8 font-medium">Multi-Device Heavy Usage</td>
-                <td className="p-8 text-center text-outline-variant">—</td>
-                <td className="p-8 text-center text-outline-variant">—</td>
-                <td className="p-8 text-center"><span className="material-symbols-outlined text-green-600 bg-green-50 p-2 rounded-full" data-icon="check">check</span></td>
-              </tr>
-              <tr className="hover:bg-surface-container-low/20 transition-colors">
-                <td className="p-8 font-medium">Cloud Backup &amp; Large File Uploads</td>
-                <td className="p-8 text-center text-outline-variant">—</td>
-                <td className="p-8 text-center text-outline-variant">—</td>
-                <td className="p-8 text-center"><span className="material-symbols-outlined text-green-600 bg-green-50 p-2 rounded-full font-bold" data-icon="check">check</span></td>
-              </tr>
-            </tbody>
-          </table>
+      <section className="py-20">
+        <div className="mx-auto grid max-w-7xl gap-8 px-8 lg:grid-cols-[0.9fr_1.1fr]">
+          <div>
+            <span className="text-xs font-black uppercase tracking-[0.25em] text-secondary">SME & Business</span>
+            <h2 className="mt-3 font-headline text-4xl font-extrabold text-primary-container">
+              Business-ready connectivity
+            </h2>
+            <p className="mt-4 text-lg leading-relaxed text-on-surface-variant">
+              SME plans are packaged for growing teams. Larger business connections are tailored after a site and usage assessment.
+            </p>
+          </div>
+          <div className="grid gap-5 sm:grid-cols-2">
+            {smePlans.map((item) => (
+              <div key={item} className="rounded-2xl border border-outline-variant/30 bg-white p-6 shadow-sm">
+                <span className="material-symbols-outlined mb-4 text-secondary-container" style={{ fontVariationSettings: "'FILL' 1" }}>
+                  verified
+                </span>
+                <p className="font-semibold leading-relaxed text-primary-container">{item}</p>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
 
-      <section className="max-w-5xl mx-auto px-8 mb-20">
-        <div className="bg-secondary-container p-12 rounded-3xl flex flex-col md:flex-row items-center justify-between gap-10 text-on-secondary-container shadow-[0_40px_100px_-20px_rgba(253,204,0,0.4)]">
-          <div className="max-w-md">
-            <h2 className="text-4xl font-black mb-4 tracking-tighter">Ready for a faster hood?</h2>
-            <p className="font-medium text-lg opacity-80 leading-relaxed">Check availability in your area and get connected within 24 hours.</p>
+      <section className="mx-auto max-w-6xl px-8">
+        <div className="flex flex-col gap-8 rounded-3xl bg-primary-container p-10 text-white md:flex-row md:items-center md:justify-between">
+          <div>
+            <h2 className="font-headline text-3xl font-extrabold">Need a tailored business service?</h2>
+            <p className="mt-3 max-w-2xl text-white/70">
+              Tell us about the site, users and uptime requirements and our team will shape the right package.
+            </p>
           </div>
-          <div className="flex flex-col sm:flex-row gap-4 w-full md:w-auto">
-            <button className="px-10 py-5 bg-primary-container text-on-primary font-bold rounded-full shadow-2xl hover:-translate-y-1 transition-all active:scale-95 text-lg">
-              Check Availability
-            </button>
-            <button className="px-10 py-5 bg-white/30 backdrop-blur-md text-primary-container font-bold rounded-full border border-primary-container/10 hover:bg-white/50 transition-all active:scale-95 text-lg">
-              Talk to Sales
-            </button>
-          </div>
+          <button className="rounded-full border border-secondary-container bg-secondary-container px-8 py-4 font-extrabold text-on-secondary-fixed transition hover:bg-yellow-300">
+            Contact Sales
+          </button>
         </div>
       </section>
     </main>

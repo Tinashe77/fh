@@ -1,5 +1,4 @@
-import { useState, useRef } from 'react';
-import CoverageSection from '../components/coverage/CoverageSection';
+import { useNavigate } from 'react-router-dom';
 import AnimateOnScroll from '../components/AnimateOnScroll';
 
 // ── Data ─────────────────────────────────────────────────────────────────────
@@ -9,7 +8,7 @@ const whyPoints = [
   'The lack of internet access traps people in cycles of poverty and limits opportunities.',
   "Internet is not just about education or entertainment, it's also about economic empowerment.",
   'With internet access, new avenues for income and growth emerge benefiting both individuals and the broader economy.',
-  'In Zimbabwe we have a large portion of the population that have extremely limited or no internet access at all. Unfortunately this drastically reduces the opportunity to showcase talent and achieve true potential.',
+  'Limited or no internet access drastically reduces the opportunity to showcase talent and achieve true potential.',
 ];
 
 const valuePropCards = [
@@ -75,16 +74,14 @@ const propertyDevelopers = [
 // ── Component ─────────────────────────────────────────────────────────────────
 
 const Screen1 = () => {
-  const [heroInput, setHeroInput] = useState('');
-  const [externalSearch, setExternalSearch] = useState(null);
-  const coverageRef = useRef(null);
+  const navigate = useNavigate();
 
   const handleHeroCheck = () => {
-    if (!heroInput.trim()) return;
-    setExternalSearch({ query: heroInput.trim(), ts: Date.now() });
-    setTimeout(() => {
-      coverageRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }, 100);
+    navigate('/network-status');
+  };
+
+  const handleServicePlans = () => {
+    navigate('/service-plans');
   };
 
   return (
@@ -92,20 +89,22 @@ const Screen1 = () => {
 
       {/* ── HERO ──────────────────────────────────────────────── */}
       <section
-        className="relative min-h-screen flex items-center pt-20 overflow-hidden"
-        style={{ background: 'linear-gradient(160deg, #010230 0%, #020450 30%, #030568 55%, #040880 75%, #020344 100%)' }}
+        className="relative flex min-h-screen items-center overflow-hidden pt-20"
+        style={{
+          backgroundImage:
+            'linear-gradient(90deg, rgba(1,2,48,0.92) 0%, rgba(3,5,104,0.76) 43%, rgba(3,5,104,0.34) 72%, rgba(3,5,104,0.18) 100%), url(https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&w=2200&q=88)',
+          backgroundPosition: 'center',
+          backgroundSize: 'cover',
+        }}
       >
-        {/* ── Ambient blobs ── */}
-        <div className="pointer-events-none absolute top-0 right-0 w-[700px] h-[600px] rounded-full blur-[140px]" style={{ background: 'rgba(253,204,0,0.09)' }} />
-        <div className="pointer-events-none absolute bottom-0 left-0 w-[500px] h-[500px] rounded-full blur-[120px]" style={{ background: 'rgba(255,255,255,0.04)' }} />
-        <div className="pointer-events-none absolute top-1/2 left-1/3 w-[600px] h-[400px] -translate-y-1/2 rounded-full blur-[130px]" style={{ background: 'rgba(3,5,104,0.5)' }} />
+        <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,rgba(1,2,48,0.22)_0%,rgba(1,2,48,0.08)_46%,rgba(1,2,48,0.72)_100%)]" />
         {/* Grid texture */}
         <div
-          className="pointer-events-none absolute inset-0 opacity-[0.03]"
+          className="pointer-events-none absolute inset-0 opacity-[0.055]"
           style={{ backgroundImage: 'repeating-linear-gradient(0deg,#fff,#fff 1px,transparent 1px,transparent 60px),repeating-linear-gradient(90deg,#fff,#fff 1px,transparent 1px,transparent 60px)' }}
         />
 
-        <div className="relative z-10 max-w-7xl mx-auto px-8 w-full grid lg:grid-cols-[1.05fr_0.95fr] gap-14 items-center py-16">
+        <div className="relative z-10 mx-auto grid w-full max-w-7xl items-center gap-12 px-8 py-16 lg:grid-cols-[0.92fr_1.08fr]">
 
           <div className="space-y-7">
             {/* Badge */}
@@ -118,7 +117,7 @@ const Screen1 = () => {
             </div>
 
             {/* Headline */}
-            <h1 className="font-headline text-5xl lg:text-[3.75rem] xl:text-7xl font-extrabold text-white leading-[1.05] tracking-[-0.04em]">
+            <h1 className="font-headline text-5xl font-extrabold leading-tight tracking-tight text-white lg:text-[3.75rem] xl:text-7xl">
               Affordable,{' '}
               <span className="relative inline-block text-secondary-container">
                 accessible
@@ -138,10 +137,10 @@ const Screen1 = () => {
 
             {/* CTA buttons */}
             <div className="flex flex-wrap gap-4 pt-1">
-              <button className="px-9 py-4 bg-secondary-container text-on-secondary-fixed font-bold rounded-full hover:scale-105 active:scale-95 transition-all duration-200 glow-yellow" style={{ boxShadow: '0 8px 32px rgba(253,204,0,0.3)' }}>
+              <button onClick={handleServicePlans} className="px-9 py-4 bg-secondary-container text-on-secondary-fixed font-bold rounded-full hover:scale-105 active:scale-95 transition-all duration-200 glow-yellow" style={{ boxShadow: '0 8px 32px rgba(253,204,0,0.3)' }}>
                 View Service Plans
               </button>
-              <button className="group px-9 py-4 rounded-full font-bold flex items-center gap-2 transition-all duration-200" style={{ border: '1px solid rgba(255,255,255,0.18)', background: 'rgba(255,255,255,0.07)', color: 'rgba(255,255,255,0.85)', backdropFilter: 'blur(12px)' }}>
+              <button onClick={() => document.getElementById('about')?.scrollIntoView({ behavior: 'smooth' })} className="group px-9 py-4 rounded-full font-bold flex items-center gap-2 transition-all duration-200" style={{ border: '1px solid rgba(255,255,255,0.18)', background: 'rgba(255,255,255,0.07)', color: 'rgba(255,255,255,0.85)', backdropFilter: 'blur(12px)' }}>
                 Learn about Fibrehood
                 <span className="material-symbols-outlined text-base group-hover:translate-x-1 transition-transform duration-200">
                   arrow_forward
@@ -149,62 +148,47 @@ const Screen1 = () => {
               </button>
             </div>
 
-            {/* Coverage search bar */}
-            <div className="flex items-center gap-2 p-2 rounded-full" style={{ background: 'rgba(255,255,255,0.08)', border: '1px solid rgba(255,255,255,0.14)', backdropFilter: 'blur(16px)' }}>
-              <div className="flex flex-1 items-center gap-3 px-4 py-2">
-                <span className="material-symbols-outlined text-secondary-container">location_on</span>
-                <input
-                  className="w-full bg-transparent border-none focus:ring-0 text-sm font-medium"
-                  style={{ color: 'rgba(255,255,255,0.9)', caretColor: '#fdcc00' }}
-                  placeholder="Enter your address to check fibre availability..."
-                  type="text"
-                  value={heroInput}
-                  onChange={(e) => setHeroInput(e.target.value)}
-                  onKeyDown={(e) => e.key === 'Enter' && handleHeroCheck()}
-                />
-              </div>
-              <button
-                onClick={handleHeroCheck}
-                className="flex items-center gap-2 px-6 py-3 bg-secondary-container text-on-secondary-fixed text-xs font-black uppercase tracking-[0.18em] rounded-full hover:scale-105 active:scale-95 transition-all duration-200"
-              >
-                <span className="material-symbols-outlined text-base">search</span>
-                Check Coverage
-              </button>
+            <div className="grid max-w-xl grid-cols-1 gap-3 pt-2 sm:grid-cols-3">
+              {['Human-centred rollout', 'Open access network', 'Local support'].map((item) => (
+                <div key={item} className="rounded-2xl border border-white/12 bg-white/7 px-4 py-3 text-center backdrop-blur-md">
+                  <p className="text-[10px] font-black uppercase tracking-[0.18em] text-white/70">{item}</p>
+                </div>
+              ))}
             </div>
           </div>
 
-          {/* Right: image + floating cards */}
-          <div className="relative hidden lg:block">
-            <div className="relative overflow-hidden rounded-[2.5rem]" style={{ boxShadow: '0 32px 80px rgba(0,0,0,0.5), 0 8px 24px rgba(0,0,0,0.3)' }}>
+          {/* Right: supporting image arrangement */}
+          <div className="relative hidden min-h-[560px] lg:block">
+            <div className="absolute right-0 top-1/2 h-[82%] w-[78%] -translate-y-1/2 overflow-hidden rounded-[2rem] border border-white/18 shadow-[0_34px_90px_rgba(0,0,0,0.34)]">
               <img
-                src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&w=1200&q=85"
-                alt="Communities connected through Fibrehood"
-                className="w-full aspect-[4/5] object-cover object-top"
+                src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1200&q=85"
+                alt="Modern fibre-ready buildings"
+                className="h-full w-full object-cover"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
+              <div className="absolute inset-0 bg-gradient-to-t from-primary-container/70 via-primary-container/10 to-transparent" />
             </div>
 
-            {/* 1Gbps floating card */}
-            <div
-              className="absolute -bottom-6 -left-10 p-6 rounded-[1.75rem] max-w-[240px]"
-              style={{ background: 'rgba(255,255,255,0.08)', border: '1px solid rgba(255,255,255,0.15)', backdropFilter: 'blur(20px)', boxShadow: '0 16px 40px rgba(0,0,0,0.3)' }}
-            >
-              <div className="flex items-center gap-3 mb-2">
-                <span className="w-10 h-10 bg-secondary-container rounded-xl flex items-center justify-center shrink-0">
-                  <span className="material-symbols-outlined text-on-secondary-fixed">speed</span>
+            <div className="absolute left-4 top-10 w-[42%] overflow-hidden rounded-[1.5rem] border border-white/20 shadow-[0_24px_60px_rgba(0,0,0,0.26)]">
+              <img
+                src="https://images.unsplash.com/photo-1517048676732-d65bc937f952?auto=format&fit=crop&w=800&q=85"
+                alt="Fibrehood planning meeting"
+                className="aspect-[4/3] w-full object-cover"
+              />
+            </div>
+
+            <div className="absolute bottom-12 left-0 max-w-[270px] rounded-[1.5rem] border border-white/18 bg-white/12 p-6 text-white shadow-[0_20px_55px_rgba(0,0,0,0.28)] backdrop-blur-xl">
+              <div className="mb-3 flex items-center gap-3">
+                <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-secondary-container text-on-secondary-fixed">
+                  <span className="material-symbols-outlined">speed</span>
                 </span>
-                <span className="font-extrabold text-2xl text-white">1Gbps</span>
+                <span className="font-headline text-3xl font-extrabold">1Gbps</span>
               </div>
-              <p className="text-sm leading-snug" style={{ color: 'rgba(255,255,255,0.55)' }}>
-                Gigabit speeds available across all new MDU installations.
+              <p className="text-sm leading-6 text-white/70">
+                Gigabit speeds available across new MDU and suburb installations.
               </p>
             </div>
 
-            {/* Network Live badge */}
-            <div
-              className="absolute top-6 -right-4 px-5 py-3 rounded-full flex items-center gap-2.5"
-              style={{ background: 'rgba(255,255,255,0.08)', border: '1px solid rgba(255,255,255,0.15)', backdropFilter: 'blur(16px)', boxShadow: '0 8px 24px rgba(0,0,0,0.25)' }}
-            >
+            <div className="absolute right-8 top-16 flex items-center gap-2.5 rounded-full border border-white/20 bg-white/14 px-5 py-3 shadow-[0_14px_34px_rgba(0,0,0,0.2)] backdrop-blur-xl">
               <span className="relative flex h-2.5 w-2.5">
                 <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-green-400 opacity-75" />
                 <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-green-500" />
@@ -214,9 +198,6 @@ const Screen1 = () => {
           </div>
         </div>
       </section>
-
-      {/* ── COVERAGE MAP — immediately after hero ─────────────── */}
-      <CoverageSection ref={coverageRef} externalSearch={externalSearch} />
 
       {/* ── VALUE MARQUEE ──────────────────────────────────────── */}
       <section
@@ -313,7 +294,7 @@ const Screen1 = () => {
       </section>
 
       {/* ── ABOUT US — WHY WE COME TO WORK ────────────────────── */}
-      <section className="relative pt-28 pb-20 overflow-hidden" style={{ background: 'linear-gradient(160deg, #f8f9ff 0%, #ffffff 40%, #fafbff 100%)' }}>
+      <section id="about" className="relative pt-28 pb-20 overflow-hidden scroll-mt-24" style={{ background: 'linear-gradient(160deg, #f8f9ff 0%, #ffffff 40%, #fafbff 100%)' }}>
 
         {/* Decorative background blobs */}
         <div className="pointer-events-none absolute -top-32 -left-32 w-[500px] h-[500px] rounded-full blur-[120px]" style={{ background: 'rgba(253,204,0,0.07)' }} />
@@ -356,19 +337,6 @@ const Screen1 = () => {
                   </div>
                 </div>
 
-                {/* Floating stat card */}
-                <div
-                  className="absolute -right-10 top-12 p-6 rounded-[1.5rem] hidden md:block z-20"
-                  style={{ background: 'rgba(255,255,255,0.9)', backdropFilter: 'blur(20px)', border: '1px solid rgba(3,5,104,0.08)', boxShadow: '0 24px 60px rgba(3,5,104,0.14)' }}
-                >
-                  <p className="text-[9px] font-black uppercase tracking-[0.3em] mb-2" style={{ color: 'rgba(3,5,104,0.4)' }}>Without internet</p>
-                  <p className="font-headline text-4xl font-extrabold text-primary-container leading-none">60%<span className="text-2xl">+</span></p>
-                  <p className="text-xs mt-2 leading-snug max-w-[140px]" style={{ color: 'rgba(3,5,104,0.5)' }}>of Zimbabwean households</p>
-                  <div className="mt-4 h-1.5 rounded-full overflow-hidden" style={{ background: 'rgba(3,5,104,0.08)' }}>
-                    <div className="h-full rounded-full animate-draw-line" style={{ width: '62%', background: 'linear-gradient(90deg, #fdcc00, #f59e0b)' }} />
-                  </div>
-                </div>
-
                 {/* Yellow bottom accent */}
                 <div className="absolute -bottom-3 left-10 right-10 h-1.5 rounded-full z-20" style={{ background: 'linear-gradient(90deg, transparent, #fdcc00, transparent)' }} />
               </div>
@@ -401,7 +369,7 @@ const Screen1 = () => {
                       }}
                     >
                       <div
-                        className="flex h-full flex-col rounded-[calc(2rem-1px)] px-5 py-5"
+                        className="flex h-full flex-col rounded-[calc(2rem-1px)] px-4 py-4"
                         style={{
                           background:
                             i % 2 === 1
@@ -445,79 +413,42 @@ const Screen1 = () => {
             </div>
 
           </div>
-        </div>
-      </section>
 
-      {/* ── OUR DREAM ────────────────────────────────────────── */}
-      <section className="bg-white pb-28 px-8">
-        <div className="max-w-7xl mx-auto">
-          <AnimateOnScroll direction="up" delay={0}>
+          {/* ── Our Dream — integrated within About Us ── */}
+          <AnimateOnScroll direction="up" delay={200}>
             <div
-              className="relative overflow-hidden rounded-[2.5rem] bg-primary-container px-10 py-20 md:px-20 text-center"
-              style={{ boxShadow: '0 32px 80px rgba(3,5,104,0.35), 0 8px 24px rgba(3,5,104,0.2), 0 2px 6px rgba(0,0,0,0.12)' }}
+              className="relative mt-16 overflow-hidden rounded-[2rem] bg-primary-container px-8 py-12 md:px-16 text-center"
+              style={{ boxShadow: '0 24px 60px rgba(3,5,104,0.30)' }}
             >
-              {/* Decorative blobs */}
-              <div className="pointer-events-none absolute -top-16 -left-16 w-64 h-64 rounded-full bg-secondary-container/15 blur-[60px]" />
-              <div className="pointer-events-none absolute -bottom-16 -right-16 w-64 h-64 rounded-full bg-white/5 blur-[60px]" />
-              {/* Vertical accent lines */}
+              <div className="pointer-events-none absolute -top-12 -left-12 w-48 h-48 rounded-full bg-secondary-container/15 blur-[50px]" />
+              <div className="pointer-events-none absolute -bottom-12 -right-12 w-48 h-48 rounded-full bg-white/5 blur-[50px]" />
               <div className="pointer-events-none absolute top-0 h-full w-px bg-white/5 left-[20%]" />
               <div className="pointer-events-none absolute top-0 h-full w-px bg-white/5 right-[20%]" />
-
               <div className="relative">
-                <AnimateOnScroll direction="up" delay={100}>
-                  <h3 className="font-headline text-secondary-container text-xl font-black uppercase tracking-[0.35em] mb-6">
-                    OUR DREAM.
-                  </h3>
-                </AnimateOnScroll>
-                <AnimateOnScroll direction="up" delay={220}>
-                  <p className="text-white/70 text-lg md:text-xl leading-relaxed mb-4 max-w-3xl mx-auto">
-                    At Fibrehood, we have a dream.
-                  </p>
-                </AnimateOnScroll>
-                <AnimateOnScroll direction="up" delay={360}>
-                  <p className="font-headline text-2xl md:text-3xl lg:text-4xl font-extrabold text-white leading-tight max-w-4xl mx-auto">
-                    Our dream is simply to connect the marginalized communities to an{' '}
-                    <span className="text-secondary-container">affordable, accessible &amp; high quality internet.</span>
-                  </p>
-                </AnimateOnScroll>
-                <AnimateOnScroll direction="up" delay={480}>
-                  <p className="mt-8 text-white/35 text-xs font-medium tracking-widest uppercase">
-                    Terms &amp; Conditions apply
-                  </p>
-                </AnimateOnScroll>
+                <h3 className="font-headline text-secondary-container text-base font-black uppercase tracking-[0.35em] mb-4">
+                  Our Dream.
+                </h3>
+                <p className="font-headline text-xl md:text-2xl lg:text-3xl font-extrabold text-white leading-tight max-w-4xl mx-auto">
+                  Our dream is simply to connect marginalized communities to an{' '}
+                  <span className="text-secondary-container">affordable, accessible &amp; high quality internet.</span>
+                </p>
               </div>
             </div>
           </AnimateOnScroll>
+
         </div>
       </section>
 
       {/* ── OUR VALUE PROPOSITION ─────────────────────────────── */}
       <section
-        className="relative py-28 overflow-hidden"
-        style={{ background: 'linear-gradient(160deg, #010230 0%, #020450 30%, #030568 55%, #040880 75%, #020344 100%)' }}
+        id="value"
+        className="relative py-24 overflow-hidden scroll-mt-24"
+        style={{ background: 'linear-gradient(180deg, #ffffff 0%, #f3f4f5 100%)' }}
       >
-        {/* ── Ambient light blobs ── */}
-        <div className="pointer-events-none absolute top-0 right-0 w-[700px] h-[500px] rounded-full blur-[130px]" style={{ background: 'rgba(253,204,0,0.08)' }} />
-        <div className="pointer-events-none absolute bottom-0 left-0 w-[600px] h-[500px] rounded-full blur-[120px]" style={{ background: 'rgba(255,255,255,0.04)' }} />
-        <div className="pointer-events-none absolute top-1/3 left-1/2 -translate-x-1/2 w-[900px] h-[400px] rounded-full blur-[150px]" style={{ background: 'rgba(3,5,104,0.6)' }} />
-
-        {/* ── Subtle grid texture ── */}
-        <div
-          className="pointer-events-none absolute inset-0 opacity-[0.03]"
-          style={{ backgroundImage: 'repeating-linear-gradient(0deg,#fff,#fff 1px,transparent 1px,transparent 60px),repeating-linear-gradient(90deg,#fff,#fff 1px,transparent 1px,transparent 60px)' }}
-        />
-
         <div className="max-w-7xl mx-auto px-8 relative">
 
           {/* ── Section header ── */}
-          <div className="text-center mb-20 relative">
-            {/* Large background watermark */}
-            <div className="pointer-events-none absolute inset-0 flex items-center justify-center overflow-hidden select-none">
-              <span className="font-headline font-extrabold uppercase tracking-[-0.05em] text-[clamp(80px,14vw,180px)] leading-none whitespace-nowrap" style={{ color: 'rgba(255,255,255,0.03)' }}>
-                VALUE
-              </span>
-            </div>
-
+          <div className="text-center mb-14 relative">
             <div className="relative">
               <AnimateOnScroll direction="up" delay={0}>
                 <span className="inline-flex mb-6 px-4 py-2 rounded-full text-on-secondary-fixed text-xs font-black uppercase tracking-[0.3em]" style={{ background: 'rgba(253,204,0,0.9)' }}>
@@ -525,12 +456,12 @@ const Screen1 = () => {
                 </span>
               </AnimateOnScroll>
               <AnimateOnScroll direction="up" delay={100}>
-                <h2 className="font-headline text-4xl lg:text-5xl font-extrabold text-white tracking-tight leading-tight mb-5">
+                <h2 className="font-headline text-4xl lg:text-5xl font-extrabold text-primary-container tracking-tight leading-tight mb-5">
                   Our Value Proposition
                 </h2>
               </AnimateOnScroll>
               <AnimateOnScroll direction="up" delay={200}>
-                <p className="text-lg font-semibold max-w-2xl mx-auto leading-relaxed" style={{ color: 'rgba(255,255,255,0.55)' }}>
+                <p className="text-lg font-semibold max-w-2xl mx-auto leading-relaxed text-on-surface-variant">
                   Choosing Fibrehood for your property brings a host of advantages that go beyond just faster internet.
                 </p>
               </AnimateOnScroll>
@@ -544,62 +475,55 @@ const Screen1 = () => {
               return (
                 <AnimateOnScroll key={card.title} direction="up" delay={i * 80} threshold={0.07}>
                   <div
-                    className="group relative h-full rounded-[2rem] overflow-hidden cursor-default transition-all duration-500 hover:-translate-y-2"
+                    className="group relative h-full overflow-hidden rounded-2xl transition-all duration-500 hover:-translate-y-1"
                     style={{
                       background: isHighlight
-                        ? 'linear-gradient(145deg, rgba(253,204,0,0.12) 0%, rgba(253,204,0,0.07) 60%, rgba(253,204,0,0.04) 100%)'
-                        : 'rgba(255,255,255,0.05)',
+                        ? 'linear-gradient(145deg, #fff8d8 0%, #ffffff 100%)'
+                        : '#ffffff',
                       border: isHighlight
-                        ? '1px solid rgba(253,204,0,0.25)'
-                        : '1px solid rgba(255,255,255,0.08)',
-                      backdropFilter: 'blur(16px)',
+                        ? '1px solid rgba(253,204,0,0.55)'
+                        : '1px solid rgba(3,5,104,0.10)',
                       boxShadow: isHighlight
-                        ? '0 8px 40px rgba(253,204,0,0.08), inset 0 1px 0 rgba(253,204,0,0.15)'
-                        : '0 4px 24px rgba(0,0,0,0.2), inset 0 1px 0 rgba(255,255,255,0.06)',
+                        ? '0 18px 45px rgba(253,204,0,0.16)'
+                        : '0 12px 34px rgba(3,5,104,0.08)',
                     }}
                   >
-                    {/* ── Hover glow bloom ── */}
-                    <div
-                      className="pointer-events-none absolute -top-10 -right-10 w-44 h-44 rounded-full blur-[60px] opacity-0 group-hover:opacity-100 transition-opacity duration-700"
-                      style={{ background: isHighlight ? 'rgba(253,204,0,0.18)' : 'rgba(255,255,255,0.06)' }}
-                    />
-
                     {/* ── Top accent bar ── */}
                     <div
                       className="absolute top-0 left-0 right-0 h-[2px]"
                       style={{
                         background: isHighlight
                           ? 'linear-gradient(90deg, transparent, rgba(253,204,0,0.9), transparent)'
-                          : 'linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent)',
+                          : 'linear-gradient(90deg, transparent, rgba(3,5,104,0.35), transparent)',
                       }}
                     />
 
                     {/* ── Watermark number ── */}
                     <div className="pointer-events-none absolute bottom-3 right-5 select-none">
-                      <span className="font-headline font-extrabold text-[6rem] leading-none" style={{ color: isHighlight ? 'rgba(253,204,0,0.07)' : 'rgba(255,255,255,0.04)' }}>
+                      <span className="font-headline font-extrabold text-[5rem] leading-none" style={{ color: isHighlight ? 'rgba(253,204,0,0.2)' : 'rgba(3,5,104,0.05)' }}>
                         {String(i + 1).padStart(2, '0')}
                       </span>
                     </div>
 
-                    <div className="relative p-8">
+                    <div className="relative p-6">
                       {/* ── Icon ── */}
                       <div
-                        className="w-14 h-14 rounded-2xl flex items-center justify-center mb-7 transition-all duration-300 group-hover:scale-110 group-hover:rotate-6"
+                        className="w-12 h-12 rounded-2xl flex items-center justify-center mb-5 transition-all duration-300 group-hover:scale-105"
                         style={{
                           background: isHighlight
-                            ? 'rgba(253,204,0,0.18)'
-                            : 'rgba(255,255,255,0.08)',
+                            ? '#fdcc00'
+                            : '#030568',
                           border: isHighlight
                             ? '1px solid rgba(253,204,0,0.35)'
-                            : '1px solid rgba(255,255,255,0.12)',
+                            : '1px solid rgba(3,5,104,0.12)',
                           boxShadow: isHighlight
                             ? '0 4px 20px rgba(253,204,0,0.2)'
-                            : '0 4px 16px rgba(0,0,0,0.2)',
+                            : '0 4px 16px rgba(3,5,104,0.16)',
                         }}
                       >
                         <span
                           className="material-symbols-outlined text-2xl"
-                          style={{ color: isHighlight ? '#fdcc00' : 'rgba(255,255,255,0.85)' }}
+                          style={{ color: isHighlight ? '#231a00' : '#ffffff' }}
                         >
                           {card.icon}
                         </span>
@@ -608,7 +532,7 @@ const Screen1 = () => {
                       {/* ── Title ── */}
                       <h3
                         className="font-headline text-xl font-extrabold mb-3 leading-snug"
-                        style={{ color: isHighlight ? '#fdcc00' : '#ffffff' }}
+                        style={{ color: '#030568' }}
                       >
                         {card.title}
                       </h3>
@@ -620,12 +544,12 @@ const Screen1 = () => {
                           width: '2rem',
                           background: isHighlight
                             ? 'rgba(253,204,0,0.5)'
-                            : 'rgba(255,255,255,0.15)',
+                            : 'rgba(3,5,104,0.16)',
                         }}
                       />
 
                       {/* ── Body text ── */}
-                      <p className="leading-relaxed text-sm" style={{ color: 'rgba(255,255,255,0.5)' }}>
+                      <p className="leading-relaxed text-sm text-on-surface-variant">
                         {card.text}
                       </p>
                     </div>
@@ -635,44 +559,12 @@ const Screen1 = () => {
             })}
           </div>
 
-          {/* ── Bottom stats strip ── */}
-          <div className="mt-14 grid grid-cols-2 md:grid-cols-4 gap-4">
-            {[
-              { value: '1Gbps', label: 'Max speeds available', icon: 'speed' },
-              { value: '0', label: 'Installation cost', icon: 'handyman' },
-              { value: '99.9%', label: 'Uptime guarantee', icon: 'verified' },
-              { value: '24/7', label: 'Network monitoring', icon: 'support_agent' },
-            ].map((stat, i) => (
-              <AnimateOnScroll key={stat.label} direction="up" delay={i * 60} threshold={0.1}>
-                <div
-                  className="group flex items-center gap-4 p-5 rounded-[1.5rem] transition-all duration-300 hover:-translate-y-1"
-                  style={{
-                    background: 'rgba(255,255,255,0.05)',
-                    border: '1px solid rgba(255,255,255,0.08)',
-                    backdropFilter: 'blur(12px)',
-                  }}
-                >
-                  <div
-                    className="w-10 h-10 rounded-xl flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform duration-300"
-                    style={{ background: 'rgba(253,204,0,0.15)', border: '1px solid rgba(253,204,0,0.2)' }}
-                  >
-                    <span className="material-symbols-outlined" style={{ color: '#fdcc00', fontSize: '18px' }}>{stat.icon}</span>
-                  </div>
-                  <div>
-                    <p className="font-headline text-xl font-extrabold leading-none" style={{ color: '#fdcc00' }}>{stat.value}</p>
-                    <p className="text-[11px] mt-0.5 leading-tight" style={{ color: 'rgba(255,255,255,0.45)' }}>{stat.label}</p>
-                  </div>
-                </div>
-              </AnimateOnScroll>
-            ))}
-          </div>
-
         </div>
       </section>
 
 
       {/* ── OUR PARTNERS ──────────────────────────────────────── */}
-      <section className="py-28 overflow-hidden" style={{ background: 'linear-gradient(180deg, #f8f9fa 0%, #eef1f9 50%, #f8f9fa 100%)' }}>
+      <section id="partners" className="py-28 overflow-hidden scroll-mt-24" style={{ background: 'linear-gradient(180deg, #f8f9fa 0%, #eef1f9 50%, #f8f9fa 100%)' }}>
         <div className="max-w-7xl mx-auto px-8">
 
           {/* Header */}
@@ -851,15 +743,6 @@ const Screen1 = () => {
                   ))}
                 </div>
 
-                {/* CTA at bottom */}
-                <div className="relative px-9 pb-9 pt-2 border-t border-white/8 mt-2">
-                  <button className="w-full py-4 bg-secondary-container text-on-secondary-fixed font-extrabold text-sm rounded-full hover:scale-105 active:scale-95 transition-all duration-200 shadow-xl glow-yellow">
-                    Contact Us
-                  </button>
-                  <p className="text-center text-white/30 text-[10px] font-medium uppercase tracking-widest mt-4">
-                    Terms &amp; Conditions apply
-                  </p>
-                </div>
               </div>
             </AnimateOnScroll>
 
@@ -868,7 +751,7 @@ const Screen1 = () => {
       </section>
 
       {/* ── CTA BANNER ────────────────────────────────────────── */}
-      <section className="pb-24">
+      <section id="get-connected" className="pb-24 scroll-mt-24">
         <div className="mx-auto max-w-[1600px] px-4 md:px-8">
           <AnimateOnScroll direction="up" delay={0}>
             <div
@@ -896,11 +779,31 @@ const Screen1 = () => {
                     Join thousands of households and businesses already experiencing the Fibrehood difference. Simple setup, expert support.
                   </p>
 
+                  {/* Stats strip */}
+                  <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+                    {[
+                      { value: '1Gbps', label: 'Max speeds', icon: 'speed' },
+                      { value: 'Free', label: 'Installation', icon: 'handyman' },
+                      { value: '99.9%', label: 'Uptime', icon: 'verified' },
+                      { value: '24/7', label: 'Support', icon: 'support_agent' },
+                    ].map((stat) => (
+                      <div
+                        key={stat.label}
+                        className="flex flex-col items-center gap-1.5 p-3 rounded-2xl border border-primary-container/12 bg-white/35 backdrop-blur-sm text-center"
+                      >
+                        <span className="material-symbols-outlined text-primary-container" style={{ fontSize: '20px' }}>{stat.icon}</span>
+                        <p className="font-headline text-xl font-extrabold text-primary-container leading-none">{stat.value}</p>
+                        <p className="text-[10px] font-semibold text-primary/55 uppercase tracking-wide">{stat.label}</p>
+                      </div>
+                    ))}
+                  </div>
+
                   <div className="flex flex-col gap-4 sm:flex-row sm:items-center">
-                    <button className="rounded-full bg-primary-container px-10 py-5 font-extrabold text-white shadow-[0_20px_45px_rgba(3,5,104,0.22)] transition-all duration-200 hover:scale-105 active:scale-95">
+                    <button onClick={handleServicePlans} className="rounded-full bg-primary-container px-10 py-5 font-extrabold text-white shadow-[0_20px_45px_rgba(3,5,104,0.22)] transition-all duration-200 hover:scale-105 active:scale-95">
                       View Service Plans
                     </button>
                     <button
+                      onClick={handleHeroCheck}
                       className="rounded-full px-10 py-5 font-bold text-white shadow-[0_20px_45px_rgba(3,5,104,0.18)] transition-all duration-200 hover:scale-105 active:scale-95"
                       style={{ backgroundColor: '#030568', opacity: 1 }}
                     >

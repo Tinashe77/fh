@@ -23,8 +23,9 @@ const AnimateOnScroll = ({
   distance = 28,
   duration = 650,
   threshold = 0.12,
-  as: Tag = 'div',
+  as: element = 'div',
 }) => {
+  const Component = element;
   const ref = useRef(null);
   const [visible, setVisible] = useState(false);
 
@@ -54,7 +55,7 @@ const AnimateOnScroll = ({
   }[direction] ?? `translateY(${distance}px)`;
 
   return (
-    <Tag
+    <Component
       ref={ref}
       className={className}
       style={{
@@ -65,7 +66,7 @@ const AnimateOnScroll = ({
       }}
     >
       {children}
-    </Tag>
+    </Component>
   );
 };
 
