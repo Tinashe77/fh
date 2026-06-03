@@ -6,6 +6,10 @@ import Screen2 from './screens/Screen2';
 import Screen3 from './screens/Screen3';
 import Screen4 from './screens/Screen4';
 import Screen5 from './screens/Screen5';
+import FaqPage from './screens/FaqPage';
+import SignUpPage from './screens/SignUpPage';
+import DocumentPage from './screens/DocumentPage';
+import SupportPage from './screens/SupportPage';
 
 function App() {
   return (
@@ -30,15 +34,19 @@ function App() {
           {/* Southview Project */}
           <Route path="southview" element={<Screen4 />} />
 
-          {/* Client Portal & Sign Up — placeholders */}
-          <Route path="portal" element={<Navigate to="/" replace />} />
-          <Route path="sign-up" element={<Navigate to="/" replace />} />
+          {/* Client Portal & Sign Up */}
+          <Route path="portal" element={<SignUpPage mode="portal" />} />
+          <Route path="sign-up" element={<SignUpPage />} />
 
-          {/* Legal placeholders */}
-          <Route path="faq" element={<Navigate to="/" replace />} />
-          <Route path="support" element={<Navigate to="/" replace />} />
-          <Route path="terms" element={<Navigate to="/" replace />} />
-          <Route path="privacy" element={<Navigate to="/" replace />} />
+          {/* Support, Legal & Documents */}
+          <Route path="faq" element={<FaqPage />} />
+          <Route path="support" element={<SupportPage />} />
+          <Route path="documents/:slug" element={<DocumentPage />} />
+          <Route path="terms" element={<Navigate to="/documents/terms" replace />} />
+          <Route path="privacy" element={<Navigate to="/documents/privacy" replace />} />
+          <Route path="fair-use" element={<Navigate to="/documents/fair-use" replace />} />
+          <Route path="sla/residential" element={<Navigate to="/documents/residential-sla" replace />} />
+          <Route path="sla/business" element={<Navigate to="/documents/business-sla" replace />} />
 
           {/* Legacy routes */}
           <Route path="screen-1" element={<Navigate to="/" replace />} />

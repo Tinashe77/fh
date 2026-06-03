@@ -25,9 +25,9 @@ import { getActiveZones } from '../../utils/coverageUtils';
 import { STATUS_CONFIG } from '../../utils/statusConfig';
 import CoverageLegend from './CoverageLegend';
 
-// ── Default map view centred on Harare, Zimbabwe ──────────────────────────────
-const DEFAULT_CENTER = [-17.83, 31.05];
-const DEFAULT_ZOOM = 12;
+// ── Default map view centred on Southview Park, Harare ───────────────────────
+const DEFAULT_CENTER = [-17.937, 30.970];
+const DEFAULT_ZOOM = 15;
 
 // ── Custom SVG pin icon ───────────────────────────────────────────────────────
 const createPinIcon = (color = '#030568') =>

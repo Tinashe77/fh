@@ -9,7 +9,7 @@
  *   - No structural changes needed here
  */
 
-import { useState, Suspense, lazy, forwardRef } from 'react';
+import { useEffect, useState, Suspense, lazy, forwardRef } from 'react';
 import { useCoverageCheck } from '../../hooks/useCoverageCheck';
 import CoverageSearchBar from './CoverageSearchBar';
 import CoverageResultCard from './CoverageResultCard';
@@ -33,11 +33,12 @@ const MapSkeleton = () => (
 );
 
 // ── CoverageSection ───────────────────────────────────────────────────────────
-const CoverageSection = forwardRef(({ externalSearch }, ref) => {
+const CoverageSection = forwardRef(({ externalSearch, autoLocate = false }, ref) => {
   const { result, isChecking, error, check, reset } = useCoverageCheck();
 
   // Selected pin position for the map [lat, lng] | null
   const [selectedPosition, setSelectedPosition] = useState(null);
+  const [locationPromptError, setLocationPromptError] = useState('');
 
   // Active modal: null | 'registerInterest' | 'getConnected'
   const [activeModal, setActiveModal] = useState(null);
@@ -69,6 +70,28 @@ const CoverageSection = forwardRef(({ externalSearch }, ref) => {
     });
     setActiveModal(formType);
   };
+
+  useEffect(() => {
+    if (!autoLocate) return;
+
+    if (!navigator.geolocation) {
+      setLocationPromptError('Location sharing is not supported by your browser.');
+      return;
+    }
+
+    setLocationPromptError('');
+    navigator.geolocation.getCurrentPosition(
+      (pos) => {
+        const { latitude, longitude } = pos.coords;
+        handleLocationSelect(latitude, longitude, null);
+      },
+      () => {
+        setLocationPromptError('Location access was not granted. Use the My Location button or click the map to share your coordinates.');
+      },
+      { enableHighAccuracy: true, timeout: 10000 }
+    );
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [autoLocate]);
 
   const handleCloseModal = () => {
     setActiveModal(null);
@@ -117,6 +140,13 @@ const CoverageSection = forwardRef(({ externalSearch }, ref) => {
               <div className="mx-5 mt-4 flex items-center gap-3 rounded-[1.25rem] border border-red-200 bg-red-50 px-5 py-4 text-red-700">
                 <span className="material-symbols-outlined shrink-0">error</span>
                 <p className="text-sm font-medium">{error}</p>
+              </div>
+            )}
+
+            {locationPromptError && (
+              <div className="mx-5 mt-4 flex items-center gap-3 rounded-[1.25rem] border border-amber-200 bg-amber-50 px-5 py-4 text-amber-800">
+                <span className="material-symbols-outlined shrink-0">my_location</span>
+                <p className="text-sm font-medium">{locationPromptError}</p>
               </div>
             )}
 

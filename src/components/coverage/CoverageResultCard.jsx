@@ -9,6 +9,7 @@ import { STATUS_CONFIG } from '../../utils/statusConfig';
 const STATUS_ICONS = {
   LIVE: 'wifi',
   IN_PROGRESS: 'construction',
+  NOT_STARTED: 'schedule',
   PLANNED: 'schedule',
   INVESTIGATION: 'search',
   NOT_AVAILABLE: 'signal_wifi_off',

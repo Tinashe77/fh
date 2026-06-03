@@ -63,7 +63,7 @@ const connectivityPartners = [
   { name: 'DFA', tagline: 'Open Access Network' },
   { name: 'Powertel', tagline: 'Communications' },
   { name: 'BCS', tagline: 'Bandwidth & Cloud Services Group' },
-  { name: 'Think Believe Connect', tagline: '' },
+  { name: 'Think Believe Connect', tagline: 'Connectivity Partner' },
   { name: 'Liquid', tagline: 'Intelligent Technologies' },
 ];
 
@@ -118,21 +118,18 @@ const Screen1 = () => {
 
             {/* Headline */}
             <h1 className="font-headline text-5xl font-extrabold leading-tight tracking-tight text-white lg:text-[3.75rem] xl:text-7xl">
-              Affordable,{' '}
+              Fast, Affordable, Reliable{' '}
               <span className="relative inline-block text-secondary-container">
-                accessible
+                fibre connectivity
                 <span className="absolute bottom-1.5 left-0 -z-10 h-3 w-full rounded-full bg-secondary-container/25" />
-              </span>{' '}
-              and{' '}
-              <span className="relative inline-block text-secondary-container">
-                high quality
-                <span className="absolute bottom-1.5 left-0 -z-10 h-3 w-full rounded-full bg-secondary-container/25" />
-              </span>{' '}
-              fibre.
+              </span>
             </h1>
 
             <p className="text-lg leading-relaxed max-w-lg" style={{ color: 'rgba(255,255,255,0.6)' }}>
-              We are building the future of digital infrastructure, connecting suburbs, MDUs, and businesses to the global economy with light-speed reliability.
+              We are building the future of digital infrastructure, connecting communities and businesses to the global village.
+            </p>
+            <p className="font-headline text-xl font-extrabold text-secondary-container">
+              Potential Lives Everywhere
             </p>
 
             {/* CTA buttons */}
@@ -148,13 +145,6 @@ const Screen1 = () => {
               </button>
             </div>
 
-            <div className="grid max-w-xl grid-cols-1 gap-3 pt-2 sm:grid-cols-3">
-              {['Human-centred rollout', 'Open access network', 'Local support'].map((item) => (
-                <div key={item} className="rounded-2xl border border-white/12 bg-white/7 px-4 py-3 text-center backdrop-blur-md">
-                  <p className="text-[10px] font-black uppercase tracking-[0.18em] text-white/70">{item}</p>
-                </div>
-              ))}
-            </div>
           </div>
 
           {/* Right: supporting image arrangement */}
@@ -183,9 +173,7 @@ const Screen1 = () => {
                 </span>
                 <span className="font-headline text-3xl font-extrabold">1Gbps</span>
               </div>
-              <p className="text-sm leading-6 text-white/70">
-                Gigabit speeds available across new MDU and suburb installations.
-              </p>
+              <p className="text-sm leading-6 text-white/70">1Gbps capable network</p>
             </div>
 
             <div className="absolute right-8 top-16 flex items-center gap-2.5 rounded-full border border-white/20 bg-white/14 px-5 py-3 shadow-[0_14px_34px_rgba(0,0,0,0.2)] backdrop-blur-xl">
@@ -564,7 +552,7 @@ const Screen1 = () => {
 
 
       {/* ── OUR PARTNERS ──────────────────────────────────────── */}
-      <section id="partners" className="py-28 overflow-hidden scroll-mt-24" style={{ background: 'linear-gradient(180deg, #f8f9fa 0%, #eef1f9 50%, #f8f9fa 100%)' }}>
+      <section id="partners" className="py-28 overflow-hidden scroll-mt-24" style={{ background: 'linear-gradient(180deg, #ffffff 0%, #f3f4f5 50%, #ffffff 100%)' }}>
         <div className="max-w-7xl mx-auto px-8">
 
           {/* Header */}
@@ -575,7 +563,7 @@ const Screen1 = () => {
               </span>
             </AnimateOnScroll>
             <AnimateOnScroll direction="up" delay={100}>
-              <h2 className="font-headline text-4xl lg:text-5xl font-extrabold text-primary tracking-tight max-w-3xl mx-auto leading-tight">
+              <h2 className="font-headline text-4xl lg:text-5xl font-extrabold text-primary-container tracking-tight max-w-3xl mx-auto leading-tight">
                 We believe in collaborations to add value to our community
               </h2>
             </AnimateOnScroll>
@@ -584,57 +572,30 @@ const Screen1 = () => {
           {/* ── 3-column grid ── */}
           <div className="grid lg:grid-cols-3 gap-6 items-stretch">
 
-            {/* ── Column 1: Connectivity Partners (Deep Navy) ── */}
+            {/* ── Column 1: Connectivity Partners ── */}
             <AnimateOnScroll direction="up" delay={0} className="flex">
               <div
-                className="relative flex flex-col w-full overflow-hidden rounded-[2.5rem] shadow-glass-heavy"
-                style={{ background: 'linear-gradient(150deg, #020344 0%, #030568 45%, #0c1a8a 80%, #030568 100%)' }}
+                className="relative flex flex-col w-full overflow-hidden rounded-[2rem] border border-primary-container/10 bg-white shadow-glass-heavy"
               >
-                {/* Decorative blobs */}
-                <div className="pointer-events-none absolute -top-12 -right-12 w-48 h-48 rounded-full blur-[60px]" style={{ background: 'rgba(253,204,0,0.18)' }} />
-                <div className="pointer-events-none absolute bottom-0 -left-8 w-40 h-40 rounded-full blur-[50px]" style={{ background: 'rgba(255,255,255,0.06)' }} />
-                {/* Subtle grid pattern overlay */}
-                <div
-                  className="pointer-events-none absolute inset-0 opacity-[0.04]"
-                  style={{ backgroundImage: 'repeating-linear-gradient(0deg,#fff,#fff 1px,transparent 1px,transparent 40px),repeating-linear-gradient(90deg,#fff,#fff 1px,transparent 1px,transparent 40px)' }}
-                />
-
-                <div className="relative p-9 pb-6 flex-1">
-                  {/* Icon badge */}
-                  <div className="w-14 h-14 rounded-2xl flex items-center justify-center mb-7 border border-secondary-container/30" style={{ background: 'rgba(253,204,0,0.15)' }}>
+                <div className="bg-primary-container p-7">
+                  <div className="mb-5 flex h-14 w-14 items-center justify-center rounded-2xl border border-secondary-container/30 bg-white/10">
                     <span className="material-symbols-outlined text-secondary-container text-2xl">cell_tower</span>
                   </div>
-
-                  <h3 className="font-headline text-2xl font-extrabold text-secondary-container mb-4 leading-snug">
+                  <h3 className="font-headline text-2xl font-extrabold text-white mb-3 leading-snug">
                     Connectivity Partners
                   </h3>
-                  <p className="text-white/65 text-sm leading-relaxed">
-                    We work with multiple Fibre Network Operators to bring you fast affordable and reliable Broadband
+                  <p className="text-white/70 text-sm leading-relaxed">
+                    We work with multiple Fibre Network Operators to bring fast, affordable and reliable broadband to communities.
                   </p>
                 </div>
 
-                {/* Logo carousel */}
-                <div className="relative pb-9 overflow-hidden">
-                  {/* Fade edges */}
-                  <div className="pointer-events-none absolute left-0 top-0 bottom-0 w-8 z-10" style={{ background: 'linear-gradient(90deg, #030568 0%, transparent 100%)' }} />
-                  <div className="pointer-events-none absolute right-0 top-0 bottom-0 w-8 z-10" style={{ background: 'linear-gradient(270deg, #030568 0%, transparent 100%)' }} />
-
-                  <div className="marquee-track py-2">
-                    <div className="marquee-group">
-                      {connectivityPartners.concat(connectivityPartners).map((p, i) => (
-                        <div
-                          key={i}
-                          className="mr-3 inline-flex flex-col items-center justify-center px-5 py-3 rounded-2xl border border-white/15 min-w-[120px]"
-                          style={{ background: 'rgba(255,255,255,0.08)', backdropFilter: 'blur(8px)' }}
-                        >
-                          <span className="text-white font-extrabold text-sm leading-tight text-center">{p.name}</span>
-                          {p.tagline && (
-                            <span className="text-white/45 text-[9px] uppercase tracking-widest mt-0.5 text-center leading-tight">{p.tagline}</span>
-                          )}
-                        </div>
-                      ))}
+                <div className="grid grid-cols-2 gap-3 p-7">
+                  {connectivityPartners.map((p) => (
+                    <div key={p.name} className="rounded-2xl border border-primary-container/10 bg-white p-4 shadow-sm">
+                      <p className="font-headline text-base font-extrabold text-primary-container">{p.name}</p>
+                      <p className="mt-1 text-[10px] font-bold uppercase tracking-wider text-on-surface-variant/65">{p.tagline}</p>
                     </div>
-                  </div>
+                  ))}
                 </div>
               </div>
             </AnimateOnScroll>
@@ -660,7 +621,7 @@ const Screen1 = () => {
                     <span className="material-symbols-outlined text-primary-container text-2xl">apartment</span>
                   </div>
 
-                  <h3 className="font-headline text-2xl font-extrabold text-primary-container mb-4 leading-snug">
+                  <h3 className="font-headline text-2xl font-extrabold text-white mb-4 leading-snug rounded-2xl bg-primary-container px-5 py-4">
                     Property Developers
                   </h3>
                   <p className="text-primary-container/75 text-sm leading-relaxed mb-8">
@@ -721,7 +682,7 @@ const Screen1 = () => {
                     <span className="material-symbols-outlined text-secondary-container text-2xl">home_work</span>
                   </div>
 
-                  <h3 className="font-headline text-2xl font-extrabold text-secondary-container mb-4 leading-snug">
+                  <h3 className="font-headline text-2xl font-extrabold text-white mb-4 leading-snug">
                     Home Owners Associations
                   </h3>
                   <p className="text-white/65 text-sm leading-relaxed mb-8">

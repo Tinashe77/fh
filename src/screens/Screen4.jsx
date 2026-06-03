@@ -1,4 +1,7 @@
-import React from 'react';
+import React, { lazy, Suspense } from 'react';
+import { Link } from 'react-router-dom';
+
+const CoverageMap = lazy(() => import('../components/coverage/CoverageMap'));
 
 const rolloutStats = [
   { value: '3,600+', label: 'Homes in scope' },
@@ -8,10 +11,10 @@ const rolloutStats = [
 ];
 
 const phases = [
-  { name: 'Phase 1', status: 'Rollout in progress' },
-  { name: 'Phase 2', status: 'Current phase' },
-  { name: 'Phase 3', status: 'Demand confirmation' },
-  { name: 'Phase 4', status: 'Planned expansion' },
+  { name: 'Zone 1A', status: 'Now live, activations in progress' },
+  { name: 'Zone 1B', status: 'Rollout in progress' },
+  { name: 'Zone 1D', status: 'Rollout in progress' },
+  { name: 'Zones 1C, 2 & 3', status: 'Not yet started' },
 ];
 
 const Screen4 = () => {
@@ -21,12 +24,17 @@ const Screen4 = () => {
         className="relative flex min-h-[680px] items-center overflow-hidden pt-28"
         style={{
           backgroundImage:
-            'linear-gradient(90deg, rgba(1,15,61,0.94), rgba(3,5,104,0.78), rgba(3,5,104,0.3)), url(https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&w=1800&q=85)',
+            'linear-gradient(90deg, rgba(1,2,48,0.94) 0%, rgba(3,5,104,0.78) 43%, rgba(3,5,104,0.42) 72%, rgba(3,5,104,0.2) 100%), url(https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&w=1800&q=85)',
           backgroundPosition: 'center',
           backgroundSize: 'cover',
         }}
       >
-        <div className="mx-auto w-full max-w-7xl px-8">
+        <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,rgba(1,2,48,0.24)_0%,rgba(1,2,48,0.08)_46%,rgba(1,2,48,0.72)_100%)]" />
+        <div
+          className="pointer-events-none absolute inset-0 opacity-[0.055]"
+          style={{ backgroundImage: 'repeating-linear-gradient(0deg,#fff,#fff 1px,transparent 1px,transparent 60px),repeating-linear-gradient(90deg,#fff,#fff 1px,transparent 1px,transparent 60px)' }}
+        />
+        <div className="relative z-10 mx-auto w-full max-w-7xl px-8 hero-readable">
           <div className="max-w-3xl">
             <span className="mb-6 inline-flex rounded-full bg-secondary-container px-4 py-2 text-xs font-black uppercase tracking-[0.25em] text-on-secondary-fixed">
               Southview Project
@@ -34,7 +42,7 @@ const Screen4 = () => {
             <h1 className="font-headline text-5xl font-extrabold leading-tight text-white md:text-7xl">
               A smart connected suburb for Southview.
             </h1>
-            <p className="mt-7 max-w-2xl text-xl leading-relaxed text-white/82">
+            <p className="mt-7 max-w-2xl text-base font-medium leading-7 text-white md:text-lg">
               Fibrehood is working with the community to bring education, entertainment, security and reliable digital access into one connected neighbourhood.
             </p>
           </div>
@@ -53,39 +61,34 @@ const Screen4 = () => {
       </section>
 
       <section className="py-20">
-        <div className="mx-auto grid max-w-7xl gap-10 px-8 lg:grid-cols-[0.95fr_1.05fr]">
-          <div>
+        <div className="mx-auto grid max-w-7xl items-center gap-10 px-8 lg:grid-cols-[0.95fr_1.05fr]">
+          <div className="flex flex-col justify-center">
             <span className="text-xs font-black uppercase tracking-[0.25em] text-secondary">Rollout</span>
             <h2 className="mt-3 font-headline text-4xl font-extrabold text-primary-container">
-              Phase 1 to 4 deployment is underway.
+              Zone deployment is underway.
             </h2>
             <p className="mt-5 text-lg leading-relaxed text-on-surface-variant">
               Advance payments help confirm demand and prioritise activations. Fibrehood has partnered with CABS Custodial Services to hold funds in trust and safeguard resident payments.
             </p>
-            <button className="mt-8 rounded-full bg-secondary-container px-8 py-4 font-extrabold text-on-secondary-fixed transition hover:bg-yellow-300">
+            <Link
+              to="/network-status?locate=1"
+              className="mt-8 inline-flex items-center justify-center rounded-full bg-secondary-container px-8 py-4 font-extrabold text-on-secondary-fixed transition hover:bg-yellow-300"
+            >
               Register Interest
-            </button>
+            </Link>
           </div>
 
           <div className="rounded-3xl border border-outline-variant/30 bg-white p-5 shadow-sm">
-            <div className="relative min-h-[420px] overflow-hidden rounded-2xl bg-[#eef1f9]">
-              <div className="absolute inset-8 rounded-[2rem] border-2 border-primary-container/20" />
-              <div className="absolute left-[12%] top-[18%] h-[32%] w-[38%] rounded-2xl bg-secondary-container/80 p-5 text-primary-container shadow-sm">
-                <p className="font-headline text-xl font-extrabold">Zone A</p>
-                <p className="mt-2 text-sm font-bold">Phase 1</p>
-              </div>
-              <div className="absolute right-[14%] top-[24%] h-[36%] w-[30%] rounded-2xl bg-primary-container p-5 text-white shadow-sm">
-                <p className="font-headline text-xl font-extrabold">Zone B</p>
-                <p className="mt-2 text-sm font-bold text-secondary-container">Phase 2</p>
-              </div>
-              <div className="absolute bottom-[14%] left-[20%] h-[24%] w-[30%] rounded-2xl bg-white p-5 text-primary-container shadow-sm">
-                <p className="font-headline text-xl font-extrabold">Zone C</p>
-                <p className="mt-2 text-sm font-bold">Phase 3</p>
-              </div>
-              <div className="absolute bottom-[12%] right-[12%] h-[22%] w-[30%] rounded-2xl bg-white p-5 text-primary-container shadow-sm">
-                <p className="font-headline text-xl font-extrabold">Zone D</p>
-                <p className="mt-2 text-sm font-bold">Phase 4</p>
-              </div>
+            <div className="h-[460px] overflow-hidden rounded-2xl border border-primary-container/10">
+              <Suspense
+                fallback={
+                  <div className="flex h-full items-center justify-center bg-surface-container-low text-sm font-bold text-primary-container">
+                    Loading Southview zones...
+                  </div>
+                }
+              >
+                <CoverageMap onMapClick={() => {}} />
+              </Suspense>
             </div>
           </div>
         </div>
@@ -101,7 +104,7 @@ const Screen4 = () => {
             {[
               { value: '1,000+', label: 'Home passes' },
               { value: '0', label: 'Homes connected' },
-              { value: '2', label: 'Current phase' },
+              { value: 'Zone 1A', label: 'Live zone' },
             ].map((stat) => (
               <div key={stat.label} className="rounded-2xl border border-white/10 bg-white/8 p-8">
                 <p className="font-headline text-5xl font-extrabold text-secondary-container">{stat.value}</p>

@@ -1,6 +1,6 @@
 import { STATUS_CONFIG } from '../../utils/statusConfig';
 
-const LEGEND_STATUSES = ['LIVE', 'IN_PROGRESS', 'PLANNED', 'INVESTIGATION', 'NOT_AVAILABLE'];
+const LEGEND_STATUSES = ['LIVE', 'IN_PROGRESS', 'NOT_STARTED', 'NOT_AVAILABLE'];
 
 const CoverageLegend = () => {
   return (

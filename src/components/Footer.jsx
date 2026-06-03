@@ -66,6 +66,8 @@ const Footer = () => {
                 { label: 'Support', to: '/support' },
                 { label: 'Network Status', to: '/network-status' },
                 { label: 'Client Portal', to: '/portal' },
+                { label: 'Residential SLA', to: '/sla/residential' },
+                { label: 'Business SLA', to: '/sla/business' },
               ].map(({ label, to }) => (
                 <li key={label}>
                   <Link to={to} className="text-white/50 hover:text-yellow-400 transition-colors duration-200">
@@ -83,6 +85,7 @@ const Footer = () => {
               {[
                 { label: 'Terms & Conditions', to: '/terms' },
                 { label: 'Privacy Policy', to: '/privacy' },
+                { label: 'Fair Use Policy', to: '/fair-use' },
               ].map(({ label, to }) => (
                 <li key={label}>
                   <Link to={to} className="text-white/50 hover:text-yellow-400 transition-colors duration-200">
