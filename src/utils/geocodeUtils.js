@@ -20,7 +20,7 @@ const DEFAULT_COUNTRY_NAME = 'Zimbabwe';
 const NOMINATIM_HEADERS = {
   'Accept-Language': 'en',
   // Nominatim requires a valid User-Agent
-  'User-Agent': 'FibreHoodApp/1.0 (contact@fibrehood.co.zw)',
+  'User-Agent': 'FibreHoodApp/1.0 (support@fibrehood.co.zw)',
 };
 
 /**

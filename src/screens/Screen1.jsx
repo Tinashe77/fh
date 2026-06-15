@@ -92,7 +92,7 @@ const Screen1 = () => {
         className="relative flex min-h-screen items-center overflow-hidden pt-20"
         style={{
           backgroundImage:
-            'linear-gradient(90deg, rgba(1,2,48,0.92) 0%, rgba(3,5,104,0.76) 43%, rgba(3,5,104,0.34) 72%, rgba(3,5,104,0.18) 100%), url(https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&w=2200&q=88)',
+            'linear-gradient(90deg, rgba(1,2,48,0.92) 0%, rgba(3,5,104,0.76) 43%, rgba(3,5,104,0.34) 72%, rgba(3,5,104,0.18) 100%), url(/assets/fibrehood-southview.jpeg)',
           backgroundPosition: 'center',
           backgroundSize: 'cover',
         }}
@@ -113,32 +113,32 @@ const Screen1 = () => {
                 <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-secondary-container opacity-80" />
                 <span className="relative inline-flex h-2 w-2 rounded-full bg-secondary-container" />
               </span>
-              Empowering Communities
+              Licensed Fibre Operator
             </div>
 
             {/* Headline */}
             <h1 className="font-headline text-5xl font-extrabold leading-tight tracking-tight text-white lg:text-[3.75rem] xl:text-7xl">
-              Fast, Affordable, Reliable{' '}
+              Fast, Unlimited Fibre Internet for{' '}
               <span className="relative inline-block text-secondary-container">
-                fibre connectivity
+                your home.
                 <span className="absolute bottom-1.5 left-0 -z-10 h-3 w-full rounded-full bg-secondary-container/25" />
               </span>
             </h1>
 
-            <p className="text-lg leading-relaxed max-w-lg" style={{ color: 'rgba(255,255,255,0.6)' }}>
-              We are building the future of digital infrastructure, connecting communities and businesses to the global village.
+            <p className="max-w-xl text-lg font-medium leading-relaxed text-white">
+              Starting from <span className="font-extrabold text-secondary-container">US$40/month</span> with free installation and a once-off activation fee applicable.
             </p>
-            <p className="font-headline text-xl font-extrabold text-secondary-container">
+            <p className="font-headline text-lg font-extrabold text-secondary-container">
               Potential Lives Everywhere
             </p>
 
             {/* CTA buttons */}
             <div className="flex flex-wrap gap-4 pt-1">
               <button onClick={handleServicePlans} className="px-9 py-4 bg-secondary-container text-on-secondary-fixed font-bold rounded-full hover:scale-105 active:scale-95 transition-all duration-200 glow-yellow" style={{ boxShadow: '0 8px 32px rgba(253,204,0,0.3)' }}>
-                View Service Plans
+                Service Plans
               </button>
-              <button onClick={() => document.getElementById('about')?.scrollIntoView({ behavior: 'smooth' })} className="group px-9 py-4 rounded-full font-bold flex items-center gap-2 transition-all duration-200" style={{ border: '1px solid rgba(255,255,255,0.18)', background: 'rgba(255,255,255,0.07)', color: 'rgba(255,255,255,0.85)', backdropFilter: 'blur(12px)' }}>
-                Learn about Fibrehood
+              <button onClick={handleHeroCheck} className="group px-9 py-4 rounded-full font-bold flex items-center gap-2 transition-all duration-200" style={{ border: '1px solid rgba(255,255,255,0.28)', background: 'rgba(255,255,255,0.12)', color: '#ffffff', backdropFilter: 'blur(12px)' }}>
+                Get Fibre
                 <span className="material-symbols-outlined text-base group-hover:translate-x-1 transition-transform duration-200">
                   arrow_forward
                 </span>
@@ -151,8 +151,8 @@ const Screen1 = () => {
           <div className="relative hidden min-h-[560px] lg:block">
             <div className="absolute right-0 top-1/2 h-[82%] w-[78%] -translate-y-1/2 overflow-hidden rounded-[2rem] border border-white/18 shadow-[0_34px_90px_rgba(0,0,0,0.34)]">
               <img
-                src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1200&q=85"
-                alt="Modern fibre-ready buildings"
+                src="/assets/fibrehood-installation.jpeg"
+                alt="Fibrehood installation in progress"
                 className="h-full w-full object-cover"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-primary-container/70 via-primary-container/10 to-transparent" />
@@ -160,8 +160,8 @@ const Screen1 = () => {
 
             <div className="absolute left-4 top-10 w-[42%] overflow-hidden rounded-[1.5rem] border border-white/20 shadow-[0_24px_60px_rgba(0,0,0,0.26)]">
               <img
-                src="https://images.unsplash.com/photo-1517048676732-d65bc937f952?auto=format&fit=crop&w=800&q=85"
-                alt="Fibrehood planning meeting"
+                src="/assets/engineers-working.jpeg"
+                alt="Fibrehood engineers working"
                 className="aspect-[4/3] w-full object-cover"
               />
             </div>
@@ -184,6 +184,40 @@ const Screen1 = () => {
               <span className="text-[11px] font-black uppercase tracking-[0.22em] text-white">Network Live</span>
             </div>
           </div>
+        </div>
+      </section>
+
+      <section className="bg-white py-10">
+        <div className="mx-auto grid max-w-7xl gap-4 px-8 md:grid-cols-4">
+          {[
+            { value: 'Unlimited', label: 'Internet', icon: 'all_inclusive' },
+            { value: 'From US$40', label: 'Per month', icon: 'payments' },
+            { value: 'Free', label: 'Installation', icon: 'handyman' },
+            { value: 'From US$65', label: 'Activation fee', icon: 'bolt' },
+          ].map((item) => (
+            <div key={item.label} className="rounded-2xl border border-primary-container/10 bg-surface-container-low p-5">
+              <span className="material-symbols-outlined text-secondary-container">{item.icon}</span>
+              <p className="mt-3 font-headline text-2xl font-extrabold text-primary-container">{item.value}</p>
+              <p className="mt-1 text-xs font-black uppercase tracking-[0.2em] text-on-surface-variant">{item.label}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <section className="bg-primary-container py-14 text-white">
+        <div className="mx-auto grid max-w-7xl gap-4 px-8 md:grid-cols-4">
+          {[
+            { value: 'Licensed', label: 'By POTRAZ', icon: 'verified_user' },
+            { value: '12+', label: 'Years industry experience', icon: 'workspace_premium' },
+            { value: '1,000+', label: 'Homes passed', icon: 'home_work' },
+            { value: 'Gold Winner', label: 'Zimbabwe CEO Network Technology Award', icon: 'emoji_events' },
+          ].map((item) => (
+            <div key={item.label} className="rounded-2xl border border-white/10 bg-white/8 p-5">
+              <span className="material-symbols-outlined text-secondary-container">{item.icon}</span>
+              <p className="mt-3 font-headline text-2xl font-extrabold text-secondary-container">{item.value}</p>
+              <p className="mt-1 text-xs font-black uppercase tracking-[0.18em] text-white/70">{item.label}</p>
+            </div>
+          ))}
         </div>
       </section>
 
@@ -792,6 +826,81 @@ const Screen1 = () => {
               </div>
             </div>
           </AnimateOnScroll>
+        </div>
+      </section>
+
+      <section className="bg-white py-24">
+        <div className="mx-auto max-w-7xl px-8">
+          <div className="mb-12 max-w-3xl">
+            <span className="text-xs font-black uppercase tracking-[0.25em] text-secondary">Developers & Estates</span>
+            <h2 className="mt-3 font-headline text-4xl font-extrabold text-primary-container">
+              Fibre infrastructure for future-ready estates.
+            </h2>
+            <p className="mt-4 text-lg leading-relaxed text-on-surface-variant">
+              Fibrehood partners with developers, body corporates and estates to deliver no-cost infrastructure models and smart estate connectivity.
+            </p>
+          </div>
+
+          <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+            {[
+              'No-cost infrastructure models',
+              'FTTH design',
+              'DStv over Fibre',
+              'Smart estate infrastructure',
+              'CCTV integration',
+              'Access control',
+            ].map((item) => (
+              <div key={item} className="rounded-2xl border border-primary-container/10 bg-surface-container-low p-6">
+                <span className="material-symbols-outlined text-secondary-container" style={{ fontVariationSettings: "'FILL' 1" }}>check_circle</span>
+                <p className="mt-4 font-headline text-xl font-extrabold text-primary-container">{item}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="bg-surface-container-low py-24">
+        <div className="mx-auto max-w-7xl px-8">
+          <div className="mb-12 max-w-3xl">
+            <span className="text-xs font-black uppercase tracking-[0.25em] text-secondary">Case Studies</span>
+            <h2 className="mt-3 font-headline text-4xl font-extrabold text-primary-container">
+              Proven deployments across communities.
+            </h2>
+          </div>
+
+          <div className="grid gap-6 md:grid-cols-3">
+            {[
+              {
+                name: 'Megawatt Court',
+                before: 'Slow internet and multiple providers.',
+                after: 'Fibre to every unit with high-speed internet.',
+              },
+              {
+                name: 'Kamushinda Flats',
+                before: 'Legacy connectivity and fragmented TV distribution.',
+                after: 'FTTH plus DStv over Fibre.',
+              },
+              {
+                name: 'Tafara Flats',
+                before: 'Large MDU requiring structured rollout.',
+                after: '144-unit deployment model.',
+              },
+            ].map((study) => (
+              <article key={study.name} className="rounded-2xl bg-white p-6 shadow-sm">
+                <h3 className="font-headline text-2xl font-extrabold text-primary-container">{study.name}</h3>
+                <div className="mt-6 space-y-4">
+                  <div>
+                    <p className="text-xs font-black uppercase tracking-[0.2em] text-red-700">Before</p>
+                    <p className="mt-1 text-sm leading-relaxed text-on-surface-variant">{study.before}</p>
+                  </div>
+                  <div>
+                    <p className="text-xs font-black uppercase tracking-[0.2em] text-green-700">After</p>
+                    <p className="mt-1 text-sm leading-relaxed text-on-surface-variant">{study.after}</p>
+                  </div>
+                </div>
+              </article>
+            ))}
+          </div>
         </div>
       </section>
 

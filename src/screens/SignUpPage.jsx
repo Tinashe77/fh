@@ -45,7 +45,29 @@ const SignUpPage = ({ mode = 'signup' }) => {
 
       <section className="mx-auto grid max-w-7xl gap-8 px-8 py-20 lg:grid-cols-[1fr_0.72fr]">
         <form className="rounded-3xl bg-white p-8 shadow-sm">
+          {!isPortal && (
+            <div className="mb-8 grid gap-3 sm:grid-cols-4">
+              {['Step 1 Package', 'Step 2 Details', 'Step 3 Payment', 'Step 4 Booking'].map((step) => (
+                <div key={step} className="rounded-2xl bg-surface-container-low px-4 py-3 text-center text-[10px] font-black uppercase tracking-[0.16em] text-primary-container">
+                  {step}
+                </div>
+              ))}
+            </div>
+          )}
+
           <div className="grid gap-5 md:grid-cols-2">
+            {!isPortal && (
+              <label className="block md:col-span-2">
+                <span className="text-sm font-bold text-primary-container">Package</span>
+                <select className="mt-2 w-full rounded-xl border-outline-variant">
+                  <option>5 Mbps</option>
+                  <option>15 Mbps</option>
+                  <option>30 Mbps</option>
+                  <option>100 Mbps</option>
+                </select>
+              </label>
+            )}
+
             {!isPortal && (
               <>
                 <label className="block">
@@ -68,14 +90,31 @@ const SignUpPage = ({ mode = 'signup' }) => {
             </label>
             {!isPortal && (
               <label className="block md:col-span-2">
-                <span className="text-sm font-bold text-primary-container">Service interest</span>
+                <span className="text-sm font-bold text-primary-container">Activation fee payment method</span>
                 <select className="mt-2 w-full rounded-xl border-outline-variant">
-                  <option>Residential fibre</option>
-                  <option>SME service</option>
-                  <option>Business service</option>
-                  <option>Southview registration</option>
+                  <option>EcoCash</option>
+                  <option>OneMoney</option>
+                  <option>InnBucks</option>
+                  <option>Paynow</option>
+                  <option>VISA / Mastercard</option>
                 </select>
               </label>
+            )}
+
+            {!isPortal && (
+              <>
+                <label className="block">
+                  <span className="text-sm font-bold text-primary-container">Preferred installation date</span>
+                  <input className="mt-2 w-full rounded-xl border-outline-variant" type="date" />
+                </label>
+                <label className="block">
+                  <span className="text-sm font-bold text-primary-container">Preferred time</span>
+                  <select className="mt-2 w-full rounded-xl border-outline-variant">
+                    <option>Morning</option>
+                    <option>Afternoon</option>
+                  </select>
+                </label>
+              </>
             )}
           </div>
           <button type="button" className="mt-8 rounded-full bg-secondary-container px-8 py-4 font-extrabold text-on-secondary-fixed transition hover:bg-yellow-300">

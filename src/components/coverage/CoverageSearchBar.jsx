@@ -10,6 +10,60 @@
 import { useState, useEffect, useRef, useCallback } from 'react';
 import { searchPlaces, formatSuggestionLabel, formatAddress } from '../../utils/geocodeUtils';
 
+const QUICK_SELECTS = {
+  estate: [
+    { label: '2257 Lifestyle Estate', lat: -17.9369, lng: 30.9702 },
+  ],
+  mdu: [
+    'Pinehurst Court',
+    'Harwill Court',
+    'Wilfred Court',
+    'Shingayi Court',
+    'Caister Court',
+    'Fintra Court',
+    'The Hilton',
+    'Montagu Place',
+    'Wolverton Court',
+    'Sandrise Court',
+    'Macambar Court',
+    'Richmond Court',
+    'Roma Court',
+    'Earls Court',
+    'Hartley Court',
+    'Charingira Court',
+    'Mason Court',
+    'Moffat Heights',
+    'Dorking',
+    'Cranford',
+    'Marsham Court',
+    'Burlington House',
+    'Mnondo - Creed',
+    'Mnondo - Ringrone',
+    'Mnondo - Spoffot',
+    'Mnondo - Stow',
+    'Mnondo - Cotswald',
+    'Mnondo - Sarsden',
+    'Megawatt Court',
+    'Rose Robin',
+    'Tafara Flats',
+    'Colleen Court',
+    'Chester Court',
+    'London Lodge',
+    'Princess Place',
+    'Northcliff',
+    'Sundaland',
+    'Blandford Court',
+    'Mazowe',
+    'Eden Garden Residence',
+    'Montagu Court A',
+  ].map((label) => ({ label, lat: -17.8292, lng: 31.0522 })),
+  suburb: [
+    { label: 'Southview Park', lat: -17.937, lng: 30.970 },
+    { label: 'Southlea', lat: -17.956, lng: 30.982 },
+    { label: 'Braeside', lat: -17.847, lng: 31.064 },
+  ],
+};
+
 const CoverageSearchBar = ({ onLocationSelect, isChecking, externalSearch }) => {
   const [inputValue, setInputValue] = useState('');
   const [suggestions, setSuggestions] = useState([]);
@@ -138,8 +192,40 @@ const CoverageSearchBar = ({ onLocationSelect, isChecking, externalSearch }) => 
 
   const isBusy = isSearching || isLocating || isChecking;
 
+  const handleQuickSelect = (type, value) => {
+    if (!value) return;
+    const selected = QUICK_SELECTS[type].find((item) => item.label === value);
+    if (!selected) return;
+    setInputValue(selected.label);
+    setSuggestions([]);
+    setShowSuggestions(false);
+    onLocationSelect(selected.lat, selected.lng, selected.label);
+  };
+
   return (
     <div ref={containerRef} className="relative w-full">
+      <div className="mb-3 grid gap-2.5 md:grid-cols-3">
+        {[
+          ['estate', 'Select Estate'],
+          ['mdu', 'Select MDU Apartment'],
+          ['suburb', 'Select Suburb'],
+        ].map(([type, label]) => (
+          <select
+            key={type}
+            className="rounded-[1.1rem] border border-primary-container/10 bg-white px-4 py-3 text-sm font-bold text-primary-container shadow-[0_10px_28px_rgba(3,5,104,0.04)] focus:border-primary-container focus:ring-primary-container/20"
+            defaultValue=""
+            onChange={(e) => handleQuickSelect(type, e.target.value)}
+          >
+            <option value="">{label}</option>
+            {QUICK_SELECTS[type].map((item) => (
+              <option key={item.label} value={item.label}>
+                {item.label}
+              </option>
+            ))}
+          </select>
+        ))}
+      </div>
+
       {/* ── Input row ── */}
       <div className="flex flex-col gap-2.5 rounded-[1.5rem] bg-surface-container-low p-2.5 sm:flex-row">
         {/* Text input */}

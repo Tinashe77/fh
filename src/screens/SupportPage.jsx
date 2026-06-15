@@ -4,6 +4,15 @@ import { documents } from '../data/documents';
 
 const resourceOrder = ['residential-sla', 'business-sla', 'terms', 'privacy', 'fair-use'];
 
+const contactChannels = [
+  { label: 'Fibrehood Business', value: '+263 780 797 695', href: 'tel:+263780797695', icon: 'business_center' },
+  { label: 'Billing', value: '+263 780 257 425', href: 'tel:+263780257425', icon: 'receipt_long' },
+  { label: 'Customer Support', value: '+263 784 416 605', href: 'tel:+263784416605', icon: 'support_agent' },
+  { label: 'Support Email', value: 'support@fibrehood.co.zw', href: 'mailto:support@fibrehood.co.zw', icon: 'mail' },
+  { label: 'Sales & Marketing', value: '+263 780 711 337', href: 'tel:+263780711337', icon: 'campaign' },
+  { label: 'Sales Email', value: 'sales@fibrehood.co.zw', href: 'mailto:sales@fibrehood.co.zw', icon: 'alternate_email' },
+];
+
 const SupportPage = () => {
   return (
     <main className="bg-white pb-20">
@@ -27,6 +36,34 @@ const SupportPage = () => {
       </section>
 
       <section className="mx-auto max-w-7xl px-8 py-20">
+        <div className="mb-16">
+          <span className="text-xs font-black uppercase tracking-[0.25em] text-secondary">Contact</span>
+          <h2 className="mt-3 font-headline text-4xl font-extrabold text-primary-container">
+            Official communication channels
+          </h2>
+          <div className="mt-8 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+            {contactChannels.map((channel) => (
+              <a
+                key={channel.label}
+                href={channel.href}
+                className="rounded-2xl border border-primary-container/10 bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-glass"
+              >
+                <span className="material-symbols-outlined text-secondary-container">{channel.icon}</span>
+                <p className="mt-4 text-xs font-black uppercase tracking-[0.2em] text-on-surface-variant">{channel.label}</p>
+                <p className="mt-2 font-headline text-xl font-extrabold text-primary-container">{channel.value}</p>
+              </a>
+            ))}
+          </div>
+          <a
+            href="https://whatsapp.com/channel/0029VazOoMWDzgT62zEu2L36"
+            target="_blank"
+            rel="noreferrer"
+            className="mt-6 inline-flex rounded-full bg-secondary-container px-8 py-4 font-extrabold text-on-secondary-fixed transition hover:bg-yellow-300"
+          >
+            Join Fibrehood WhatsApp Channel
+          </a>
+        </div>
+
         <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
           <Link to="/faq" className="rounded-2xl border border-primary-container/10 bg-surface-container-low p-6 transition hover:-translate-y-1 hover:shadow-glass">
             <span className="material-symbols-outlined text-secondary-container">help</span>
@@ -40,7 +77,9 @@ const SupportPage = () => {
               <Link key={slug} to={`/documents/${slug}`} className="rounded-2xl border border-primary-container/10 bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-glass">
                 <span className="material-symbols-outlined text-secondary-container">description</span>
                 <h2 className="mt-4 font-headline text-2xl font-extrabold text-primary-container">{doc.title}</h2>
-                <p className="mt-2 leading-relaxed text-on-surface-variant">{doc.summary}</p>
+                <p className="mt-4 inline-flex rounded-full bg-surface-container-low px-4 py-2 text-xs font-black uppercase tracking-[0.18em] text-primary-container">
+                  View PDF
+                </p>
               </Link>
             );
           })}

@@ -3,23 +3,29 @@ import { Link } from 'react-router-dom';
 
 const residentialPlans = [
   {
-    name: 'Home Starter',
-    speed: '25 Mbps',
+    name: 'Starter Fibre',
+    speed: '5 Mbps',
     price: 'US$40',
-    description: 'Reliable fibre for everyday browsing, streaming, school work and messaging.',
+    description: 'Entry fibre for messaging, browsing and light streaming.',
   },
   {
-    name: 'Home Plus',
-    speed: '50 Mbps',
-    price: 'US$60',
-    description: 'Built for busy households with multiple devices, HD streaming and remote work.',
+    name: 'Family Fibre',
+    speed: '15 Mbps',
+    price: 'US$55',
+    description: 'Everyday household fibre for school, streaming and work-from-home.',
+  },
+  {
+    name: 'Popular Fibre',
+    speed: '30 Mbps',
+    price: 'US$65',
+    description: 'The balanced home package for multiple users and reliable entertainment.',
     featured: true,
   },
   {
-    name: 'Home Max',
+    name: 'Power Fibre',
     speed: '100 Mbps',
-    price: 'US$85',
-    description: 'High-capacity fibre for gaming, 4K entertainment and smart home devices.',
+    price: 'US$100',
+    description: 'High-capacity fibre for larger households, gaming and heavy streaming.',
   },
 ];
 
@@ -72,9 +78,25 @@ const Screen3 = () => {
             <p className="mt-4 text-lg leading-relaxed text-on-surface-variant">
               Residential fibre packages for family homes, homework, entertainment and always-on communication. Prices include VAT.
             </p>
+            <div className="mt-8 grid gap-3 sm:grid-cols-2 lg:grid-cols-5">
+              {[
+                'Unlimited Data',
+                'No Fair Usage Restrictions',
+                'FREE Installation',
+                'Activation from US$65 / US$100',
+                'Free-to-use Router',
+              ].map((feature) => (
+                <div key={feature} className="rounded-2xl bg-white px-4 py-3 text-sm font-extrabold text-primary-container shadow-sm">
+                  <span className="material-symbols-outlined mr-2 text-base text-secondary-container" style={{ fontVariationSettings: "'FILL' 1" }}>
+                    check_circle
+                  </span>
+                  {feature}
+                </div>
+              ))}
+            </div>
           </div>
 
-          <div className="grid gap-6 lg:grid-cols-3">
+          <div className="grid gap-6 lg:grid-cols-4">
             {residentialPlans.map((plan) => (
               <article
                 key={plan.name}
@@ -86,7 +108,7 @@ const Screen3 = () => {
               >
                 {plan.featured && (
                   <span className="mb-6 inline-flex rounded-full bg-secondary-container px-3 py-1 text-xs font-black uppercase tracking-widest text-on-secondary-fixed">
-                    Popular
+                    Most Popular
                   </span>
                 )}
                 <h3 className="font-headline text-2xl font-extrabold">{plan.name}</h3>
@@ -154,9 +176,12 @@ const Screen3 = () => {
               Tell us about the site, users and uptime requirements and our team will shape the right package.
             </p>
           </div>
-          <button className="rounded-full border border-secondary-container bg-secondary-container px-8 py-4 font-extrabold text-on-secondary-fixed transition hover:bg-yellow-300">
+          <a
+            href="mailto:sales@fibrehood.co.zw?subject=Tailored%20business%20service%20enquiry"
+            className="rounded-full border border-secondary-container bg-secondary-container px-8 py-4 text-center font-extrabold text-on-secondary-fixed transition hover:bg-yellow-300"
+          >
             Contact Sales
-          </button>
+          </a>
         </div>
       </section>
 

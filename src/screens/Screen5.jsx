@@ -12,6 +12,12 @@ const buildings = [
   { name: 'Southview Phase 2C', status: 'Not yet started', phase: 'Pending', color: 'text-red-700' },
 ];
 
+const liveNetwork = [
+  { name: 'Graniteside Core', status: 'Live' },
+  { name: 'Southview Park', status: 'Live' },
+  { name: 'Avenues Area Network', status: 'Live' },
+];
+
 const Screen5 = () => {
   const location = useLocation();
   const shouldAutoLocate = new URLSearchParams(location.search).get('locate') === '1';
@@ -43,6 +49,31 @@ const Screen5 = () => {
             <p className="mt-7 max-w-2xl text-base font-medium leading-7 text-white md:text-lg">
               Confirm your location, track active rollout areas and see which buildings or suburbs are ready for the next connection step.
             </p>
+          </div>
+        </div>
+      </section>
+
+      <section className="bg-primary-container py-12 text-white">
+        <div className="mx-auto max-w-7xl px-8">
+          <div className="mb-6 flex flex-col gap-2 md:flex-row md:items-end md:justify-between">
+            <div>
+              <span className="text-xs font-black uppercase tracking-[0.25em] text-secondary-container">Network Status</span>
+              <h2 className="mt-2 font-headline text-3xl font-extrabold">Core network health</h2>
+            </div>
+            <p className="rounded-full bg-white/10 px-5 py-3 text-sm font-bold text-white/75">
+              Planned Maintenance: <span className="text-secondary-container">None</span>
+            </p>
+          </div>
+          <div className="grid gap-4 md:grid-cols-3">
+            {liveNetwork.map((item) => (
+              <div key={item.name} className="rounded-2xl border border-white/10 bg-white/8 p-5">
+                <div className="flex items-center gap-3">
+                  <span className="h-3 w-3 rounded-full bg-green-500 shadow-[0_0_0_6px_rgba(34,197,94,0.16)]" />
+                  <p className="font-headline text-xl font-extrabold">{item.name}</p>
+                </div>
+                <p className="mt-3 text-sm font-black uppercase tracking-[0.2em] text-green-300">{item.status}</p>
+              </div>
+            ))}
           </div>
         </div>
       </section>

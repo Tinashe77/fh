@@ -19,39 +19,36 @@ const DocumentPage = () => {
             {doc.label}
           </span>
           <h1 className="max-w-4xl font-headline text-5xl font-extrabold leading-tight text-white md:text-7xl">{doc.title}</h1>
-          <p className="mt-6 max-w-2xl text-base font-medium leading-7 text-white md:text-lg">{doc.summary}</p>
         </div>
       </section>
 
-      <section className="mx-auto grid max-w-7xl gap-8 px-8 py-20 lg:grid-cols-[0.8fr_0.42fr]">
-        <div className="rounded-3xl border border-primary-container/10 bg-surface-container-low p-8">
-          <h2 className="font-headline text-3xl font-extrabold text-primary-container">Key points</h2>
-          <div className="mt-8 grid gap-4">
-            {doc.points.map((point) => (
-              <div key={point} className="flex gap-4 rounded-2xl bg-white p-5">
-                <span className="material-symbols-outlined text-secondary-container" style={{ fontVariationSettings: "'FILL' 1" }}>
-                  verified
-                </span>
-                <p className="font-semibold leading-relaxed text-on-surface-variant">{point}</p>
-              </div>
-            ))}
+      <section className="mx-auto max-w-5xl px-8 py-20">
+        <div className="rounded-3xl border border-primary-container/10 bg-surface-container-low p-6 shadow-sm">
+          <div className="flex flex-col gap-5 md:flex-row md:items-center md:justify-between">
+            <div>
+              <p className="text-xs font-black uppercase tracking-[0.25em] text-secondary">Official PDF</p>
+              <h2 className="mt-2 font-headline text-3xl font-extrabold text-primary-container">{doc.title}</h2>
+            </div>
+            <a href={doc.file} className="inline-flex rounded-full bg-secondary-container px-8 py-4 font-extrabold text-on-secondary-fixed transition hover:bg-yellow-300">
+              Open PDF
+            </a>
           </div>
-        </div>
 
-        <aside className="rounded-3xl bg-primary-container p-8 text-white">
-          <h2 className="font-headline text-3xl font-extrabold">Original document</h2>
-          <p className="mt-3 leading-relaxed text-white/70">
-            This page is a summary. The PDF remains the authoritative document.
-          </p>
-          <a href={doc.file} className="mt-8 inline-flex rounded-full bg-secondary-container px-8 py-4 font-extrabold text-on-secondary-fixed transition hover:bg-yellow-300">
+          <iframe
+            src={doc.file}
+            title={doc.title}
+            className="mt-6 h-[720px] w-full rounded-2xl border border-primary-container/10 bg-white"
+          />
+
+          <a href={doc.file} className="mt-6 inline-flex rounded-full bg-primary-container px-8 py-4 font-extrabold text-white transition hover:bg-black">
             Open PDF
           </a>
-          <div className="mt-8 border-t border-white/10 pt-6">
+          <div className="mt-8 border-t border-primary-container/10 pt-6">
             <Link to="/support" className="font-bold text-secondary-container hover:text-yellow-300">
               View all resources
             </Link>
           </div>
-        </aside>
+        </div>
       </section>
     </main>
   );

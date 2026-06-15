@@ -1,6 +1,15 @@
 import { Link } from 'react-router-dom';
 
 const Footer = () => {
+  const contactChannels = [
+    { label: 'Fibrehood Business', value: '+263 780 797 695', href: 'tel:+263780797695' },
+    { label: 'Billing', value: '+263 780 257 425', href: 'tel:+263780257425' },
+    { label: 'Customer Support', value: '+263 784 416 605', href: 'tel:+263784416605' },
+    { label: 'Support Email', value: 'support@fibrehood.co.zw', href: 'mailto:support@fibrehood.co.zw' },
+    { label: 'Sales & Marketing', value: '+263 780 711 337', href: 'tel:+263780711337' },
+    { label: 'Sales Email', value: 'sales@fibrehood.co.zw', href: 'mailto:sales@fibrehood.co.zw' },
+  ];
+
   return (
     <footer className="w-full bg-[#010f3d] font-['Manrope'] text-sm leading-relaxed">
       <div className="max-w-7xl mx-auto px-10 pt-16 pb-10 flex flex-col md:flex-row justify-between gap-12">
@@ -16,7 +25,23 @@ const Footer = () => {
             Building world-class fibre infrastructure for the next generation of connectivity.
           </p>
 
-          {/* Social media icons */}
+          <div className="space-y-2 pt-1">
+            {contactChannels.map(({ label, value, href }) => (
+              <a key={label} href={href} className="block text-xs text-white/55 transition hover:text-yellow-400">
+                <span className="font-bold text-white/75">{label}:</span> {value}
+              </a>
+            ))}
+          </div>
+
+          <a
+            href="https://whatsapp.com/channel/0029VazOoMWDzgT62zEu2L36"
+            className="inline-flex rounded-full border border-yellow-400/35 px-4 py-2 text-xs font-extrabold text-yellow-400 transition hover:bg-yellow-400 hover:text-blue-950"
+            target="_blank"
+            rel="noreferrer"
+          >
+            WhatsApp Channel
+          </a>
+
           <div className="flex gap-3 pt-1">
             {[
               { label: 'f', href: '#', title: 'Facebook' },
@@ -47,6 +72,7 @@ const Footer = () => {
                 { label: 'Service Plans', to: '/service-plans' },
                 { label: 'Installation', to: '/installation' },
                 { label: 'Southview Project', to: '/southview' },
+                { label: 'Gallery', to: '/gallery' },
               ].map(({ label, to }) => (
                 <li key={label}>
                   <Link to={to} className="text-white/50 hover:text-yellow-400 transition-colors duration-200">

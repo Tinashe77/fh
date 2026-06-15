@@ -10,6 +10,7 @@ import FaqPage from './screens/FaqPage';
 import SignUpPage from './screens/SignUpPage';
 import DocumentPage from './screens/DocumentPage';
 import SupportPage from './screens/SupportPage';
+import GalleryPage from './screens/GalleryPage';
 
 function App() {
   return (
@@ -33,6 +34,7 @@ function App() {
 
           {/* Southview Project */}
           <Route path="southview" element={<Screen4 />} />
+          <Route path="gallery" element={<GalleryPage />} />
 
           {/* Client Portal & Sign Up */}
           <Route path="portal" element={<SignUpPage mode="portal" />} />

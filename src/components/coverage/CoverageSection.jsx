@@ -109,10 +109,10 @@ const CoverageSection = forwardRef(({ externalSearch, autoLocate = false }, ref)
           </span>
           <div className="flex flex-col justify-between gap-5 md:flex-row md:items-end">
             <h2 className="max-w-2xl font-headline text-3xl font-extrabold leading-tight tracking-tight text-primary lg:text-4xl">
-              Search your location and see exactly where Fibrehood reaches in your area.
+              Check if Fibrehood is available in your area.
             </h2>
             <p className="max-w-sm shrink-0 text-sm leading-7 text-on-surface-variant md:text-base">
-              Drop a pin on the map or type your address to instantly check fibre availability.
+              Select your estate, apartment, suburb, use your location or type your address to check fibre availability.
             </p>
           </div>
         </div>

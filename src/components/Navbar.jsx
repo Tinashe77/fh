@@ -39,6 +39,7 @@ const navItems = [
     ],
   },
   { name: 'Southview Project', path: '/southview' },
+  { name: 'Gallery', path: '/gallery' },
 ];
 
 const Navbar = () => {
