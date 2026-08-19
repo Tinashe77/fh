@@ -92,7 +92,7 @@ const Screen1 = () => {
         className="relative flex min-h-screen items-center overflow-hidden pt-20"
         style={{
           backgroundImage:
-            'linear-gradient(90deg, rgba(1,2,48,0.92) 0%, rgba(3,5,104,0.76) 43%, rgba(3,5,104,0.34) 72%, rgba(3,5,104,0.18) 100%), url(/assets/fibrehood-southview.jpeg)',
+            'linear-gradient(90deg, rgba(1,2,48,0.96) 0%, rgba(3,5,104,0.82) 40%, rgba(3,5,104,0.48) 67%, rgba(3,5,104,0.28) 100%), url(/assets/fibrehood-southview.jpeg)',
           backgroundPosition: 'center',
           backgroundSize: 'cover',
         }}
@@ -104,18 +104,16 @@ const Screen1 = () => {
           style={{ backgroundImage: 'repeating-linear-gradient(0deg,#fff,#fff 1px,transparent 1px,transparent 60px),repeating-linear-gradient(90deg,#fff,#fff 1px,transparent 1px,transparent 60px)' }}
         />
 
-        <div className="relative z-10 mx-auto grid w-full max-w-7xl items-center gap-12 px-8 py-16 lg:grid-cols-[0.92fr_1.08fr]">
+        <div className="relative z-10 mx-auto flex w-full max-w-7xl flex-col gap-12 px-8 py-16">
+          <div className="absolute right-8 top-10 hidden items-center gap-2.5 rounded-full border border-white/20 bg-white/14 px-5 py-3 shadow-[0_14px_34px_rgba(0,0,0,0.2)] backdrop-blur-xl sm:flex">
+            <span className="relative flex h-2.5 w-2.5">
+              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-green-400 opacity-75" />
+              <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-green-500" />
+            </span>
+            <span className="text-[11px] font-black uppercase tracking-[0.22em] text-white">Network Live</span>
+          </div>
 
-          <div className="space-y-7">
-            {/* Badge */}
-            <div className="inline-flex items-center gap-2.5 px-4 py-2 rounded-full text-[10px] font-black uppercase tracking-[0.3em]" style={{ background: 'rgba(255,255,255,0.08)', border: '1px solid rgba(255,255,255,0.12)', color: 'rgba(255,255,255,0.85)', backdropFilter: 'blur(12px)' }}>
-              <span className="relative flex h-2 w-2">
-                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-secondary-container opacity-80" />
-                <span className="relative inline-flex h-2 w-2 rounded-full bg-secondary-container" />
-              </span>
-              Licensed Fibre Operator
-            </div>
-
+          <div className="max-w-2xl space-y-7">
             {/* Headline */}
             <h1 className="font-headline text-5xl font-extrabold leading-tight tracking-tight text-white lg:text-[3.75rem] xl:text-7xl">
               Fast, Unlimited Fibre Internet for{' '}
@@ -128,17 +126,15 @@ const Screen1 = () => {
             <p className="max-w-xl text-lg font-medium leading-relaxed text-white">
               Starting from <span className="font-extrabold text-secondary-container">US$40/month</span> with free installation and a once-off activation fee applicable.
             </p>
-            <p className="font-headline text-lg font-extrabold text-secondary-container">
-              Potential Lives Everywhere
-            </p>
 
             {/* CTA buttons */}
             <div className="flex flex-wrap gap-4 pt-1">
-              <button onClick={handleServicePlans} className="px-9 py-4 bg-secondary-container text-on-secondary-fixed font-bold rounded-full hover:scale-105 active:scale-95 transition-all duration-200 glow-yellow" style={{ boxShadow: '0 8px 32px rgba(253,204,0,0.3)' }}>
-                Service Plans
+              <button onClick={handleHeroCheck} className="inline-flex items-center gap-2 px-9 py-4 bg-secondary-container text-on-secondary-fixed font-bold rounded-full hover:scale-105 active:scale-95 transition-all duration-200 glow-yellow" style={{ boxShadow: '0 8px 32px rgba(253,204,0,0.3)' }}>
+                <span className="material-symbols-outlined text-base">pin_drop</span>
+                Check Coverage
               </button>
-              <button onClick={handleHeroCheck} className="group px-9 py-4 rounded-full font-bold flex items-center gap-2 transition-all duration-200" style={{ border: '1px solid rgba(255,255,255,0.28)', background: 'rgba(255,255,255,0.12)', color: '#ffffff', backdropFilter: 'blur(12px)' }}>
-                Get Fibre
+              <button onClick={handleServicePlans} className="group px-9 py-4 rounded-full font-bold flex items-center gap-2 transition-all duration-200" style={{ border: '1px solid rgba(255,255,255,0.28)', background: 'rgba(255,255,255,0.12)', color: '#ffffff', backdropFilter: 'blur(12px)' }}>
+                View Plans
                 <span className="material-symbols-outlined text-base group-hover:translate-x-1 transition-transform duration-200">
                   arrow_forward
                 </span>
@@ -147,77 +143,19 @@ const Screen1 = () => {
 
           </div>
 
-          {/* Right: supporting image arrangement */}
-          <div className="relative hidden min-h-[560px] lg:block">
-            <div className="absolute right-0 top-1/2 h-[82%] w-[78%] -translate-y-1/2 overflow-hidden rounded-[2rem] border border-white/18 shadow-[0_34px_90px_rgba(0,0,0,0.34)]">
-              <img
-                src="/assets/fibrehood-installation.jpeg"
-                alt="Fibrehood installation in progress"
-                className="h-full w-full object-cover"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-primary-container/70 via-primary-container/10 to-transparent" />
-            </div>
-
-            <div className="absolute left-4 top-10 w-[42%] overflow-hidden rounded-[1.5rem] border border-white/20 shadow-[0_24px_60px_rgba(0,0,0,0.26)]">
-              <img
-                src="/assets/engineers-working.jpeg"
-                alt="Fibrehood engineers working"
-                className="aspect-[4/3] w-full object-cover"
-              />
-            </div>
-
-            <div className="absolute bottom-12 left-0 max-w-[270px] rounded-[1.5rem] border border-white/18 bg-white/12 p-6 text-white shadow-[0_20px_55px_rgba(0,0,0,0.28)] backdrop-blur-xl">
-              <div className="mb-3 flex items-center gap-3">
-                <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-secondary-container text-on-secondary-fixed">
-                  <span className="material-symbols-outlined">speed</span>
-                </span>
-                <span className="font-headline text-3xl font-extrabold">1Gbps</span>
+          <div className="ml-auto grid w-full gap-4 md:max-w-[58rem] md:grid-cols-3">
+            {[
+              { value: '12+', label: 'Connected Communities', icon: 'workspace_premium' },
+              { value: '2,500+', label: 'Homes Passed and Growing', icon: 'home_work' },
+              { value: 'Gold Winner', label: 'Recognized for Excellence in Connectivity', icon: 'emoji_events' },
+            ].map((item) => (
+              <div key={item.label} className="rounded-2xl border border-white/16 bg-white/10 p-5 text-white shadow-[0_18px_45px_rgba(0,0,0,0.2)] backdrop-blur-xl">
+                <span className="material-symbols-outlined text-secondary-container">{item.icon}</span>
+                <p className="mt-3 font-headline text-2xl font-extrabold text-white">{item.value}</p>
+                <p className="mt-1 text-sm font-semibold leading-5 text-white/78">{item.label}</p>
               </div>
-              <p className="text-sm leading-6 text-white/70">1Gbps capable network</p>
-            </div>
-
-            <div className="absolute right-8 top-16 flex items-center gap-2.5 rounded-full border border-white/20 bg-white/14 px-5 py-3 shadow-[0_14px_34px_rgba(0,0,0,0.2)] backdrop-blur-xl">
-              <span className="relative flex h-2.5 w-2.5">
-                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-green-400 opacity-75" />
-                <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-green-500" />
-              </span>
-              <span className="text-[11px] font-black uppercase tracking-[0.22em] text-white">Network Live</span>
-            </div>
+            ))}
           </div>
-        </div>
-      </section>
-
-      <section className="bg-white py-10">
-        <div className="mx-auto grid max-w-7xl gap-4 px-8 md:grid-cols-4">
-          {[
-            { value: 'Unlimited', label: 'Internet', icon: 'all_inclusive' },
-            { value: 'From US$40', label: 'Per month', icon: 'payments' },
-            { value: 'Free', label: 'Installation', icon: 'handyman' },
-            { value: 'From US$65', label: 'Activation fee', icon: 'bolt' },
-          ].map((item) => (
-            <div key={item.label} className="rounded-2xl border border-primary-container/10 bg-surface-container-low p-5">
-              <span className="material-symbols-outlined text-secondary-container">{item.icon}</span>
-              <p className="mt-3 font-headline text-2xl font-extrabold text-primary-container">{item.value}</p>
-              <p className="mt-1 text-xs font-black uppercase tracking-[0.2em] text-on-surface-variant">{item.label}</p>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      <section className="bg-primary-container py-14 text-white">
-        <div className="mx-auto grid max-w-7xl gap-4 px-8 md:grid-cols-4">
-          {[
-            { value: 'Licensed', label: 'By POTRAZ', icon: 'verified_user' },
-            { value: '12+', label: 'Years industry experience', icon: 'workspace_premium' },
-            { value: '1,000+', label: 'Homes passed', icon: 'home_work' },
-            { value: 'Gold Winner', label: 'Zimbabwe CEO Network Technology Award', icon: 'emoji_events' },
-          ].map((item) => (
-            <div key={item.label} className="rounded-2xl border border-white/10 bg-white/8 p-5">
-              <span className="material-symbols-outlined text-secondary-container">{item.icon}</span>
-              <p className="mt-3 font-headline text-2xl font-extrabold text-secondary-container">{item.value}</p>
-              <p className="mt-1 text-xs font-black uppercase tracking-[0.18em] text-white/70">{item.label}</p>
-            </div>
-          ))}
         </div>
       </section>
 
