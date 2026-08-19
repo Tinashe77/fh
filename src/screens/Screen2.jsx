@@ -20,10 +20,10 @@ const Screen2 = () => {
         <div className="relative z-10 mx-auto w-full max-w-7xl px-8 text-center hero-readable md:text-left">
           <div className="max-w-3xl">
             <span className="inline-block px-4 py-1.5 mb-8 text-xs font-bold uppercase tracking-widest bg-secondary-container text-on-secondary-fixed rounded-full shadow-sm">
-              Infrastructure Deployment
+              Get Connected
             </span>
             <h1 className="text-5xl md:text-7xl font-extrabold text-white tracking-tight mb-8 font-headline">
-              Installation Pathways
+              Get Connected
             </h1>
             <p className="text-base font-medium leading-7 text-white md:text-lg">
               Streamlined fiber-to-the-home and business solutions tailored for every architectural landscape. Discover the right connection journey for your property.

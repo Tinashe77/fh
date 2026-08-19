@@ -1,4 +1,5 @@
-import { useNavigate } from 'react-router-dom';
+import { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import AnimateOnScroll from '../components/AnimateOnScroll';
 
 // ── Data ─────────────────────────────────────────────────────────────────────
@@ -21,16 +22,16 @@ const valuePropCards = [
   },
   {
     icon: 'hub',
-    title: 'Open Access',
-    text: 'Residents can choose from various ISPs to suit their needs.',
+    title: 'Unlimited Fibre Packages',
+    text: 'Residents can choose a package suitable to their connectivity needs.',
     iconBg: 'bg-secondary-container',
-    iconColor: 'text-on-secondary-fixed',
+    iconColor: 'text-primary-container',
     highlight: true,
   },
   {
     icon: 'bolt',
-    title: 'Blazing fast speeds',
-    text: 'Enjoy lightning-fast download and upload speeds for uninterrupted streaming, work, and play.',
+    title: 'Fast Fibre Internet',
+    text: 'Enjoy low latency and faster speeds for work and play.',
     iconBg: 'bg-primary-container',
     iconColor: 'text-white',
   },
@@ -46,13 +47,13 @@ const valuePropCards = [
     title: 'Future-proof technology',
     text: 'Fibre networks are built to support the growing demands of the digital era, ensuring long-term value.',
     iconBg: 'bg-secondary-container',
-    iconColor: 'text-on-secondary-fixed',
+    iconColor: 'text-primary-container',
     highlight: true,
   },
   {
     icon: 'thumb_up',
     title: 'Reliable and stable connection',
-    text: 'Experience a stable connection, even during peak times and bad weather.',
+    text: 'Our fibre network is engineered to provide stable, consistent connectivity for everyday home and business use.',
     iconBg: 'bg-primary-container',
     iconColor: 'text-white',
   },
@@ -71,21 +72,104 @@ const propertyDevelopers = [
   { name: 'N3 Properties', tagline: '' },
 ];
 
+const homeCoverageAreas = [
+  { area: 'Southview Park', building: 'Phase 1A', status: 'LIVE', detail: 'Fibre is live and activations are in progress in this zone.' },
+  { area: 'Southview Park', building: 'Phase 1B', status: 'BUILDING', detail: 'Rollout is underway. Register interest so the team can confirm activation timing.' },
+  { area: 'Southview Park', building: 'Phase 1D', status: 'BUILDING', detail: 'Rollout is underway. Register interest so the team can confirm activation timing.' },
+  { area: 'Southview Park', building: 'Phase 1C', status: 'PLANNED', detail: 'This zone is planned. Register your interest to help Fibrehood plan demand.' },
+  { area: 'Southview Park', building: 'Phase 2A', status: 'PLANNED', detail: 'This zone is planned. Register your interest to help Fibrehood plan demand.' },
+  { area: 'Southview Park', building: 'Phase 2B', status: 'PLANNED', detail: 'This zone is planned. Register your interest to help Fibrehood plan demand.' },
+  { area: 'Southview Park', building: 'Phase 2C', status: 'PLANNED', detail: 'This zone is planned. Register your interest to help Fibrehood plan demand.' },
+  { area: 'Avenues Area Network', building: 'MDU / Apartment', status: 'LIVE', detail: 'Fibre is live for supported buildings in the Avenues area.' },
+  { area: '2257 Lifestyle Estate', building: 'Estate', status: 'LIVE', detail: 'Fibre is available for supported homes in this estate.' },
+  { area: 'Southlea', building: 'Suburb', status: 'PLANNED', detail: 'This area is in future rollout planning.' },
+  { area: 'Braeside', building: 'Suburb', status: 'PLANNED', detail: 'This area is in future rollout planning.' },
+];
+
+const coverageStatusContent = {
+  LIVE: {
+    label: 'LIVE',
+    title: 'Fibre available now',
+    icon: 'wifi',
+    tone: 'border-green-500 bg-green-50 text-green-800',
+    dot: 'bg-green-500',
+    cta: 'Sign Up',
+    action: '/sign-up',
+  },
+  BUILDING: {
+    label: 'BUILDING',
+    title: 'Network deployment underway',
+    icon: 'construction',
+    tone: 'border-orange-500 bg-orange-50 text-orange-800',
+    dot: 'bg-orange-500',
+    cta: 'Register Interest',
+    action: '/coverage?locate=1',
+  },
+  PLANNED: {
+    label: 'PLANNED',
+    title: 'Register your interest',
+    icon: 'event_available',
+    tone: 'border-red-500 bg-red-50 text-red-800',
+    dot: 'bg-red-500',
+    cta: 'Register Interest',
+    action: '/coverage?locate=1',
+  },
+};
+
+const howItWorksSteps = [
+  { title: 'Check Coverage', text: 'Confirm availability for your area, building or Southview phase.', icon: 'location_on' },
+  { title: 'Choose Your Plan', text: 'Pick the fibre package that fits your home or business.', icon: 'speed' },
+  { title: 'Sign Up', text: 'Share your details and complete the simple registration steps.', icon: 'edit_note' },
+  { title: 'Get Connected', text: 'Fibrehood schedules installation and activates your service.', icon: 'router' },
+];
+
 // ── Component ─────────────────────────────────────────────────────────────────
 
 const Screen1 = () => {
   const navigate = useNavigate();
+  const [coverageForm, setCoverageForm] = useState({
+    area: 'Southview Park',
+    building: 'Phase 1A',
+    unit: '',
+  });
+  const [homeCoverageResult, setHomeCoverageResult] = useState(homeCoverageAreas[0]);
 
   const handleHeroCheck = () => {
-    navigate('/network-status');
+    navigate('/coverage');
   };
 
   const handleServicePlans = () => {
-    navigate('/service-plans');
+    navigate('/fibre-plans');
   };
 
+  const updateCoverageField = (field, value) => {
+    setCoverageForm((current) => {
+      const next = { ...current, [field]: value };
+      if (field === 'area') {
+        const firstMatch = homeCoverageAreas.find((item) => item.area === value);
+        next.building = firstMatch?.building || '';
+      }
+      return next;
+    });
+  };
+
+  const handleHomeCoverageCheck = (event) => {
+    event.preventDefault();
+
+    const normalizedBuilding = coverageForm.building.trim().toLowerCase();
+    const areaMatches = homeCoverageAreas.filter((item) => item.area === coverageForm.area);
+    const exactMatch = areaMatches.find((item) => item.building.toLowerCase() === normalizedBuilding);
+    const partialMatch = areaMatches.find((item) => normalizedBuilding && normalizedBuilding.includes(item.building.toLowerCase()));
+    const fallback = areaMatches[0] || homeCoverageAreas.find((item) => item.status === 'PLANNED');
+
+    setHomeCoverageResult(exactMatch || partialMatch || fallback);
+  };
+
+  const selectedAreaOptions = homeCoverageAreas.filter((item) => item.area === coverageForm.area);
+  const selectedStatus = coverageStatusContent[homeCoverageResult.status];
+
   return (
-    <main className="overflow-hidden bg-surface text-on-surface">
+    <main className="overflow-hidden bg-surface text-primary-container">
 
       {/* ── HERO ──────────────────────────────────────────────── */}
       <section
@@ -104,7 +188,7 @@ const Screen1 = () => {
           style={{ backgroundImage: 'repeating-linear-gradient(0deg,#fff,#fff 1px,transparent 1px,transparent 60px),repeating-linear-gradient(90deg,#fff,#fff 1px,transparent 1px,transparent 60px)' }}
         />
 
-        <div className="relative z-10 mx-auto flex w-full max-w-7xl flex-col gap-12 px-8 py-16">
+        <div className="relative z-10 mx-auto flex min-h-[calc(100vh-5rem)] w-full max-w-7xl flex-col justify-between gap-14 px-6 py-14 sm:px-8 lg:min-h-[720px] lg:py-16">
           <div className="absolute right-8 top-10 hidden items-center gap-2.5 rounded-full border border-white/20 bg-white/14 px-5 py-3 shadow-[0_14px_34px_rgba(0,0,0,0.2)] backdrop-blur-xl sm:flex">
             <span className="relative flex h-2.5 w-2.5">
               <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-green-400 opacity-75" />
@@ -113,7 +197,7 @@ const Screen1 = () => {
             <span className="text-[11px] font-black uppercase tracking-[0.22em] text-white">Network Live</span>
           </div>
 
-          <div className="max-w-2xl space-y-7">
+          <div className="max-w-2xl space-y-7 lg:pt-8">
             {/* Headline */}
             <h1 className="font-headline text-5xl font-extrabold leading-tight tracking-tight text-white lg:text-[3.75rem] xl:text-7xl">
               Fast, Unlimited Fibre Internet for{' '}
@@ -129,7 +213,7 @@ const Screen1 = () => {
 
             {/* CTA buttons */}
             <div className="flex flex-wrap gap-4 pt-1">
-              <button onClick={handleHeroCheck} className="inline-flex items-center gap-2 px-9 py-4 bg-secondary-container text-on-secondary-fixed font-bold rounded-full hover:scale-105 active:scale-95 transition-all duration-200 glow-yellow" style={{ boxShadow: '0 8px 32px rgba(253,204,0,0.3)' }}>
+              <button onClick={handleHeroCheck} className="inline-flex items-center gap-2 px-9 py-4 bg-secondary-container text-primary-container font-bold rounded-full hover:scale-105 active:scale-95 transition-all duration-200 glow-yellow" style={{ boxShadow: '0 8px 32px rgba(253,204,0,0.3)' }}>
                 <span className="material-symbols-outlined text-base">pin_drop</span>
                 Check Coverage
               </button>
@@ -143,259 +227,351 @@ const Screen1 = () => {
 
           </div>
 
-          <div className="ml-auto grid w-full gap-4 md:max-w-[58rem] md:grid-cols-3">
+          <div className="grid w-full gap-4 self-end md:max-w-[49rem] md:grid-cols-3">
             {[
               { value: '12+', label: 'Connected Communities', icon: 'workspace_premium' },
               { value: '2,500+', label: 'Homes Passed and Growing', icon: 'home_work' },
               { value: 'Gold Winner', label: 'Recognized for Excellence in Connectivity', icon: 'emoji_events' },
             ].map((item) => (
-              <div key={item.label} className="rounded-2xl border border-white/16 bg-white/10 p-5 text-white shadow-[0_18px_45px_rgba(0,0,0,0.2)] backdrop-blur-xl">
-                <span className="material-symbols-outlined text-secondary-container">{item.icon}</span>
-                <p className="mt-3 font-headline text-2xl font-extrabold text-white">{item.value}</p>
-                <p className="mt-1 text-sm font-semibold leading-5 text-white/78">{item.label}</p>
+              <div key={item.label} className="flex min-h-[104px] items-center gap-4 rounded-2xl border border-white/16 bg-white/10 px-5 py-4 text-white shadow-[0_18px_45px_rgba(0,0,0,0.2)] backdrop-blur-xl">
+                <span className="material-symbols-outlined shrink-0 text-3xl text-secondary-container">{item.icon}</span>
+                <div className="min-w-0">
+                  <p className="font-headline text-2xl font-extrabold leading-tight text-white">{item.value}</p>
+                  <p className="mt-1 text-sm font-semibold leading-5 text-white/78">{item.label}</p>
+                </div>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* ── VALUE MARQUEE ──────────────────────────────────────── */}
-      <section
-        className="relative overflow-hidden py-10"
-        style={{ background: 'linear-gradient(135deg, #010230 0%, #020558 40%, #030568 70%, #010f4a 100%)' }}
-      >
-        {/* Ambient glow */}
-        <div className="pointer-events-none absolute top-1/2 left-1/4 -translate-y-1/2 w-96 h-32 rounded-full blur-[80px]" style={{ background: 'rgba(253,204,0,0.07)' }} />
-        <div className="pointer-events-none absolute top-1/2 right-1/4 -translate-y-1/2 w-96 h-32 rounded-full blur-[80px]" style={{ background: 'rgba(253,204,0,0.05)' }} />
+      {/* ── HOME COVERAGE CHECKER ─────────────────────────────── */}
+      <section className="relative overflow-hidden bg-white py-16">
+        <div className="mx-auto max-w-7xl px-6 sm:px-8">
+          <div className="grid gap-6 lg:grid-cols-[1.05fr_0.95fr]">
+            <AnimateOnScroll direction="up" delay={0}>
+              <div className="h-full rounded-[2rem] border border-primary-container/10 bg-[linear-gradient(145deg,#ffffff_0%,#f7f8fc_100%)] p-6 shadow-[0_24px_70px_rgba(3,5,104,0.10)] md:p-8">
+                <div className="flex flex-col gap-5 md:flex-row md:items-end md:justify-between">
+                  <div>
+                    <span className="inline-flex rounded-full bg-primary-container px-4 py-2 text-[11px] font-black uppercase tracking-[0.24em] text-white">
+                      Coverage Checker
+                    </span>
+                    <h2 className="mt-5 max-w-2xl font-headline text-3xl font-extrabold leading-tight text-primary-container md:text-4xl">
+                      Is Fibrehood available at your address?
+                    </h2>
+                    <p className="mt-3 max-w-xl text-base font-semibold leading-7 text-primary-container/78">
+                      Check your suburb, building or Southview phase before choosing a plan.
+                    </p>
+                  </div>
+                  <Link to="/coverage" className="inline-flex shrink-0 items-center gap-2 text-sm font-extrabold text-primary-container hover:text-secondary-container">
+                    Full network map
+                    <span className="material-symbols-outlined text-base">arrow_forward</span>
+                  </Link>
+                </div>
 
-        {/* Left/right fade masks */}
-        <div className="pointer-events-none absolute left-0 top-0 bottom-0 w-32 z-10" style={{ background: 'linear-gradient(90deg, #010230 0%, transparent 100%)' }} />
-        <div className="pointer-events-none absolute right-0 top-0 bottom-0 w-32 z-10" style={{ background: 'linear-gradient(270deg, #010230 0%, transparent 100%)' }} />
+                <form onSubmit={handleHomeCoverageCheck} className="mt-8 grid gap-4">
+                  <div className="grid gap-4 md:grid-cols-3">
+                    <label className="block">
+                      <span className="mb-2 block text-xs font-black uppercase tracking-[0.16em] text-primary-container/65">Suburb / Area</span>
+                      <select
+                        value={coverageForm.area}
+                        onChange={(event) => updateCoverageField('area', event.target.value)}
+                        className="h-14 w-full rounded-xl border border-primary-container/10 bg-white px-4 text-sm font-bold text-primary-container shadow-[0_10px_24px_rgba(3,5,104,0.05)] focus:border-primary-container focus:ring-primary-container/20"
+                      >
+                        {[...new Set(homeCoverageAreas.map((item) => item.area))].map((area) => (
+                          <option key={area} value={area}>{area}</option>
+                        ))}
+                      </select>
+                    </label>
 
-        {/* Row 1 — scrolls left */}
-        <div className="marquee-track mb-4">
-          <div className="marquee-group">
-            {[
-              { text: 'Affordable, accessible and high quality internet', icon: 'wifi' },
-              { text: 'Fast rollout for underserved communities', icon: 'rocket_launch' },
-              { text: 'Reliable infrastructure built for long-term growth', icon: 'hub' },
-              { text: 'A platform for education, remote work and digital business', icon: 'school' },
-              { text: 'Affordable, accessible and high quality internet', icon: 'wifi' },
-              { text: 'Fast rollout for underserved communities', icon: 'rocket_launch' },
-              { text: 'Reliable infrastructure built for long-term growth', icon: 'hub' },
-              { text: 'A platform for education, remote work and digital business', icon: 'school' },
-            ].map((item, i) => (
-              <div
-                key={i}
-                className="mr-3 inline-flex items-center gap-3 px-5 py-3 rounded-full"
-                style={{
-                  background: i % 2 === 0 ? 'rgba(253,204,0,0.1)' : 'rgba(255,255,255,0.06)',
-                  border: i % 2 === 0 ? '1px solid rgba(253,204,0,0.2)' : '1px solid rgba(255,255,255,0.1)',
-                }}
-              >
-                <span
-                  className="material-symbols-outlined shrink-0"
-                  style={{ fontSize: '15px', color: i % 2 === 0 ? '#fdcc00' : 'rgba(255,255,255,0.5)' }}
-                >
-                  {item.icon}
-                </span>
-                <span
-                  className="text-[11px] font-black uppercase tracking-[0.25em] whitespace-nowrap"
-                  style={{ color: i % 2 === 0 ? '#fdcc00' : 'rgba(255,255,255,0.7)' }}
-                >
-                  {item.text}
-                </span>
+                    <label className="block">
+                      <span className="mb-2 block text-xs font-black uppercase tracking-[0.16em] text-primary-container/65">Building / Phase</span>
+                      <select
+                        value={coverageForm.building}
+                        onChange={(event) => updateCoverageField('building', event.target.value)}
+                        className="h-14 w-full rounded-xl border border-primary-container/10 bg-white px-4 text-sm font-bold text-primary-container shadow-[0_10px_24px_rgba(3,5,104,0.05)] focus:border-primary-container focus:ring-primary-container/20"
+                      >
+                        {selectedAreaOptions.map((item) => (
+                          <option key={`${item.area}-${item.building}`} value={item.building}>{item.building}</option>
+                        ))}
+                      </select>
+                    </label>
+
+                    <label className="block">
+                      <span className="mb-2 block text-xs font-black uppercase tracking-[0.16em] text-primary-container/65">Unit / Stand</span>
+                      <input
+                        value={coverageForm.unit}
+                        onChange={(event) => updateCoverageField('unit', event.target.value)}
+                        placeholder="Optional"
+                        className="h-14 w-full rounded-xl border border-primary-container/10 bg-white px-4 text-sm font-bold text-primary-container shadow-[0_10px_24px_rgba(3,5,104,0.05)] placeholder:text-primary-container/50 focus:border-primary-container focus:ring-primary-container/20"
+                      />
+                    </label>
+                  </div>
+
+                  <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
+                    <button type="submit" className="inline-flex items-center justify-center gap-2 rounded-full bg-secondary-container px-8 py-4 font-extrabold text-primary-container shadow-[0_16px_34px_rgba(253,204,0,0.28)] transition-all duration-200 hover:scale-[1.02] active:scale-95">
+                      Check Coverage
+                      <span className="material-symbols-outlined text-base">search</span>
+                    </button>
+                    <button type="button" onClick={() => navigate('/coverage?locate=1')} className="inline-flex items-center justify-center gap-2 rounded-full border border-primary-container/15 bg-white px-8 py-4 font-extrabold text-primary-container transition-all duration-200 hover:border-primary-container/35">
+                      Use My Location
+                      <span className="material-symbols-outlined text-base">my_location</span>
+                    </button>
+                  </div>
+                </form>
               </div>
+            </AnimateOnScroll>
+
+            <AnimateOnScroll direction="up" delay={100}>
+              <div className={`flex h-full flex-col justify-between rounded-[2rem] border p-6 shadow-[0_24px_70px_rgba(3,5,104,0.08)] md:p-8 ${selectedStatus.tone}`}>
+                <div>
+                  <div className="flex items-center justify-between gap-4">
+                    <div className="flex items-center gap-3">
+                      <span className={`h-3 w-3 rounded-full ${selectedStatus.dot}`} />
+                      <span className="text-xs font-black uppercase tracking-[0.24em]">{selectedStatus.label}</span>
+                    </div>
+                    <span className="material-symbols-outlined text-4xl">{selectedStatus.icon}</span>
+                  </div>
+
+                  <h3 className="mt-8 font-headline text-3xl font-extrabold leading-tight md:text-4xl">
+                    {selectedStatus.title}
+                  </h3>
+                  <p className="mt-4 text-base font-semibold leading-7">
+                    {homeCoverageResult.detail}
+                  </p>
+
+                  <div className="mt-6 rounded-2xl bg-white/70 p-4 text-primary-container">
+                    <p className="text-xs font-black uppercase tracking-[0.2em] text-primary-container/55">Checked location</p>
+                    <p className="mt-2 font-headline text-xl font-extrabold">{homeCoverageResult.area}</p>
+                    <p className="mt-1 text-sm font-semibold text-primary-container/70">
+                      {homeCoverageResult.building}{coverageForm.unit ? ` · Unit ${coverageForm.unit}` : ''}
+                    </p>
+                  </div>
+                </div>
+
+                <button
+                  onClick={() => navigate(selectedStatus.action)}
+                  className="mt-8 inline-flex w-full items-center justify-center gap-2 rounded-full bg-primary-container px-8 py-4 font-extrabold text-white shadow-[0_16px_34px_rgba(3,5,104,0.20)] transition-all duration-200 hover:scale-[1.02] active:scale-95"
+                >
+                  {selectedStatus.cta}
+                  <span className="material-symbols-outlined text-base">arrow_forward</span>
+                </button>
+              </div>
+            </AnimateOnScroll>
+          </div>
+        </div>
+      </section>
+
+      {/* ── HOW IT WORKS ──────────────────────────────────────── */}
+      <section className="bg-surface-container-low py-16">
+        <div className="mx-auto max-w-7xl px-6 sm:px-8">
+          <div className="mb-8 flex flex-col justify-between gap-4 md:flex-row md:items-end">
+            <div>
+              <span className="text-xs font-black uppercase tracking-[0.24em] text-secondary-container">How it works</span>
+              <h2 className="mt-3 font-headline text-3xl font-extrabold text-primary-container md:text-4xl">
+                Four simple steps to get connected.
+              </h2>
+            </div>
+            <p className="max-w-md text-sm font-semibold leading-7 text-primary-container/78">
+              From coverage check to activation, the process is designed to be clear and simple.
+            </p>
+          </div>
+
+          <div className="grid gap-4 md:grid-cols-4">
+            {howItWorksSteps.map((step, index) => (
+              <AnimateOnScroll key={step.title} direction="up" delay={index * 70} className="h-full">
+                <div className="relative flex h-full min-h-[190px] flex-col rounded-2xl border border-primary-container/10 bg-white p-5 shadow-[0_14px_34px_rgba(3,5,104,0.06)]">
+                  <div className="flex items-start justify-between gap-4">
+                    <span className="flex h-12 w-12 items-center justify-center rounded-xl bg-primary-container text-secondary-container">
+                      <span className="material-symbols-outlined">{step.icon}</span>
+                    </span>
+                    <span className="font-headline text-3xl font-extrabold text-primary-container/14">
+                      {String(index + 1).padStart(2, '0')}
+                    </span>
+                  </div>
+                  <h3 className="mt-7 font-headline text-xl font-extrabold text-primary-container">{step.title}</h3>
+                  <p className="mt-3 text-sm font-semibold leading-6 text-primary-container/78">{step.text}</p>
+                </div>
+              </AnimateOnScroll>
             ))}
           </div>
         </div>
+      </section>
 
-        {/* Row 2 — scrolls right (reverse) */}
-        <div className="marquee-track">
-          <div className="marquee-group" style={{ animationDirection: 'reverse' }}>
-            {[
-              { text: 'No-cost installation', icon: 'handyman' },
-              { text: 'Open access network', icon: 'lan' },
-              { text: 'Blazing fast speeds', icon: 'bolt' },
-              { text: 'Boost property value', icon: 'trending_up' },
-              { text: 'Future-proof technology', icon: 'security' },
-              { text: 'Reliable & stable connection', icon: 'verified' },
-              { text: 'No-cost installation', icon: 'handyman' },
-              { text: 'Open access network', icon: 'lan' },
-              { text: 'Blazing fast speeds', icon: 'bolt' },
-              { text: 'Boost property value', icon: 'trending_up' },
-              { text: 'Future-proof technology', icon: 'security' },
-              { text: 'Reliable & stable connection', icon: 'verified' },
-            ].map((item, i) => (
-              <div
-                key={i}
-                className="mr-3 inline-flex items-center gap-3 px-5 py-3 rounded-full"
-                style={{
-                  background: 'rgba(255,255,255,0.05)',
-                  border: '1px solid rgba(255,255,255,0.08)',
-                }}
-              >
-                <span
-                  className="material-symbols-outlined shrink-0"
-                  style={{ fontSize: '15px', color: 'rgba(253,204,0,0.7)' }}
+      {/* ── VALUE SNAPSHOT ─────────────────────────────────────── */}
+      <section className="relative overflow-hidden bg-white py-16">
+        <div className="mx-auto max-w-7xl px-6 sm:px-8">
+          <div className="overflow-hidden rounded-[2rem] border border-primary-container/10 bg-surface-container-low shadow-[0_28px_80px_rgba(3,5,104,0.12)]">
+            <div className="grid gap-px bg-primary-container/10 sm:grid-cols-2 lg:grid-cols-4">
+              {[
+                { value: 'Unlimited', kicker: 'Fibre internet', label: 'Internet', icon: 'all_inclusive' },
+                { value: 'US$40', kicker: 'Starting from', label: 'Per month', icon: 'payments' },
+                { value: 'FREE*', kicker: 'Available locations', label: 'Installation', note: '*Applicable in available live Fibrehood locations only.', icon: 'handyman' },
+                { value: 'US$65', kicker: 'Starting from...', label: 'Activation fee', icon: 'bolt' },
+              ].map((item) => (
+                <div
+                  key={item.value}
+                  className="flex min-h-[176px] flex-col justify-between bg-white px-7 py-6"
                 >
-                  {item.icon}
-                </span>
-                <span
-                  className="text-[11px] font-black uppercase tracking-[0.25em] whitespace-nowrap"
-                  style={{ color: 'rgba(255,255,255,0.55)' }}
-                >
-                  {item.text}
-                </span>
+                  <div className="flex items-start justify-between gap-4">
+                    <span className="material-symbols-outlined text-3xl text-secondary-container">{item.icon}</span>
+                    <span className="text-right text-xs font-black uppercase tracking-[0.16em] text-primary-container/45">{item.kicker}</span>
+                  </div>
+
+                  <div>
+                    <p className="font-headline text-4xl font-extrabold leading-none text-primary-container lg:text-[3.05rem]">
+                      {item.value}
+                    </p>
+                    <p className="mt-4 text-xs font-black uppercase leading-5 tracking-[0.24em] text-primary-container/78">
+                      {item.label}
+                    </p>
+                    {item.note && (
+                      <p className="mt-2 max-w-[15rem] text-xs font-semibold leading-5 text-primary-container/78">
+                        {item.note}
+                      </p>
+                    )}
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            <div className="bg-primary-container px-5 py-6 sm:px-8">
+              <div className="mx-auto grid max-w-5xl gap-4 md:grid-cols-3">
+                {[
+                  { value: '12+', label: 'Connected Communities', icon: 'workspace_premium' },
+                  { value: '2,500+', label: 'Homes Passed and Growing', icon: 'home_work' },
+                  { value: 'Gold Winner', label: 'Recognized for Excellence in Connectivity', icon: 'emoji_events' },
+                ].map((item) => (
+                  <div key={item.label} className="flex min-h-[96px] items-center justify-center rounded-2xl border border-white/20 bg-white/8 px-6 py-4 text-white">
+                    <div className="flex items-center gap-4">
+                      <span className="material-symbols-outlined shrink-0 text-3xl text-secondary-container">{item.icon}</span>
+                      <div>
+                        <p className="font-headline text-2xl font-extrabold leading-tight text-secondary-container">{item.value}</p>
+                        <p className="mt-1 text-sm font-semibold leading-5 text-white">{item.label}</p>
+                      </div>
+                    </div>
+                  </div>
+                ))}
               </div>
-            ))}
+            </div>
+
+            <div className="bg-surface-container-low px-5 py-6 sm:px-8">
+              <div className="grid gap-3 md:grid-cols-3">
+                {[
+                  { text: 'Fast rollout for underserved communities', icon: 'rocket_launch' },
+                  { text: 'Reliable infrastructure built for long-term growth', icon: 'hub', accent: true },
+                  { text: 'Education, remote work and digital business', icon: 'school' },
+                  { text: 'Reliable & stable connection', icon: 'verified' },
+                  { text: 'No-cost installation', icon: 'handyman' },
+                  { text: 'Open access network', icon: 'lan' },
+                  { text: 'Blazing fast speeds', icon: 'bolt' },
+                  { text: 'Boost property value', icon: 'trending_up' },
+                  { text: 'Future-proof technology', icon: 'security' },
+                ].map((item) => (
+                  <div
+                    key={item.text}
+                    className={`flex min-h-[58px] items-center gap-3 rounded-2xl border bg-white px-4 py-3 ${item.accent ? 'border-secondary-container text-primary-container shadow-[0_12px_28px_rgba(253,204,0,0.12)]' : 'border-primary-container/10 text-primary-container'}`}
+                  >
+                    <span className={`material-symbols-outlined shrink-0 text-xl ${item.accent ? 'text-secondary-container' : 'text-primary-container'}`}>{item.icon}</span>
+                    <span className="text-xs font-black uppercase leading-5 tracking-[0.12em]">{item.text}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
           </div>
         </div>
       </section>
 
       {/* ── ABOUT US — WHY WE COME TO WORK ────────────────────── */}
-      <section id="about" className="relative pt-28 pb-20 overflow-hidden scroll-mt-24" style={{ background: 'linear-gradient(160deg, #f8f9ff 0%, #ffffff 40%, #fafbff 100%)' }}>
+      <section id="about" className="relative overflow-hidden bg-white py-24 scroll-mt-24">
+        <div className="pointer-events-none absolute -left-24 top-6 h-72 w-72 rounded-full border-[28px] border-secondary-container/10" />
+        <div className="pointer-events-none absolute right-0 top-24 h-80 w-80 rounded-full bg-primary-container/[0.03] blur-3xl" />
 
-        {/* Decorative background blobs */}
-        <div className="pointer-events-none absolute -top-32 -left-32 w-[500px] h-[500px] rounded-full blur-[120px]" style={{ background: 'rgba(253,204,0,0.07)' }} />
-        <div className="pointer-events-none absolute bottom-0 right-0 w-[400px] h-[400px] rounded-full blur-[100px]" style={{ background: 'rgba(3,5,104,0.05)' }} />
-        {/* Large decorative quote mark */}
-        <div className="pointer-events-none absolute top-16 right-8 select-none font-headline font-extrabold leading-none" style={{ fontSize: 'clamp(160px,20vw,280px)', color: 'rgba(3,5,104,0.03)', lineHeight: 1 }}>"</div>
-
-        <div className="max-w-7xl mx-auto px-8 relative">
-
-          {/* ── Section label ── */}
+        <div className="relative mx-auto max-w-[1220px] px-6 sm:px-8">
           <AnimateOnScroll direction="up" delay={0}>
-            <span className="inline-flex mb-14 px-4 py-2 rounded-full bg-secondary-container/20 text-primary-container text-xs font-black uppercase tracking-[0.3em]">
-              About Us
-            </span>
+            <div className="mb-10">
+              <h2 className="font-headline text-5xl font-extrabold uppercase leading-none tracking-tight text-primary-container lg:text-[3.9rem]">
+                About Us
+              </h2>
+              <div className="mt-5 h-3 w-44 rounded-full bg-secondary-container" />
+            </div>
           </AnimateOnScroll>
 
-          <div className="grid lg:grid-cols-[1fr_1.2fr] gap-16 items-stretch">
-
-            {/* ── Left: image ── */}
-            <AnimateOnScroll direction="left" delay={80}>
-              <div className="relative">
-                {/* Decorative ring behind image */}
-                <div
-                  className="absolute -top-6 -left-6 right-6 bottom-6 rounded-[2.5rem]"
-                  style={{ background: 'linear-gradient(135deg, rgba(253,204,0,0.18) 0%, rgba(3,5,104,0.08) 100%)', zIndex: 0 }}
+          <div className="grid gap-10 lg:grid-cols-[460px_minmax(0,1fr)] lg:items-stretch xl:grid-cols-[500px_minmax(0,1fr)]">
+            <AnimateOnScroll direction="left" delay={60} className="h-full">
+              <div className="relative h-full min-h-[560px] rounded-[2rem] bg-white p-3 shadow-[0_28px_70px_rgba(3,5,104,0.14)] ring-8 ring-secondary-container/16">
+                <img
+                  src="/assets/about-fibregood-home.jpg"
+                  alt="Children in a connected community"
+                  className="h-full w-full rounded-[1.45rem] object-cover"
                 />
-
-                <div className="relative z-10 overflow-hidden rounded-[2.5rem]" style={{ boxShadow: '0 32px 80px rgba(3,5,104,0.18), 0 8px 24px rgba(3,5,104,0.1)' }}>
-                  <img
-                    src="https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?auto=format&fit=crop&w=900&q=85"
-                    alt="Communities benefiting from connectivity"
-                    className="w-full aspect-[3/4] object-cover"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-primary-container/60 via-primary-container/10 to-transparent" />
-
-                  {/* Bottom caption overlay */}
-                  <div className="absolute bottom-0 left-0 right-0 px-8 py-7">
-                    <p className="text-white/50 text-[10px] font-black uppercase tracking-[0.3em] mb-1">Zimbabwe</p>
-                    <p className="font-headline text-white font-extrabold text-2xl leading-tight">Connecting the<br />underserved.</p>
-                  </div>
-                </div>
-
-                {/* Yellow bottom accent */}
-                <div className="absolute -bottom-3 left-10 right-10 h-1.5 rounded-full z-20" style={{ background: 'linear-gradient(90deg, transparent, #fdcc00, transparent)' }} />
               </div>
             </AnimateOnScroll>
 
-            {/* ── Right: headline + points ── */}
-            <div className="flex h-full flex-col">
-              <AnimateOnScroll direction="up" delay={120}>
-                <h2 className="font-headline text-3xl lg:text-4xl xl:text-[3rem] font-extrabold leading-[1.04] tracking-tight mb-8" style={{ color: '#030568' }}>
-                  Why we come to <br />
-                  <span style={{ color: '#fdcc00', WebkitTextStroke: '1px rgba(180,120,0,0.2)' }}>work everyday?</span>
-                </h2>
+            <div className="flex h-full min-w-0 flex-col">
+              <AnimateOnScroll direction="up" delay={100}>
+                <div>
+                  <h3 className="font-headline text-4xl font-extrabold leading-[1.02] tracking-tight text-primary-container lg:text-[3.15rem]">
+                    Why we come to <br />
+                    <span className="text-secondary-container">work everyday?</span>
+                  </h3>
+                  <p className="mt-5 font-headline text-xl font-extrabold text-primary-container">
+                    Bridging the Connectivity Gap
+                  </p>
+                  <p className="mt-5 max-w-3xl border-l-4 border-secondary-container pl-6 text-base font-semibold leading-7 text-primary-container/82">
+                    Fibrehood is building affordable, high-quality fibre infrastructure in communities that have historically had limited access to reliable fixed broadband. We believe better connectivity creates opportunities for households, businesses, education and local economic growth.
+                  </p>
+                </div>
               </AnimateOnScroll>
 
-              {/* Four-column points */}
-              <div className="grid flex-1 gap-4 md:grid-cols-2 auto-rows-fr">
-                {whyPoints.map((point, i) => (
-                  <AnimateOnScroll key={i} direction="up" delay={180 + i * 90}>
-                    <div
-                      className="group h-full rounded-[2rem] p-[1px] transition-all duration-500 hover:-translate-y-2"
-                      style={{
-                        background:
-                          i % 2 === 1
-                            ? 'linear-gradient(145deg, rgba(253,204,0,0.8), rgba(253,204,0,0.18), rgba(255,255,255,0.65))'
-                            : 'linear-gradient(145deg, rgba(3,5,104,0.24), rgba(3,5,104,0.08), rgba(253,204,0,0.22))',
-                        boxShadow:
-                          i % 2 === 1
-                            ? '0 24px 60px rgba(253,204,0,0.14)'
-                            : '0 24px 60px rgba(3,5,104,0.12)',
-                      }}
-                    >
-                      <div
-                        className="flex h-full flex-col rounded-[calc(2rem-1px)] px-4 py-4"
-                        style={{
-                          background:
-                            i % 2 === 1
-                              ? 'linear-gradient(180deg, #fffef7 0%, #fff8dd 100%)'
-                              : 'linear-gradient(180deg, #ffffff 0%, #f7f8fc 100%)',
-                        }}
-                      >
+              <div className="mt-7 grid flex-1 auto-rows-fr gap-4 md:grid-cols-2">
+                {whyPoints.map((point, i) => {
+                  const isYellow = i % 2 === 1;
+                  return (
+                    <AnimateOnScroll key={point} direction="up" delay={180 + i * 70} className="h-full">
+                      <div className={`relative flex h-full min-h-[142px] flex-col rounded-2xl border p-5 shadow-[0_14px_34px_rgba(3,5,104,0.07)] ${isYellow ? 'border-secondary-container/45 bg-secondary-container/[0.08]' : 'border-primary-container/10 bg-white'}`}>
                         <div className="flex items-start justify-between gap-4">
-                          <div
-                            className="flex h-10 w-10 shrink-0 items-center justify-center rounded-[0.9rem] transition-transform duration-300 group-hover:rotate-3 group-hover:scale-105"
-                            style={{
-                              background: i % 2 === 0 ? '#030568' : '#fdcc00',
-                              color: i % 2 === 0 ? '#ffffff' : '#1a1200',
-                              boxShadow:
-                                i % 2 === 0
-                                  ? '0 12px 28px rgba(3,5,104,0.18)'
-                                  : '0 12px 28px rgba(253,204,0,0.24)',
-                            }}
-                          >
-                            <span className="material-symbols-outlined">
+                          <span className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-full ${isYellow ? 'bg-secondary-container text-primary-container' : 'bg-primary-container text-white'}`}>
+                            <span className="material-symbols-outlined text-xl">
                               {['signal_cellular_alt', 'school', 'trending_up', 'bolt'][i]}
                             </span>
-                          </div>
-
-                          <span
-                            className="font-headline text-[2rem] font-extrabold leading-none transition-colors duration-300 group-hover:text-primary-container/30"
-                            style={{ color: 'rgba(3,5,104,0.14)' }}
-                          >
+                          </span>
+                          <span className="font-headline text-3xl font-extrabold leading-none text-primary-container/20">
                             {String(i + 1).padStart(2, '0')}
                           </span>
                         </div>
-
-                        <p className="mt-4 flex-1 text-[15px] leading-7" style={{ color: 'rgba(3,5,104,0.65)' }}>
+                        <p className="mt-auto pt-5 text-sm font-semibold leading-6 text-primary-container/80">
                           {point}
                         </p>
                       </div>
-                    </div>
-                  </AnimateOnScroll>
-                ))}
+                    </AnimateOnScroll>
+                  );
+                })}
               </div>
             </div>
-
           </div>
 
-          {/* ── Our Dream — integrated within About Us ── */}
-          <AnimateOnScroll direction="up" delay={200}>
-            <div
-              className="relative mt-16 overflow-hidden rounded-[2rem] bg-primary-container px-8 py-12 md:px-16 text-center"
-              style={{ boxShadow: '0 24px 60px rgba(3,5,104,0.30)' }}
-            >
-              <div className="pointer-events-none absolute -top-12 -left-12 w-48 h-48 rounded-full bg-secondary-container/15 blur-[50px]" />
-              <div className="pointer-events-none absolute -bottom-12 -right-12 w-48 h-48 rounded-full bg-white/5 blur-[50px]" />
-              <div className="pointer-events-none absolute top-0 h-full w-px bg-white/5 left-[20%]" />
-              <div className="pointer-events-none absolute top-0 h-full w-px bg-white/5 right-[20%]" />
+          <AnimateOnScroll direction="up" delay={180}>
+            <div className="relative mt-14 overflow-hidden rounded-[2rem] bg-primary-container px-8 py-10 text-center shadow-[0_28px_70px_rgba(3,5,104,0.28)] md:px-16">
+              <div
+                className="pointer-events-none absolute -left-12 bottom-0 h-44 w-44 opacity-30"
+                style={{ backgroundImage: 'radial-gradient(circle, rgba(253,204,0,0.5) 1.5px, transparent 1.5px)', backgroundSize: '12px 12px' }}
+              />
+              <div
+                className="pointer-events-none absolute -right-12 bottom-0 h-44 w-44 opacity-30"
+                style={{ backgroundImage: 'radial-gradient(circle, rgba(253,204,0,0.5) 1.5px, transparent 1.5px)', backgroundSize: '12px 12px' }}
+              />
               <div className="relative">
-                <h3 className="font-headline text-secondary-container text-base font-black uppercase tracking-[0.35em] mb-4">
+                <h3 className="font-headline text-sm font-black uppercase tracking-[0.45em] text-secondary-container">
                   Our Dream.
                 </h3>
-                <p className="font-headline text-xl md:text-2xl lg:text-3xl font-extrabold text-white leading-tight max-w-4xl mx-auto">
+                <p className="mx-auto mt-5 max-w-4xl font-headline text-2xl font-extrabold leading-tight text-white md:text-4xl">
                   Our dream is simply to connect marginalized communities to an{' '}
                   <span className="text-secondary-container">affordable, accessible &amp; high quality internet.</span>
                 </p>
               </div>
             </div>
           </AnimateOnScroll>
-
         </div>
       </section>
 
@@ -405,23 +581,23 @@ const Screen1 = () => {
         className="relative py-24 overflow-hidden scroll-mt-24"
         style={{ background: 'linear-gradient(180deg, #ffffff 0%, #f3f4f5 100%)' }}
       >
-        <div className="max-w-7xl mx-auto px-8 relative">
+        <div className="relative mx-auto max-w-7xl px-6 sm:px-8">
 
           {/* ── Section header ── */}
-          <div className="text-center mb-14 relative">
+          <div className="relative mb-14 text-center">
             <div className="relative">
               <AnimateOnScroll direction="up" delay={0}>
-                <span className="inline-flex mb-6 px-4 py-2 rounded-full text-on-secondary-fixed text-xs font-black uppercase tracking-[0.3em]" style={{ background: 'rgba(253,204,0,0.9)' }}>
+                <span className="inline-flex rounded-full bg-secondary-container px-5 py-2 text-xs font-black uppercase tracking-[0.22em] text-primary-container shadow-[0_10px_24px_rgba(253,204,0,0.22)]">
                   Value
                 </span>
               </AnimateOnScroll>
               <AnimateOnScroll direction="up" delay={100}>
-                <h2 className="font-headline text-4xl lg:text-5xl font-extrabold text-primary-container tracking-tight leading-tight mb-5">
+                <h2 className="mt-5 font-headline text-5xl font-extrabold leading-tight tracking-tight text-primary-container lg:text-6xl">
                   Our Value Proposition
                 </h2>
               </AnimateOnScroll>
               <AnimateOnScroll direction="up" delay={200}>
-                <p className="text-lg font-semibold max-w-2xl mx-auto leading-relaxed text-on-surface-variant">
+                <p className="mx-auto mt-4 max-w-2xl text-lg font-semibold leading-8 text-primary-container/78">
                   Choosing Fibrehood for your property brings a host of advantages that go beyond just faster internet.
                 </p>
               </AnimateOnScroll>
@@ -429,13 +605,13 @@ const Screen1 = () => {
           </div>
 
           {/* ── Cards grid ── */}
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+          <div className="mx-auto grid max-w-6xl gap-5 sm:grid-cols-2 lg:grid-cols-3">
             {valuePropCards.map((card, i) => {
               const isHighlight = card.highlight;
               return (
                 <AnimateOnScroll key={card.title} direction="up" delay={i * 80} threshold={0.07}>
                   <div
-                    className="group relative h-full overflow-hidden rounded-2xl transition-all duration-500 hover:-translate-y-1"
+                    className="group relative flex min-h-[190px] h-full flex-col overflow-hidden rounded-xl transition-all duration-500 hover:-translate-y-1"
                     style={{
                       background: isHighlight
                         ? 'linear-gradient(145deg, #fff8d8 0%, #ffffff 100%)'
@@ -448,27 +624,17 @@ const Screen1 = () => {
                         : '0 12px 34px rgba(3,5,104,0.08)',
                     }}
                   >
-                    {/* ── Top accent bar ── */}
-                    <div
-                      className="absolute top-0 left-0 right-0 h-[2px]"
-                      style={{
-                        background: isHighlight
-                          ? 'linear-gradient(90deg, transparent, rgba(253,204,0,0.9), transparent)'
-                          : 'linear-gradient(90deg, transparent, rgba(3,5,104,0.35), transparent)',
-                      }}
-                    />
-
                     {/* ── Watermark number ── */}
                     <div className="pointer-events-none absolute bottom-3 right-5 select-none">
-                      <span className="font-headline font-extrabold text-[5rem] leading-none" style={{ color: isHighlight ? 'rgba(253,204,0,0.2)' : 'rgba(3,5,104,0.05)' }}>
+                      <span className="font-headline text-[4rem] font-extrabold leading-none" style={{ color: isHighlight ? 'rgba(253,204,0,0.28)' : 'rgba(3,5,104,0.10)' }}>
                         {String(i + 1).padStart(2, '0')}
                       </span>
                     </div>
 
-                    <div className="relative p-6">
+                    <div className="relative flex h-full flex-col p-6">
                       {/* ── Icon ── */}
                       <div
-                        className="w-12 h-12 rounded-2xl flex items-center justify-center mb-5 transition-all duration-300 group-hover:scale-105"
+                        className="mb-5 flex h-11 w-11 items-center justify-center rounded-xl transition-all duration-300 group-hover:scale-105"
                         style={{
                           background: isHighlight
                             ? '#fdcc00'
@@ -491,7 +657,7 @@ const Screen1 = () => {
 
                       {/* ── Title ── */}
                       <h3
-                        className="font-headline text-xl font-extrabold mb-3 leading-snug"
+                        className="mb-3 font-headline text-xl font-extrabold leading-snug"
                         style={{ color: '#030568' }}
                       >
                         {card.title}
@@ -499,17 +665,15 @@ const Screen1 = () => {
 
                       {/* ── Underline ── */}
                       <div
-                        className="h-[2px] mb-5 rounded-full group-hover:w-16 transition-all duration-500"
+                        className="mb-5 h-[2px] rounded-full transition-all duration-500 group-hover:w-14"
                         style={{
-                          width: '2rem',
-                          background: isHighlight
-                            ? 'rgba(253,204,0,0.5)'
-                            : 'rgba(3,5,104,0.16)',
+                          width: '1.75rem',
+                          background: 'rgba(253,204,0,0.9)',
                         }}
                       />
 
                       {/* ── Body text ── */}
-                      <p className="leading-relaxed text-sm text-on-surface-variant">
+                      <p className="relative z-10 mt-auto max-w-[15.5rem] text-sm leading-6 text-primary-container/78">
                         {card.text}
                       </p>
                     </div>
@@ -565,7 +729,7 @@ const Screen1 = () => {
                   {connectivityPartners.map((p) => (
                     <div key={p.name} className="rounded-2xl border border-primary-container/10 bg-white p-4 shadow-sm">
                       <p className="font-headline text-base font-extrabold text-primary-container">{p.name}</p>
-                      <p className="mt-1 text-[10px] font-bold uppercase tracking-wider text-on-surface-variant/65">{p.tagline}</p>
+                      <p className="mt-1 text-[10px] font-bold uppercase tracking-wider text-primary-container/65">{p.tagline}</p>
                     </div>
                   ))}
                 </div>
@@ -685,80 +849,51 @@ const Screen1 = () => {
 
       {/* ── CTA BANNER ────────────────────────────────────────── */}
       <section id="get-connected" className="pb-24 scroll-mt-24">
-        <div className="mx-auto max-w-[1600px] px-4 md:px-8">
+        <div className="mx-auto max-w-7xl px-6 sm:px-8">
           <AnimateOnScroll direction="up" delay={0}>
             <div
-              className="relative overflow-hidden rounded-[2.75rem] shadow-[0_32px_100px_rgba(195,140,0,0.24)]"
-              style={{ background: 'linear-gradient(118deg, #fff8d3 0%, #ffe27a 24%, #fdcc00 48%, #f4b400 72%, #d69200 100%)' }}
+              className="relative overflow-hidden rounded-[2rem] shadow-[0_30px_80px_rgba(195,140,0,0.22)]"
+              style={{ background: 'linear-gradient(135deg, #ffe56a 0%, #fdcc00 48%, #f5b400 100%)' }}
             >
-              <div className="pointer-events-none absolute -top-24 -right-12 h-80 w-80 rounded-full bg-white/35 blur-[80px]" />
-              <div className="pointer-events-none absolute bottom-0 left-[22%] h-64 w-64 rounded-full bg-primary-container/10 blur-[90px]" />
-              <div className="pointer-events-none absolute inset-0 opacity-[0.06]" style={{ backgroundImage: 'repeating-linear-gradient(-35deg,#030568 0px,#030568 1px,transparent 1px,transparent 24px)' }} />
-              <div className="pointer-events-none absolute top-0 h-full w-px bg-primary-container/10" style={{ right: '190px' }} />
-              <div className="pointer-events-none absolute top-0 h-full w-px bg-primary-container/10" style={{ right: '380px' }} />
+              <div className="pointer-events-none absolute -top-24 -left-16 h-72 w-72 rounded-full bg-white/35 blur-[90px]" />
+              <div className="pointer-events-none absolute -bottom-24 right-10 h-72 w-72 rounded-full bg-primary-container/8 blur-[90px]" />
 
-              <div className="relative grid items-center gap-12 p-10 lg:grid-cols-[1.1fr_0.9fr] lg:gap-16 lg:p-16 xl:p-20">
-                <div className="space-y-8">
-                  <div className="inline-flex rounded-full border border-primary-container/12 bg-white/45 px-4 py-2 text-[11px] font-black uppercase tracking-[0.28em] text-primary-container backdrop-blur-md">
-                    Get Connected
-                  </div>
-
-                  <h2 className="font-headline text-4xl font-extrabold leading-tight tracking-tight text-primary lg:text-6xl">
-                    Ready to join the <br />
-                    <span className="text-primary-container">Fibrehood?</span>
+              <div className="relative grid items-center gap-10 p-8 md:p-10 lg:grid-cols-[0.86fr_1.14fr] lg:gap-14 xl:p-14">
+                <div>
+                  <h2 className="font-headline text-5xl font-extrabold leading-[0.98] tracking-tight text-primary-container lg:text-[4.4rem]">
+                    Ready to <br />
+                    <span className="text-white">get connected?</span>
                   </h2>
 
-                  <p className="max-w-2xl text-lg leading-relaxed text-primary/75 lg:text-xl">
+                  <p className="mt-7 max-w-xl text-lg font-semibold leading-8 text-primary-container lg:text-xl">
                     Join thousands of households and businesses already experiencing the Fibrehood difference. Simple setup, expert support.
                   </p>
 
-                  {/* Stats strip */}
-                  <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+                  <div className="mt-8 grid gap-4 sm:grid-cols-3">
                     {[
-                      { value: '1Gbps', label: 'Max speeds', icon: 'speed' },
+                      { value: '1GPS', label: 'Capable network', icon: 'speed' },
                       { value: 'Free', label: 'Installation', icon: 'handyman' },
-                      { value: '99.9%', label: 'Uptime', icon: 'verified' },
                       { value: '24/7', label: 'Support', icon: 'support_agent' },
                     ].map((stat) => (
                       <div
                         key={stat.label}
-                        className="flex flex-col items-center gap-1.5 p-3 rounded-2xl border border-primary-container/12 bg-white/35 backdrop-blur-sm text-center"
+                        className="flex min-h-[128px] flex-col items-center justify-center rounded-xl border border-white/55 bg-white/72 px-5 py-5 text-center shadow-[0_16px_38px_rgba(3,5,104,0.10)] backdrop-blur-sm"
                       >
-                        <span className="material-symbols-outlined text-primary-container" style={{ fontSize: '20px' }}>{stat.icon}</span>
-                        <p className="font-headline text-xl font-extrabold text-primary-container leading-none">{stat.value}</p>
-                        <p className="text-[10px] font-semibold text-primary/55 uppercase tracking-wide">{stat.label}</p>
+                        <span className="material-symbols-outlined text-primary-container" style={{ fontSize: '34px' }}>{stat.icon}</span>
+                        <p className="mt-3 font-headline text-3xl font-extrabold leading-none text-primary-container">{stat.value}</p>
+                        <p className="mt-2 text-sm font-extrabold leading-5 text-primary-container">{stat.label}</p>
                       </div>
                     ))}
                   </div>
-
-                  <div className="flex flex-col gap-4 sm:flex-row sm:items-center">
-                    <button onClick={handleServicePlans} className="rounded-full bg-primary-container px-10 py-5 font-extrabold text-white shadow-[0_20px_45px_rgba(3,5,104,0.22)] transition-all duration-200 hover:scale-105 active:scale-95">
-                      View Service Plans
-                    </button>
-                    <button
-                      onClick={handleHeroCheck}
-                      className="rounded-full px-10 py-5 font-bold text-white shadow-[0_20px_45px_rgba(3,5,104,0.18)] transition-all duration-200 hover:scale-105 active:scale-95"
-                      style={{ backgroundColor: '#030568', opacity: 1 }}
-                    >
-                      Check Coverage
-                    </button>
-                  </div>
                 </div>
 
-                <div className="relative hidden lg:block">
-                  <div className="group overflow-hidden rounded-[2.25rem] border border-white/45 shadow-[0_24px_70px_rgba(3,5,104,0.16)] rotate-1 transition-all duration-700 hover:rotate-0">
+                <div className="relative">
+                  <div className="overflow-hidden rounded-[1.55rem] border border-white/60 shadow-[0_24px_70px_rgba(3,5,104,0.16)]">
                     <img
-                      src="https://images.unsplash.com/photo-1511895426328-dc8714191011?auto=format&fit=crop&w=1200&q=85"
+                      src="/assets/how-to-get.jpg"
                       alt="A happy family connected through Fibrehood"
-                      className="h-[400px] w-full object-cover transition-all duration-700 group-hover:scale-[1.02]"
+                      className="h-[320px] w-full object-cover md:h-[390px]"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-primary-container/28 via-transparent to-white/10" />
-                  </div>
-
-                  <div className="absolute -left-8 bottom-8 rounded-[1.5rem] border border-white/55 bg-white/70 p-5 shadow-[0_18px_50px_rgba(3,5,104,0.12)] backdrop-blur-xl">
-                    <p className="text-[10px] font-black uppercase tracking-[0.28em] text-primary-container/50">Simple Setup</p>
-                    <p className="mt-2 font-headline text-2xl font-extrabold text-primary-container">Fast support.</p>
-                    <p className="mt-1 text-sm leading-6 text-primary/65">Expert help from sign-up to activation.</p>
                   </div>
                 </div>
               </div>
@@ -767,78 +902,66 @@ const Screen1 = () => {
         </div>
       </section>
 
-      <section className="bg-white py-24">
-        <div className="mx-auto max-w-7xl px-8">
-          <div className="mb-12 max-w-3xl">
-            <span className="text-xs font-black uppercase tracking-[0.25em] text-secondary">Developers & Estates</span>
-            <h2 className="mt-3 font-headline text-4xl font-extrabold text-primary-container">
-              Fibre infrastructure for future-ready estates.
-            </h2>
-            <p className="mt-4 text-lg leading-relaxed text-on-surface-variant">
-              Fibrehood partners with developers, body corporates and estates to deliver no-cost infrastructure models and smart estate connectivity.
-            </p>
-          </div>
+      <section id="developers-estates" className="bg-white py-24 scroll-mt-24">
+        <div className="mx-auto max-w-7xl px-6 sm:px-8">
+          <AnimateOnScroll direction="up" delay={0}>
+            <div className="overflow-hidden rounded-[2rem] border border-primary-container/10 bg-white shadow-[0_28px_90px_rgba(3,5,104,0.12)]">
+              <div
+                className="relative min-h-[500px] bg-cover bg-center"
+                style={{ backgroundImage: 'url(/assets/fibrehood-houses.jpg)' }}
+              >
+                <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(253,204,0,0.98)_0%,rgba(253,204,0,0.88)_34%,rgba(253,204,0,0.34)_56%,rgba(3,5,104,0.04)_100%)]" />
+                <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(255,255,255,0.04)_0%,rgba(255,255,255,0)_58%,rgba(3,5,104,0.10)_100%)]" />
 
-          <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
-            {[
-              'No-cost infrastructure models',
-              'FTTH design',
-              'DStv over Fibre',
-              'Smart estate infrastructure',
-              'CCTV integration',
-              'Access control',
-            ].map((item) => (
-              <div key={item} className="rounded-2xl border border-primary-container/10 bg-surface-container-low p-6">
-                <span className="material-symbols-outlined text-secondary-container" style={{ fontVariationSettings: "'FILL' 1" }}>check_circle</span>
-                <p className="mt-4 font-headline text-xl font-extrabold text-primary-container">{item}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+                <div className="relative max-w-3xl px-8 py-12 md:px-14">
+                  <p className="text-xs font-black uppercase tracking-[0.28em] text-primary-container">
+                    Developers &amp; Estates
+                  </p>
+                  <div className="mt-3 h-1 w-16 rounded-full bg-primary-container" />
+                  <h2 className="mt-5 max-w-xl font-headline text-4xl font-extrabold leading-tight tracking-tight text-primary-container md:text-5xl">
+                    Fibre infrastructure for future-ready estates.
+                  </h2>
+                  <p className="mt-5 max-w-2xl text-base font-semibold leading-7 text-primary-container/85">
+                    Fibrehood partners with developers, body corporates and estates to deliver no-cost infrastructure models and smart estate connectivity.
+                  </p>
 
-      <section className="bg-surface-container-low py-24">
-        <div className="mx-auto max-w-7xl px-8">
-          <div className="mb-12 max-w-3xl">
-            <span className="text-xs font-black uppercase tracking-[0.25em] text-secondary">Case Studies</span>
-            <h2 className="mt-3 font-headline text-4xl font-extrabold text-primary-container">
-              Proven deployments across communities.
-            </h2>
-          </div>
-
-          <div className="grid gap-6 md:grid-cols-3">
-            {[
-              {
-                name: 'Megawatt Court',
-                before: 'Slow internet and multiple providers.',
-                after: 'Fibre to every unit with high-speed internet.',
-              },
-              {
-                name: 'Kamushinda Flats',
-                before: 'Legacy connectivity and fragmented TV distribution.',
-                after: 'FTTH plus DStv over Fibre.',
-              },
-              {
-                name: 'Tafara Flats',
-                before: 'Large MDU requiring structured rollout.',
-                after: '144-unit deployment model.',
-              },
-            ].map((study) => (
-              <article key={study.name} className="rounded-2xl bg-white p-6 shadow-sm">
-                <h3 className="font-headline text-2xl font-extrabold text-primary-container">{study.name}</h3>
-                <div className="mt-6 space-y-4">
-                  <div>
-                    <p className="text-xs font-black uppercase tracking-[0.2em] text-red-700">Before</p>
-                    <p className="mt-1 text-sm leading-relaxed text-on-surface-variant">{study.before}</p>
-                  </div>
-                  <div>
-                    <p className="text-xs font-black uppercase tracking-[0.2em] text-green-700">After</p>
-                    <p className="mt-1 text-sm leading-relaxed text-on-surface-variant">{study.after}</p>
+                  <div className="mt-8 grid max-w-2xl gap-3 sm:grid-cols-2 lg:grid-cols-3">
+                    {[
+                      'FTTH Network Design',
+                      'Fibre Infrastructure Deployment',
+                      'Developer Partnership Models',
+                      'Estate & MDU Connectivity',
+                      'Managed Services',
+                    ].map((item) => (
+                      <div key={item} className="flex min-h-[62px] items-center gap-3 rounded-lg bg-white px-4 py-3 shadow-[0_14px_30px_rgba(3,5,104,0.10)]">
+                        <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-secondary-container text-primary-container">
+                          <span className="material-symbols-outlined text-sm" style={{ fontVariationSettings: "'FILL' 1" }}>check</span>
+                        </span>
+                        <span className="text-sm font-extrabold leading-5 text-primary-container">{item}</span>
+                      </div>
+                    ))}
                   </div>
                 </div>
-              </article>
-            ))}
-          </div>
+              </div>
+
+              <div className="bg-white px-8 py-12 text-center">
+                <div className="mx-auto mb-7 h-1 w-16 rounded-full bg-secondary-container" />
+                <h3 className="font-headline text-2xl font-extrabold text-primary-container md:text-3xl">
+                  Let&apos;s build smarter, connected estates together.
+                </h3>
+                <p className="mx-auto mt-4 max-w-2xl text-base font-semibold leading-7 text-primary-container/78">
+                  Partner with Fibrehood to deliver high-quality, future-ready connectivity that adds value to your developments.
+                </p>
+                <button
+                  onClick={() => { window.location.href = 'mailto:sales@fibrehood.co.zw?subject=Developer%20and%20estate%20partnership'; }}
+                  className="mt-7 inline-flex items-center gap-3 rounded-full bg-primary-container px-9 py-4 font-extrabold text-white shadow-[0_18px_38px_rgba(3,5,104,0.22)] transition-all duration-200 hover:scale-105 active:scale-95"
+                >
+                  Partner With Us
+                  <span className="material-symbols-outlined text-base">arrow_forward</span>
+                </button>
+              </div>
+            </div>
+          </AnimateOnScroll>
         </div>
       </section>
 

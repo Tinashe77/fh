@@ -56,7 +56,7 @@ const Screen3 = () => {
         <div className="relative z-10 mx-auto w-full max-w-7xl px-8 hero-readable">
           <div className="max-w-3xl">
             <span className="mb-6 inline-flex rounded-full bg-secondary-container px-4 py-2 text-xs font-black uppercase tracking-[0.25em] text-on-secondary-fixed">
-              Service Plans
+              Fibre Plans
             </span>
             <h1 className="font-headline text-5xl font-extrabold leading-tight text-white md:text-7xl">
               Fibre packages for homes and businesses.
@@ -73,7 +73,7 @@ const Screen3 = () => {
           <div className="mb-12 max-w-3xl">
             <span className="text-xs font-black uppercase tracking-[0.25em] text-primary-container">Residential</span>
             <h2 className="mt-3 font-headline text-4xl font-extrabold text-primary-container">
-              Home service plans
+              Home fibre plans
             </h2>
             <p className="mt-4 text-lg leading-relaxed text-on-surface-variant">
               Residential fibre packages for family homes, homework, entertainment and always-on communication. Prices include VAT.
@@ -129,15 +129,16 @@ const Screen3 = () => {
                     <p className="font-headline text-3xl font-extrabold">{plan.price}</p>
                   </div>
                 </div>
-                <button
-                  className={`mt-8 w-full rounded-full px-6 py-4 font-extrabold transition ${
+                <Link
+                  to="/sign-up"
+                  className={`mt-8 block w-full rounded-full px-6 py-4 text-center font-extrabold transition ${
                     plan.featured
                       ? 'bg-secondary-container text-on-secondary-fixed hover:bg-yellow-300'
                       : 'bg-primary-container text-white hover:bg-black'
                   }`}
                 >
                   Sign Up
-                </button>
+                </Link>
               </article>
             ))}
           </div>

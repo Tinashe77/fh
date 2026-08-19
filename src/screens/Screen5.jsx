@@ -41,7 +41,7 @@ const Screen5 = () => {
         <div className="relative z-10 mx-auto w-full max-w-7xl px-8 hero-readable">
           <div className="max-w-3xl">
             <span className="mb-6 inline-flex rounded-full bg-secondary-container px-4 py-2 text-xs font-black uppercase tracking-[0.25em] text-on-secondary-fixed">
-              Network Status
+              Coverage
             </span>
             <h1 className="font-headline text-5xl font-extrabold leading-tight text-white md:text-7xl">
               Check coverage and deployment status.
@@ -57,7 +57,7 @@ const Screen5 = () => {
         <div className="mx-auto max-w-7xl px-8">
           <div className="mb-6 flex flex-col gap-2 md:flex-row md:items-end md:justify-between">
             <div>
-              <span className="text-xs font-black uppercase tracking-[0.25em] text-secondary-container">Network Status</span>
+              <span className="text-xs font-black uppercase tracking-[0.25em] text-secondary-container">Coverage</span>
               <h2 className="mt-2 font-headline text-3xl font-extrabold">Core network health</h2>
             </div>
             <p className="rounded-full bg-white/10 px-5 py-3 text-sm font-bold text-white/75">

@@ -2,12 +2,16 @@ import { Link } from 'react-router-dom';
 
 const Footer = () => {
   const contactChannels = [
-    { label: 'Fibrehood Business', value: '+263 780 797 695', href: 'tel:+263780797695' },
-    { label: 'Billing', value: '+263 780 257 425', href: 'tel:+263780257425' },
-    { label: 'Customer Support', value: '+263 784 416 605', href: 'tel:+263784416605' },
-    { label: 'Support Email', value: 'support@fibrehood.co.zw', href: 'mailto:support@fibrehood.co.zw' },
-    { label: 'Sales & Marketing', value: '+263 780 711 337', href: 'tel:+263780711337' },
-    { label: 'Sales Email', value: 'sales@fibrehood.co.zw', href: 'mailto:sales@fibrehood.co.zw' },
+    { group: 'Call Lines', items: [
+      { label: 'Fibrehood Business', value: '+263 780 797 695', href: 'tel:+263780797695' },
+      { label: 'Billing', value: '+263 780 257 425', href: 'tel:+263780257425' },
+      { label: 'Customer Support', value: '+263 784 416 605', href: 'tel:+263784416605' },
+      { label: 'Sales & Marketing', value: '+263 780 711 337', href: 'tel:+263780711337' },
+    ] },
+    { group: 'Emails', items: [
+      { label: 'Support', value: 'support@fibrehood.co.zw', href: 'mailto:support@fibrehood.co.zw' },
+      { label: 'Sales', value: 'sales@fibrehood.co.zw', href: 'mailto:sales@fibrehood.co.zw' },
+    ] },
   ];
 
   return (
@@ -22,14 +26,21 @@ const Footer = () => {
             className="h-10 w-auto brightness-0 invert"
           />
           <p className="text-white/50 text-sm leading-relaxed">
-            Building world-class fibre infrastructure for the next generation of connectivity.
+            Potential lives everywhere.
           </p>
 
-          <div className="space-y-2 pt-1">
-            {contactChannels.map(({ label, value, href }) => (
-              <a key={label} href={href} className="block text-xs text-white/55 transition hover:text-yellow-400">
-                <span className="font-bold text-white/75">{label}:</span> {value}
-              </a>
+          <div className="space-y-4 pt-1">
+            {contactChannels.map(({ group, items }) => (
+              <div key={group}>
+                <p className="mb-2 text-[10px] font-black uppercase tracking-[0.22em] text-yellow-400">{group}</p>
+                <div className="space-y-1.5">
+                  {items.map(({ label, value, href }) => (
+                    <a key={label} href={href} className="block text-xs text-white/55 transition hover:text-yellow-400">
+                      <span className="font-bold text-white/75">{label}:</span> {value}
+                    </a>
+                  ))}
+                </div>
+              </div>
             ))}
           </div>
 
@@ -39,7 +50,7 @@ const Footer = () => {
             target="_blank"
             rel="noreferrer"
           >
-            WhatsApp Channel
+            WhatsApp us
           </a>
 
           <div className="flex gap-3 pt-1">
@@ -65,12 +76,13 @@ const Footer = () => {
 
           {/* Company */}
           <div className="space-y-4">
-            <h4 className="text-white font-extrabold uppercase tracking-widest text-[11px]">Company</h4>
+            <h4 className="text-yellow-400 font-extrabold uppercase tracking-widest text-[11px]">Company</h4>
             <ul className="space-y-3">
               {[
                 { label: 'About Us', to: '/' },
-                { label: 'Service Plans', to: '/service-plans' },
-                { label: 'Installation', to: '/installation' },
+                { label: 'Fibre Plans', to: '/fibre-plans' },
+                { label: 'Get Connected', to: '/get-connected' },
+                { label: 'Developers & Estates', to: '/#developers-estates' },
                 { label: 'Southview Project', to: '/southview' },
                 { label: 'Gallery', to: '/gallery' },
               ].map(({ label, to }) => (
@@ -85,15 +97,13 @@ const Footer = () => {
 
           {/* Support */}
           <div className="space-y-4">
-            <h4 className="text-white font-extrabold uppercase tracking-widest text-[11px]">Support</h4>
+            <h4 className="text-yellow-400 font-extrabold uppercase tracking-widest text-[11px]">Support</h4>
             <ul className="space-y-3">
               {[
                 { label: 'FAQ', to: '/faq' },
                 { label: 'Support', to: '/support' },
-                { label: 'Network Status', to: '/network-status' },
+                { label: 'Coverage', to: '/coverage' },
                 { label: 'Client Portal', to: '/portal' },
-                { label: 'Residential SLA', to: '/sla/residential' },
-                { label: 'Business SLA', to: '/sla/business' },
               ].map(({ label, to }) => (
                 <li key={label}>
                   <Link to={to} className="text-white/50 hover:text-yellow-400 transition-colors duration-200">
@@ -106,7 +116,7 @@ const Footer = () => {
 
           {/* Legal */}
           <div className="space-y-4 col-span-2 md:col-span-1">
-            <h4 className="text-white font-extrabold uppercase tracking-widest text-[11px]">Legal</h4>
+            <h4 className="text-yellow-400 font-extrabold uppercase tracking-widest text-[11px]">Legal</h4>
             <ul className="space-y-3">
               {[
                 { label: 'Terms & Conditions', to: '/terms' },
@@ -129,24 +139,8 @@ const Footer = () => {
       <div className="border-t border-white/8">
         <div className="max-w-7xl mx-auto px-10 py-6 flex flex-col md:flex-row justify-between items-center gap-4">
           <p className="text-white/35 text-xs">
-            © 2026 Fibrehood Connectivity (Pvt) Ltd. All rights reserved.
+            © 2026 Fibrehood (Pvt) Ltd. All rights reserved.
           </p>
-          <div className="flex items-center gap-6 text-xs">
-            {[
-              { label: 'FAQ', to: '/faq' },
-              { label: 'Support', to: '/support' },
-              { label: 'Terms & Conditions', to: '/terms' },
-              { label: 'Privacy Policy', to: '/privacy' },
-            ].map(({ label, to }) => (
-              <Link
-                key={label}
-                to={to}
-                className="text-white/40 hover:text-yellow-400 transition-colors duration-200"
-              >
-                {label}
-              </Link>
-            ))}
-          </div>
         </div>
       </div>
     </footer>

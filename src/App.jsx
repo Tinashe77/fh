@@ -20,15 +20,21 @@ function App() {
           {/* Home */}
           <Route index element={<Screen1 />} />
 
-          {/* Service Plans */}
+          {/* Fibre Plans */}
+          <Route path="fibre-plans" element={<Screen3 />} />
+          <Route path="fibre-plans/:type" element={<Screen3 />} />
           <Route path="service-plans" element={<Screen3 />} />
           <Route path="service-plans/:type" element={<Screen3 />} />
 
-          {/* Installation */}
+          {/* Get Connected */}
+          <Route path="get-connected" element={<Screen2 />} />
+          <Route path="get-connected/:type" element={<Screen2 />} />
           <Route path="installation" element={<Screen2 />} />
           <Route path="installation/:type" element={<Screen2 />} />
 
-          {/* Network Status */}
+          {/* Coverage */}
+          <Route path="coverage" element={<Screen5 />} />
+          <Route path="coverage/:type" element={<Screen5 />} />
           <Route path="network-status" element={<Screen5 />} />
           <Route path="network-status/:type" element={<Screen5 />} />
 
@@ -52,10 +58,10 @@ function App() {
 
           {/* Legacy routes */}
           <Route path="screen-1" element={<Navigate to="/" replace />} />
-          <Route path="screen-2" element={<Navigate to="/installation" replace />} />
-          <Route path="screen-3" element={<Navigate to="/service-plans" replace />} />
+          <Route path="screen-2" element={<Navigate to="/get-connected" replace />} />
+          <Route path="screen-3" element={<Navigate to="/fibre-plans" replace />} />
           <Route path="screen-4" element={<Navigate to="/southview" replace />} />
-          <Route path="screen-5" element={<Navigate to="/network-status" replace />} />
+          <Route path="screen-5" element={<Navigate to="/coverage" replace />} />
 
           <Route path="*" element={<Navigate to="/" replace />} />
         </Route>

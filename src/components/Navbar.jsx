@@ -5,41 +5,37 @@ const navItems = [
   {
     name: 'Home',
     path: '/',
+  },
+  {
+    name: 'Fibre Plans',
+    path: '/fibre-plans',
     sub: [
-      { name: 'About Us', path: '/#about' },
-      { name: 'Value Proposition', path: '/#value' },
-      { name: 'Our Partners', path: '/#partners' },
-      { name: 'Get Connected', path: '/#get-connected' },
+      { name: 'Residential', path: '/fibre-plans/residential' },
+      { name: 'Business', path: '/fibre-plans/business' },
     ],
   },
   {
-    name: 'Service Plans',
-    path: '/service-plans',
+    name: 'Coverage',
+    path: '/coverage',
     sub: [
-      { name: 'Residential', path: '/service-plans/residential' },
-      { name: 'Business', path: '/service-plans/business' },
+      { name: 'Coverage Map', path: '/coverage' },
+      { name: 'Our Network', path: '/coverage' },
+      { name: 'Projects', path: '/southview' },
+      { name: 'Southview Project', path: '/southview' },
     ],
   },
   {
-    name: 'Installation',
-    path: '/installation',
+    name: 'Get Connected',
+    path: '/get-connected',
     sub: [
-      { name: 'Coverage', path: '/network-status' },
-      { name: 'Residential Suburbs', path: '/installation/residential-suburbs' },
-      { name: 'Multi Dwelling Units', path: '/installation/multi-dwelling-units' },
-      { name: 'Commercial Property', path: '/installation/commercial-property' },
+      { name: 'Get Connected Overview', path: '/get-connected' },
+      { name: 'Residential Suburbs', path: '/get-connected/residential-suburbs' },
+      { name: 'Multi Dwelling Units', path: '/get-connected/multi-dwelling-units' },
+      { name: 'Commercial Property', path: '/get-connected/commercial-property' },
     ],
   },
-  {
-    name: 'Network Status',
-    path: '/network-status',
-    sub: [
-      { name: 'Coverage Map', path: '/network-status' },
-      { name: 'Network Status', path: '/network-status' },
-    ],
-  },
-  { name: 'Southview Project', path: '/southview' },
-  { name: 'Gallery', path: '/gallery' },
+  { name: 'Developers & Estates', path: '/#developers-estates' },
+  { name: 'Support', path: '/support' },
 ];
 
 const Navbar = () => {
@@ -47,8 +43,15 @@ const Navbar = () => {
   const [openDropdown, setOpenDropdown] = useState(null);
   const closeTimer = useRef(null);
 
-  const isActive = (path) =>
-    path === '/' ? location.pathname === '/' : location.pathname.startsWith(path);
+  const normalizePath = (path) => path.split('#')[0] || '/';
+
+  const isPathActive = (path) => {
+    const normalized = normalizePath(path);
+    if (normalized === '/') return location.pathname === '/';
+    return location.pathname.startsWith(normalized);
+  };
+
+  const isItemActive = (item) => isPathActive(item.path) || item.sub?.some((sub) => isPathActive(sub.path));
 
   const handleMouseEnter = (name) => {
     clearTimeout(closeTimer.current);
@@ -83,7 +86,7 @@ const Navbar = () => {
               <Link
                 to={item.path}
                 className={`flex items-center gap-1 px-3 py-2 rounded-full text-sm transition-colors duration-200 font-semibold ${
-                  isActive(item.path)
+                  isItemActive(item)
                     ? 'text-blue-900 bg-blue-50'
                     : 'text-blue-900/60 hover:text-blue-900 hover:bg-slate-50'
                 }`}
@@ -98,7 +101,7 @@ const Navbar = () => {
                     expand_more
                   </span>
                 )}
-                {isActive(item.path) && (
+                {isItemActive(item) && (
                   <span className="absolute -bottom-[1px] left-1/2 -translate-x-1/2 w-1.5 h-1.5 rounded-full bg-yellow-400" />
                 )}
               </Link>

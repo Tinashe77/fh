@@ -71,7 +71,7 @@ const Screen4 = () => {
               Advance payments help confirm demand and prioritise activations. Fibrehood has partnered with CABS Custodial Services to hold funds in trust and safeguard resident payments.
             </p>
             <Link
-              to="/network-status?locate=1"
+              to="/coverage?locate=1"
               className="mt-8 inline-flex items-center justify-center rounded-full bg-secondary-container px-8 py-4 font-extrabold text-on-secondary-fixed transition hover:bg-yellow-300"
             >
               Register Interest
