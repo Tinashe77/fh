@@ -173,7 +173,7 @@ const Screen1 = () => {
 
       {/* ── HERO ──────────────────────────────────────────────── */}
       <section
-        className="relative flex min-h-screen items-center overflow-hidden pt-20"
+        className="hero-cinematic relative flex min-h-screen items-center overflow-hidden pt-20"
         style={{
           backgroundImage:
             'linear-gradient(90deg, rgba(1,2,48,0.96) 0%, rgba(3,5,104,0.82) 40%, rgba(3,5,104,0.48) 67%, rgba(3,5,104,0.28) 100%), url(/assets/fibrehood-southview.jpeg)',
@@ -182,14 +182,15 @@ const Screen1 = () => {
         }}
       >
         <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,rgba(1,2,48,0.22)_0%,rgba(1,2,48,0.08)_46%,rgba(1,2,48,0.72)_100%)]" />
+        <div className="hero-ambient-sweep pointer-events-none absolute inset-y-0 left-0 w-[70%]" />
         {/* Grid texture */}
         <div
-          className="pointer-events-none absolute inset-0 opacity-[0.055]"
+          className="hero-grid-drift pointer-events-none absolute inset-0 opacity-[0.055]"
           style={{ backgroundImage: 'repeating-linear-gradient(0deg,#fff,#fff 1px,transparent 1px,transparent 60px),repeating-linear-gradient(90deg,#fff,#fff 1px,transparent 1px,transparent 60px)' }}
         />
 
         <div className="relative z-10 mx-auto flex min-h-[calc(100vh-5rem)] w-full max-w-7xl flex-col justify-between gap-14 px-6 py-14 sm:px-8 lg:min-h-[720px] lg:py-16">
-          <div className="absolute right-8 top-10 hidden items-center gap-2.5 rounded-full border border-white/20 bg-white/14 px-5 py-3 shadow-[0_14px_34px_rgba(0,0,0,0.2)] backdrop-blur-xl sm:flex">
+          <div className="live-pill-motion hero-reveal absolute right-8 top-10 hidden items-center gap-2.5 rounded-full border border-white/20 bg-white/14 px-5 py-3 shadow-[0_14px_34px_rgba(0,0,0,0.2)] backdrop-blur-xl sm:flex" style={{ animationDelay: '0.25s' }}>
             <span className="relative flex h-2.5 w-2.5">
               <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-green-400 opacity-75" />
               <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-green-500" />
@@ -199,7 +200,7 @@ const Screen1 = () => {
 
           <div className="max-w-2xl space-y-7 lg:pt-8">
             {/* Headline */}
-            <h1 className="font-headline text-5xl font-extrabold leading-tight tracking-tight text-white lg:text-[3.75rem] xl:text-7xl">
+            <h1 className="hero-reveal font-headline text-5xl font-extrabold leading-tight tracking-tight text-white lg:text-[3.75rem] xl:text-7xl" style={{ animationDelay: '0.08s' }}>
               Fast, Unlimited Fibre Internet for{' '}
               <span className="relative inline-block text-secondary-container">
                 your home.
@@ -207,12 +208,12 @@ const Screen1 = () => {
               </span>
             </h1>
 
-            <p className="max-w-xl text-lg font-medium leading-relaxed text-white">
+            <p className="hero-reveal max-w-xl text-lg font-medium leading-relaxed text-white" style={{ animationDelay: '0.22s' }}>
               Starting from <span className="font-extrabold text-secondary-container">US$40/month</span> with free installation and a once-off activation fee applicable.
             </p>
 
             {/* CTA buttons */}
-            <div className="flex flex-wrap gap-4 pt-1">
+            <div className="hero-reveal flex flex-wrap gap-4 pt-1" style={{ animationDelay: '0.36s' }}>
               <button onClick={handleHeroCheck} className="inline-flex items-center gap-2 px-9 py-4 bg-secondary-container text-primary-container font-bold rounded-full hover:scale-105 active:scale-95 transition-all duration-200 glow-yellow" style={{ boxShadow: '0 8px 32px rgba(253,204,0,0.3)' }}>
                 <span className="material-symbols-outlined text-base">pin_drop</span>
                 Check Coverage
@@ -227,13 +228,13 @@ const Screen1 = () => {
 
           </div>
 
-          <div className="grid w-full gap-4 self-end md:max-w-[49rem] md:grid-cols-3">
+          <div className="grid w-full gap-4 md:grid-cols-3">
             {[
               { value: '12+', label: 'Connected Communities', icon: 'workspace_premium' },
               { value: '2,500+', label: 'Homes Passed and Growing', icon: 'home_work' },
               { value: 'Gold Winner', label: 'Recognized for Excellence in Connectivity', icon: 'emoji_events' },
-            ].map((item) => (
-              <div key={item.label} className="flex min-h-[104px] items-center gap-4 rounded-2xl border border-white/16 bg-white/10 px-5 py-4 text-white shadow-[0_18px_45px_rgba(0,0,0,0.2)] backdrop-blur-xl">
+            ].map((item, index) => (
+              <div key={item.label} className="hero-card-reveal soft-hover-lift flex min-h-[104px] items-center justify-center gap-4 rounded-2xl border border-white/16 bg-white/10 px-6 py-4 text-white shadow-[0_18px_45px_rgba(0,0,0,0.2)] backdrop-blur-xl" style={{ animationDelay: `${0.5 + index * 0.12}s` }}>
                 <span className="material-symbols-outlined shrink-0 text-3xl text-secondary-container">{item.icon}</span>
                 <div className="min-w-0">
                   <p className="font-headline text-2xl font-extrabold leading-tight text-white">{item.value}</p>
