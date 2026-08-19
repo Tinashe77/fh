@@ -1,184 +1,196 @@
-import React from 'react';
-import heroImage from '../assets/hero.png';
+const journeySteps = [
+  {
+    icon: 'location_on',
+    title: 'Check Availability',
+    text: "Enter your address to see if we're in your area.",
+  },
+  {
+    icon: 'inventory_2',
+    title: 'Choose Your Plan',
+    text: 'Select the perfect fibre plan for your needs.',
+  },
+  {
+    icon: 'event_available',
+    title: 'Book Installation',
+    text: "Pick a convenient date. We'll do the rest.",
+  },
+  {
+    icon: 'wifi',
+    title: 'Get Connected',
+    text: 'Enjoy fast, reliable internet every day.',
+  },
+];
+
+const connectionTypes = [
+  {
+    icon: 'home',
+    title: 'Home',
+    text: 'High-speed fibre for your household.',
+    active: true,
+  },
+  {
+    icon: 'apartment',
+    title: 'Business / SME',
+    text: 'Reliable connectivity for your business.',
+  },
+  {
+    icon: 'domain',
+    title: 'Multi-Dwelling Unit',
+    text: 'Solutions for apartments and estates.',
+  },
+  {
+    icon: 'construction',
+    title: 'Developer / Projects',
+    text: 'Partner with us for new developments.',
+  },
+];
+
+const StepNumber = ({ children }) => <span className="gc-step-number">{children}</span>;
 
 const Screen2 = () => {
   return (
-    <main className="pb-20 overflow-hidden">
-      <header className="relative min-h-[680px] w-full overflow-hidden pt-32 pb-24 flex items-center bg-primary">
-        <div
-          aria-hidden="true"
-          className="absolute inset-0 bg-cover bg-center opacity-35"
-          style={{ backgroundImage: `url(${heroImage})` }}
-        />
-        <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(1,2,48,0.96)_0%,rgba(3,5,104,0.86)_44%,rgba(3,5,104,0.5)_72%,rgba(3,5,104,0.2)_100%)]" />
-        <img
-          aria-hidden="true"
-          className="absolute right-[-8rem] top-1/2 hidden w-[48rem] max-w-none -translate-y-1/2 opacity-80 lg:block"
-          src={heroImage}
-          alt=""
-        />
-        <div className="relative z-10 mx-auto w-full max-w-7xl px-8 text-center hero-readable md:text-left">
-          <div className="max-w-3xl">
-            <span className="inline-block px-4 py-1.5 mb-8 text-xs font-bold uppercase tracking-widest bg-secondary-container text-on-secondary-fixed rounded-full shadow-sm">
-              Get Connected
-            </span>
-            <h1 className="text-5xl md:text-7xl font-extrabold text-white tracking-tight mb-8 font-headline">
-              Get Connected
+    <main className="gc-page">
+      <section className="gc-hero">
+        <div className="gc-hero-inner">
+          <div className="gc-hero-copy">
+            <p className="gc-eyebrow">Get Connected</p>
+            <h1>
+              Let&apos;s Get You
+              <span>Connected.</span>
             </h1>
-            <p className="text-base font-medium leading-7 text-white md:text-lg">
-              Streamlined fiber-to-the-home and business solutions tailored for every architectural landscape. Discover the right connection journey for your property.
+            <p className="gc-hero-text">
+              Getting started with Fibrehood is simple. Choose your connection type, check availability and we&apos;ll handle the rest.
             </p>
+          </div>
+
+          <div className="gc-journey">
+            {journeySteps.map((step) => (
+              <article className="gc-journey-item" key={step.title}>
+                <span className="material-symbols-outlined">{step.icon}</span>
+                <h2>{step.title}</h2>
+                <p>{step.text}</p>
+              </article>
+            ))}
           </div>
         </div>
-      </header>
+      </section>
 
-      <div className="px-8 max-w-7xl mx-auto py-32">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-10">
-
-          <div className="glass-card group relative p-10 rounded-4xl transition-all duration-500 hover:shadow-[0_32px_64px_rgba(3,5,104,0.1)] hover:-translate-y-1">
-            <div className="flex justify-between items-start mb-10">
-              <div className="w-16 h-16 bg-white/60 rounded-2xl flex items-center justify-center text-primary-container shadow-inner icon-glow">
-                <span className="material-symbols-outlined text-4xl" data-icon="home">home</span>
+      <section className="gc-shell">
+        <div className="gc-availability">
+          <div className="gc-panel-copy">
+            <div className="gc-section-title">
+              <StepNumber>1</StepNumber>
+              <div>
+                <h2>Check Availability</h2>
+                <p>Enter your address to see if Fibrehood is available in your area.</p>
               </div>
-              <span className="text-sm font-bold text-on-surface-variant/20 font-headline">01</span>
             </div>
-            <h3 className="text-3xl font-bold text-primary mb-4 font-headline">Residential Suburbs</h3>
-            <p className="text-on-surface-variant mb-10 leading-relaxed min-h-[4.5rem]">
-              End-to-end fiber connectivity for standalone homes. Our non-invasive trenching technology ensures minimal disruption to your driveway and garden.
-            </p>
-            <ul className="space-y-4 mb-10">
-              <li className="flex items-center text-sm font-medium text-on-surface/80">
-                <span className="material-symbols-outlined text-secondary mr-3 text-xl" data-icon="check_circle" style={{fontVariationSettings: "'FILL' 1"}}>check_circle</span>
-                Non-invasive micro-trenching
-              </li>
-              <li className="flex items-center text-sm font-medium text-on-surface/80">
-                <span className="material-symbols-outlined text-secondary mr-3 text-xl" data-icon="check_circle" style={{fontVariationSettings: "'FILL' 1"}}>check_circle</span>
-                Same-day activation options
-              </li>
-              <li className="flex items-center text-sm font-medium text-on-surface/80">
-                <span className="material-symbols-outlined text-secondary mr-3 text-xl" data-icon="check_circle" style={{fontVariationSettings: "'FILL' 1"}}>check_circle</span>
-                Standard 20m free cabling
-              </li>
-            </ul>
-            <button className="w-full py-4 bg-primary-container text-on-primary font-bold rounded-2xl hover:bg-black transition-all flex items-center justify-center group-hover:shadow-lg">
-              Express Interest
-              <span className="material-symbols-outlined ml-2 text-xl transition-transform group-hover:translate-x-1" data-icon="arrow_forward">arrow_forward</span>
-            </button>
+
+            <div className="gc-check-form">
+              <label htmlFor="street-address">Street address</label>
+              <div className="gc-input-wrap">
+                <input id="street-address" placeholder="Enter your street address" />
+                <span className="material-symbols-outlined">location_on</span>
+              </div>
+              <button type="button">Check Availability</button>
+              <p className="gc-help">
+                <span className="material-symbols-outlined">help</span>
+                Not sure of your address? <a href="mailto:support@fibrehood.co.zw">Contact our team</a> for assistance.
+              </p>
+            </div>
           </div>
 
-          <div className="glass-card group relative p-10 rounded-4xl transition-all duration-500 hover:shadow-[0_32px_64px_rgba(3,5,104,0.1)] hover:-translate-y-1">
-            <div className="flex justify-between items-start mb-10">
-              <div className="w-16 h-16 bg-white/60 rounded-2xl flex items-center justify-center text-primary-container shadow-inner icon-glow">
-                <span className="material-symbols-outlined text-4xl" data-icon="apartment">apartment</span>
-              </div>
-              <span className="text-sm font-bold text-on-surface-variant/20 font-headline">02</span>
+          <div className="gc-map-card" aria-label="Coverage preview">
+            <div className="gc-map-pin">
+              <span className="material-symbols-outlined">all_inclusive</span>
             </div>
-            <h3 className="text-3xl font-bold text-primary mb-4 font-headline">Multi-Dwelling Units</h3>
-            <p className="text-on-surface-variant mb-10 leading-relaxed min-h-[4.5rem]">
-              Customized infrastructure for apartment blocks and gated communities. We manage the backbone installation to provide every resident with gigabit speeds.
-            </p>
-            <ul className="space-y-4 mb-10">
-              <li className="flex items-center text-sm font-medium text-on-surface/80">
-                <span className="material-symbols-outlined text-secondary mr-3 text-xl" data-icon="check_circle" style={{fontVariationSettings: "'FILL' 1"}}>check_circle</span>
-                Building management liaison
-              </li>
-              <li className="flex items-center text-sm font-medium text-on-surface/80">
-                <span className="material-symbols-outlined text-secondary mr-3 text-xl" data-icon="check_circle" style={{fontVariationSettings: "'FILL' 1"}}>check_circle</span>
-                Internal riser optimization
-              </li>
-              <li className="flex items-center text-sm font-medium text-on-surface/80">
-                <span className="material-symbols-outlined text-secondary mr-3 text-xl" data-icon="check_circle" style={{fontVariationSettings: "'FILL' 1"}}>check_circle</span>
-                Zero cost to body corporate
-              </li>
-            </ul>
-            <button className="w-full py-4 bg-primary-container text-on-primary font-bold rounded-2xl hover:bg-black transition-all flex items-center justify-center group-hover:shadow-lg">
-              Express Interest
-              <span className="material-symbols-outlined ml-2 text-xl transition-transform group-hover:translate-x-1" data-icon="arrow_forward">arrow_forward</span>
-            </button>
-          </div>
-
-          <div className="glass-card group relative p-10 rounded-4xl transition-all duration-500 hover:shadow-[0_32px_64px_rgba(3,5,104,0.1)] hover:-translate-y-1">
-            <div className="flex justify-between items-start mb-10">
-              <div className="w-16 h-16 bg-white/60 rounded-2xl flex items-center justify-center text-primary-container shadow-inner icon-glow">
-                <span className="material-symbols-outlined text-4xl" data-icon="business">business</span>
+            <div className="gc-map-result">
+              <span className="material-symbols-outlined">check</span>
+              <div>
+                <h3>Fibrehood is in your area!</h3>
+                <p>We can connect your home or business.</p>
               </div>
-              <span className="text-sm font-bold text-on-surface-variant/20 font-headline">03</span>
             </div>
-            <h3 className="text-3xl font-bold text-primary mb-4 font-headline">Commercial Property</h3>
-            <p className="text-on-surface-variant mb-10 leading-relaxed min-h-[4.5rem]">
-              High-availability connectivity for office parks and retail spaces. Scalable bandwidth that grows with your business and supports heavy cloud workloads.
-            </p>
-            <ul className="space-y-4 mb-10">
-              <li className="flex items-center text-sm font-medium text-on-surface/80">
-                <span className="material-symbols-outlined text-secondary mr-3 text-xl" data-icon="check_circle" style={{fontVariationSettings: "'FILL' 1"}}>check_circle</span>
-                Dedicated service level agreements
-              </li>
-              <li className="flex items-center text-sm font-medium text-on-surface/80">
-                <span className="material-symbols-outlined text-secondary mr-3 text-xl" data-icon="check_circle" style={{fontVariationSettings: "'FILL' 1"}}>check_circle</span>
-                Redundant pathway design
-              </li>
-              <li className="flex items-center text-sm font-medium text-on-surface/80">
-                <span className="material-symbols-outlined text-secondary mr-3 text-xl" data-icon="check_circle" style={{fontVariationSettings: "'FILL' 1"}}>check_circle</span>
-                Priority technical support
-              </li>
-            </ul>
-            <button className="w-full py-4 bg-primary-container text-on-primary font-bold rounded-2xl hover:bg-black transition-all flex items-center justify-center group-hover:shadow-lg">
-              Express Interest
-              <span className="material-symbols-outlined ml-2 text-xl transition-transform group-hover:translate-x-1" data-icon="arrow_forward">arrow_forward</span>
-            </button>
           </div>
-
-          <div className="glass-card group relative p-10 rounded-4xl transition-all duration-500 hover:shadow-[0_32px_64px_rgba(3,5,104,0.1)] hover:-translate-y-1">
-            <div className="flex justify-between items-start mb-10">
-              <div className="w-16 h-16 bg-white/60 rounded-2xl flex items-center justify-center text-primary-container shadow-inner icon-glow">
-                <span className="material-symbols-outlined text-4xl" data-icon="foundation">foundation</span>
-              </div>
-              <span className="text-sm font-bold text-on-surface-variant/20 font-headline">04</span>
-            </div>
-            <h3 className="text-3xl font-bold text-primary mb-4 font-headline">Property Developers</h3>
-            <p className="text-on-surface-variant mb-10 leading-relaxed min-h-[4.5rem]">
-              Future-proof your greenfield developments. We partner with developers to integrate fiber infrastructure during the construction phase.
-            </p>
-            <ul className="space-y-4 mb-10">
-              <li className="flex items-center text-sm font-medium text-on-surface/80">
-                <span className="material-symbols-outlined text-secondary mr-3 text-xl" data-icon="check_circle" style={{fontVariationSettings: "'FILL' 1"}}>check_circle</span>
-                Pre-wiring during construction
-              </li>
-              <li className="flex items-center text-sm font-medium text-on-surface/80">
-                <span className="material-symbols-outlined text-secondary mr-3 text-xl" data-icon="check_circle" style={{fontVariationSettings: "'FILL' 1"}}>check_circle</span>
-                Value-add for property sales
-              </li>
-              <li className="flex items-center text-sm font-medium text-on-surface/80">
-                <span className="material-symbols-outlined text-secondary mr-3 text-xl" data-icon="check_circle" style={{fontVariationSettings: "'FILL' 1"}}>check_circle</span>
-                Turnkey utility management
-              </li>
-            </ul>
-            <button className="w-full py-4 bg-secondary-container text-on-secondary-fixed font-bold rounded-2xl hover:brightness-105 transition-all flex items-center justify-center group-hover:shadow-lg">
-              Express Interest
-              <span className="material-symbols-outlined ml-2 text-xl transition-transform group-hover:translate-x-1" data-icon="arrow_forward">arrow_forward</span>
-            </button>
-          </div>
-
         </div>
-      </div>
 
-      <section className="bg-surface-container-low/50 py-32 rounded-[4rem] mx-4 mb-20">
-        <div className="max-w-7xl mx-auto px-8 grid grid-cols-1 lg:grid-cols-12 gap-16 items-center">
-          <div className="lg:col-span-7 relative">
-            <div className="absolute -inset-4 bg-primary-container/5 rounded-4xl blur-3xl"></div>
-            <img alt="Technical installation" className="relative rounded-3xl shadow-[0_40px_80px_rgba(0,0,0,0.15)] w-full object-cover h-[560px]" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBlzUTFGndkKNc7VALwsBaB_29TSgJ0a5sA0Jj1TvzWQp2ClMN6fOlaxxfvnali0y5DHGOVbb5weDOshsJ1nSG9fJz6Z0AoE0GNxs6wrk9SKM5SVEa_o9YWs7DxvAyhFwo0G10GrPpofYTwyLXezmjb5bZpEn00vwdR8IQSd-zQkAkWFPoXq75v912WH20SSdMP_IawNhElN4IX2HeoZJqXIj0LQe_qTN7opMsmvMJDbvtNoBne5qsBi5rSdWlN2PlIQ-qqUEa-2yA" />
+        <div className="gc-workflow">
+          <section className="gc-panel">
+            <div className="gc-section-title">
+              <StepNumber>2</StepNumber>
+              <div>
+                <h2>Choose Your Connection</h2>
+                <p>What are you looking to connect?</p>
+              </div>
+            </div>
+
+            <div className="gc-connection-grid">
+              {connectionTypes.map((type) => (
+                <button className={`gc-choice ${type.active ? 'is-active' : ''}`} key={type.title} type="button">
+                  <span className="material-symbols-outlined">{type.icon}</span>
+                  <strong>{type.title}</strong>
+                  <small>{type.text}</small>
+                </button>
+              ))}
+            </div>
+          </section>
+
+          <section className="gc-panel">
+            <div className="gc-section-title">
+              <StepNumber>3</StepNumber>
+              <div>
+                <h2>Tell Us About You</h2>
+                <p>Fill in your details and we&apos;ll be in touch.</p>
+              </div>
+            </div>
+
+            <form className="gc-details-form">
+              <input placeholder="Full Name" />
+              <input type="email" placeholder="Email Address" />
+              <div className="gc-form-row">
+                <input type="tel" placeholder="Phone Number" />
+                <select defaultValue="phone" aria-label="Preferred Contact">
+                  <option value="phone">Preferred Contact: Phone</option>
+                  <option value="whatsapp">Preferred Contact: WhatsApp</option>
+                  <option value="email">Preferred Contact: Email</option>
+                </select>
+              </div>
+              <input placeholder="Property Address (if known)" />
+              <textarea placeholder="How can we help you? (optional)" />
+              <label className="gc-consent">
+                <input type="checkbox" />
+                <span>
+                  I agree to Fibrehood&apos;s <a href="/privacy">Privacy Policy</a> and <a href="/terms">Terms & Conditions</a>.
+                </span>
+              </label>
+              <button type="button">
+                Submit Request
+                <span className="material-symbols-outlined">arrow_forward</span>
+              </button>
+            </form>
+          </section>
+        </div>
+
+        <section className="gc-contact-band">
+          <div className="gc-contact-copy">
+            <span className="material-symbols-outlined">support_agent</span>
+            <div>
+              <h2>Prefer to talk to our team?</h2>
+              <p>We&apos;re here to help you every step of the way.</p>
+            </div>
           </div>
-          <div className="lg:col-span-5 lg:pl-12">
-            <h2 className="text-4xl md:text-5xl font-extrabold text-primary mb-8 leading-tight font-headline">Can't find your category?</h2>
-            <p className="text-lg text-on-surface-variant mb-10 leading-relaxed">
-              Our engineering team specializes in bespoke infrastructure layouts. If you have a unique property requirement, our digital architects are ready to map a path for you.
-            </p>
-            <a className="text-primary-container font-bold text-xl inline-flex items-center group" href="#">
-              <span className="border-b-2 border-primary-container/20 pb-1 group-hover:border-primary-container transition-colors">Contact Engineering Team</span>
-              <span className="material-symbols-outlined ml-3 transition-transform group-hover:translate-x-2" data-icon="trending_flat">trending_flat</span>
+          <a className="gc-contact-button" href="mailto:support@fibrehood.co.zw">Contact Us</a>
+          <div className="gc-contact-details">
+            <a href="tel:+263784416605">
+              <span className="material-symbols-outlined">call</span>
+              +263 784 416 605
+            </a>
+            <a href="mailto:support@fibrehood.co.zw">
+              <span className="material-symbols-outlined">mail</span>
+              support@fibrehood.co.zw
             </a>
           </div>
-        </div>
+        </section>
       </section>
     </main>
   );

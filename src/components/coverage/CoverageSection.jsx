@@ -99,123 +99,91 @@ const CoverageSection = forwardRef(({ externalSearch, autoLocate = false }, ref)
   };
 
   return (
-    <section ref={ref} className="px-8 py-24">
-      <div className="mx-auto max-w-7xl">
+    <section ref={ref} className="cp-coverage-section">
+      <div className="cp-search-card">
+        <h2>Check if Fibrehood is available in your area</h2>
+        <p>Search by suburb, estate or street address to see if we&apos;re in your area.</p>
+        <CoverageSearchBar
+          onLocationSelect={handleLocationSelect}
+          isChecking={isChecking}
+          externalSearch={externalSearch}
+        />
 
-        {/* ── Section header ── */}
-        <div className="mb-10">
-          <span className="mb-5 inline-flex rounded-full bg-primary-container px-4 py-2 text-xs font-black uppercase tracking-[0.3em] text-white shadow-[0_16px_38px_rgba(3,5,104,0.18)]">
-            Coverage
-          </span>
-          <div className="flex flex-col justify-between gap-5 md:flex-row md:items-end">
-            <h2 className="max-w-2xl font-headline text-3xl font-extrabold leading-tight tracking-tight text-primary lg:text-4xl">
-              Check if Fibrehood is available in your area.
-            </h2>
-            <p className="max-w-sm shrink-0 text-sm leading-7 text-on-surface-variant md:text-base">
-              Select your estate, apartment, suburb, use your location or type your address to check fibre availability.
-            </p>
+        {error && (
+          <div className="cp-alert is-error">
+            <span className="material-symbols-outlined">error</span>
+            <p>{error}</p>
           </div>
-        </div>
+        )}
 
-        {/* ── Main card ── */}
-        <div
-          className="overflow-hidden rounded-[2.25rem] p-[1px]"
-          style={{
-            background:
-              'linear-gradient(145deg, rgba(3,5,104,0.18), rgba(3,5,104,0.06), rgba(253,204,0,0.28))',
-            boxShadow: '0 30px 90px rgba(3,5,104,0.1)',
-          }}
-        >
-          <div className="overflow-hidden rounded-[calc(2.25rem-1px)] bg-[linear-gradient(180deg,#ffffff_0%,#fbfbfe_100%)]">
-            <div className="border-b border-primary-container/6 bg-[linear-gradient(180deg,#ffffff_0%,#f8f9fd_100%)] p-5">
-              <CoverageSearchBar
-                onLocationSelect={handleLocationSelect}
-                isChecking={isChecking}
-                externalSearch={externalSearch}
-              />
-            </div>
-
-            {/* ── Error state ── */}
-            {error && (
-              <div className="mx-5 mt-4 flex items-center gap-3 rounded-[1.25rem] border border-red-200 bg-red-50 px-5 py-4 text-red-700">
-                <span className="material-symbols-outlined shrink-0">error</span>
-                <p className="text-sm font-medium">{error}</p>
-              </div>
-            )}
-
-            {locationPromptError && (
-              <div className="mx-5 mt-4 flex items-center gap-3 rounded-[1.25rem] border border-amber-200 bg-amber-50 px-5 py-4 text-amber-800">
-                <span className="material-symbols-outlined shrink-0">my_location</span>
-                <p className="text-sm font-medium">{locationPromptError}</p>
-              </div>
-            )}
-
-            {/* ── Checking overlay hint ── */}
-            {isChecking && (
-              <div className="mx-5 mt-4 flex items-center gap-3 rounded-[1.25rem] border border-primary-container/10 bg-primary-container/5 px-5 py-3.5 text-primary-container">
-                <svg className="h-4 w-4 animate-spin shrink-0" fill="none" viewBox="0 0 24 24">
-                  <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
-                  <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z" />
-                </svg>
-                <p className="text-sm font-semibold">Checking coverage for this location…</p>
-              </div>
-            )}
-
-            {/* ── Map ── */}
-            <div className="relative p-5 pt-4">
-              <div className="mb-4 flex flex-wrap items-center justify-between gap-3 rounded-[1.25rem] border border-primary-container/6 bg-surface-container-low/50 px-4 py-3">
-                <div>
-                  <p className="text-[10px] font-black uppercase tracking-[0.28em] text-primary-container/55">
-                    Coverage Map
-                  </p>
-                  <p className="mt-1 text-sm font-medium text-on-surface-variant">
-                    Live view of active zones, planned rollouts, and map-selected address results.
-                  </p>
-                </div>
-                <div className="inline-flex items-center gap-2 rounded-full bg-white px-3 py-2 shadow-[0_10px_28px_rgba(3,5,104,0.06)]">
-                  <span className="relative flex h-2.5 w-2.5">
-                    <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-green-400 opacity-75" />
-                    <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-green-500" />
-                  </span>
-                  <span className="text-[11px] font-black uppercase tracking-[0.2em] text-primary-container">
-                    Interactive Map
-                  </span>
-                </div>
-              </div>
-
-              <div className="relative h-[480px] overflow-hidden rounded-[1.75rem] border border-primary-container/8 shadow-[0_24px_65px_rgba(3,5,104,0.1)] md:h-[540px]">
-                <Suspense fallback={<MapSkeleton />}>
-                  <CoverageMap
-                    selectedPosition={selectedPosition}
-                    onMapClick={handleMapClick}
-                    selectedStatus={result?.status ?? null}
-                  />
-                </Suspense>
-
-                {!selectedPosition && !isChecking && (
-                  <div className="pointer-events-none absolute inset-0 flex items-end justify-center pb-8">
-                    <div className="glass-effect flex items-center gap-2.5 rounded-full border border-white/50 px-6 py-3 text-primary-container shadow-glass">
-                      <span className="material-symbols-outlined animate-bounce text-base">touch_app</span>
-                      <span className="text-sm font-bold">Click the map to drop a pin, or search above</span>
-                    </div>
-                  </div>
-                )}
-              </div>
-            </div>
-
-            {/* ── Result card ── */}
-            {result && !isChecking && (
-              <div className="border-t border-primary-container/6 bg-[linear-gradient(180deg,#fdfdff_0%,#f8f9fd_100%)] p-5">
-                <CoverageResultCard
-                  result={result}
-                  onCTAClick={handleCTAClick}
-                  onReset={handleReset}
-                />
-              </div>
-            )}
+        {locationPromptError && (
+          <div className="cp-alert is-warning">
+            <span className="material-symbols-outlined">my_location</span>
+            <p>{locationPromptError}</p>
           </div>
+        )}
+
+        {isChecking && (
+          <div className="cp-alert is-info">
+            <svg className="h-4 w-4 animate-spin shrink-0" fill="none" viewBox="0 0 24 24">
+              <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
+              <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z" />
+            </svg>
+            <p>Checking coverage for this location...</p>
+          </div>
+        )}
+      </div>
+
+      <div className="cp-map-panel">
+        <aside className="cp-rollout-copy">
+          <p className="cp-small-label">Rollout Map</p>
+          <h2>Southview Park rollout zones</h2>
+          <p>Live view of our fibre rollout. Click on a zone to see more details.</p>
+
+          <div className="cp-map-legend">
+            <span><i className="is-live" /> Live (Now Available)</span>
+            <span><i className="is-progress" /> In Progress</span>
+            <span><i className="is-planned" /> Planned</span>
+            <span><i className="is-started" /> Not Started</span>
+          </div>
+
+          <div className="cp-question-box">
+            <h3>Questions about your area?</h3>
+            <p>Contact our team and we&apos;ll be happy to help.</p>
+            <a href="mailto:support@fibrehood.co.zw">
+              Contact Us
+              <span className="material-symbols-outlined">arrow_forward</span>
+            </a>
+          </div>
+        </aside>
+
+        <div className="cp-live-map">
+          <Suspense fallback={<MapSkeleton />}>
+            <CoverageMap
+              selectedPosition={selectedPosition}
+              onMapClick={handleMapClick}
+              selectedStatus={result?.status ?? null}
+            />
+          </Suspense>
+
+          {!selectedPosition && !isChecking && (
+            <div className="cp-map-hint">
+              <span className="material-symbols-outlined">touch_app</span>
+              <span>Click the map to drop a pin, or search above</span>
+            </div>
+          )}
         </div>
       </div>
+
+      {result && !isChecking && (
+        <div className="cp-result-wrap">
+          <CoverageResultCard
+            result={result}
+            onCTAClick={handleCTAClick}
+            onReset={handleReset}
+          />
+        </div>
+      )}
 
       {/* ── Modals ── */}
       <Suspense fallback={null}>

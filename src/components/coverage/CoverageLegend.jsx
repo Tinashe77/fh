@@ -4,7 +4,7 @@ const LEGEND_STATUSES = ['LIVE', 'IN_PROGRESS', 'NOT_STARTED', 'NOT_AVAILABLE'];
 
 const CoverageLegend = () => {
   return (
-    <div className="absolute bottom-4 right-4 z-[1000] rounded-2xl border border-white/70 bg-white/95 px-4 py-3 shadow-[0_18px_40px_rgba(3,5,104,0.12)] backdrop-blur-sm">
+    <div className="coverage-map-legend absolute bottom-4 right-4 z-[1000] rounded-2xl border border-white/70 bg-white/95 px-4 py-3 shadow-[0_18px_40px_rgba(3,5,104,0.12)] backdrop-blur-sm">
       <p className="text-[9px] font-black uppercase tracking-[0.25em] text-on-surface-variant mb-2.5">
         Coverage
       </p>

@@ -281,7 +281,7 @@ const CoverageSearchBar = ({ onLocationSelect, isChecking, externalSearch }) => 
           <span className="material-symbols-outlined text-base">
             {isLocating ? 'sync' : 'my_location'}
           </span>
-          <span className="hidden sm:inline">My Location</span>
+          <span className="hidden sm:inline">Use My Location</span>
         </button>
 
         {/* Search button */}
