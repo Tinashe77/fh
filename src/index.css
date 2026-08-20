@@ -285,6 +285,47 @@
     padding: 24px 0 56px;
   }
 
+  .gc-flow-intro {
+    width: min(100% - 64px, 1180px);
+    margin: 0 auto;
+    padding: 34px 0 0;
+  }
+
+  .gc-flow-intro > div {
+    border: 1px solid rgba(3, 5, 104, 0.08);
+    border-radius: 18px;
+    background: #ffffff;
+    padding: 28px 34px;
+    box-shadow: 0 18px 46px rgba(3, 5, 104, 0.08);
+  }
+
+  .gc-flow-intro p {
+    margin: 0 0 10px;
+    color: #735c00;
+    font-size: 11px;
+    font-weight: 900;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+  }
+
+  .gc-flow-intro h2 {
+    margin: 0;
+    color: #030568;
+    font-family: Manrope, sans-serif;
+    font-size: 30px;
+    font-weight: 900;
+  }
+
+  .gc-flow-intro span {
+    display: block;
+    max-width: 860px;
+    margin-top: 12px;
+    color: rgba(3, 5, 104, 0.74);
+    font-size: 15px;
+    font-weight: 700;
+    line-height: 1.65;
+  }
+
   .gc-availability,
   .gc-panel,
   .gc-contact-band {
@@ -716,7 +757,8 @@
 
   @media (max-width: 1023px) {
     .gc-hero-inner,
-    .gc-shell {
+    .gc-shell,
+    .gc-flow-intro {
       width: min(100% - 36px, 760px);
     }
 
@@ -1144,6 +1186,37 @@
 
   .cp-live-map .coverage-map-legend {
     display: none;
+  }
+
+  .coverage-zone-label {
+    pointer-events: none;
+    background: transparent;
+    border: 0;
+  }
+
+  .coverage-zone-label__inner {
+    width: 132px;
+    color: #ffffff;
+    font-family: Manrope, sans-serif;
+    text-align: center;
+    text-shadow: 0 2px 12px rgba(3, 5, 104, 0.45);
+  }
+
+  .coverage-zone-label__inner strong {
+    display: block;
+    color: #ffffff;
+    font-size: 18px;
+    font-weight: 900;
+    line-height: 1.1;
+  }
+
+  .coverage-zone-label__inner span {
+    display: block;
+    margin-top: 2px;
+    color: rgba(255, 255, 255, 0.92);
+    font-size: 12px;
+    font-weight: 800;
+    line-height: 1.1;
   }
 
   .cp-map-hint {

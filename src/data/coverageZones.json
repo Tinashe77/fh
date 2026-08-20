@@ -616,8 +616,8 @@
     "province": "Harare",
     "city": "Harare",
     "suburb": "Southview Park",
-    "status": "IN_PROGRESS",
-    "description": "Phase 1D: Rollout in progress.",
+    "status": "LIVE",
+    "description": "Phase 1D: Live.",
     "isActive": true,
     "polygonGeoJson": {
       "type": "Polygon",
@@ -809,8 +809,8 @@
     "province": "Harare",
     "city": "Harare",
     "suburb": "Southview Park",
-    "status": "NOT_STARTED",
-    "description": "Phase 2A: Not yet started.",
+    "status": "PLANNED",
+    "description": "Phase 2A: Planned.",
     "isActive": true,
     "polygonGeoJson": {
       "type": "Polygon",
@@ -1347,8 +1347,8 @@
     "province": "Harare",
     "city": "Harare",
     "suburb": "Southview Park",
-    "status": "NOT_STARTED",
-    "description": "Phase 2C: Not yet started.",
+    "status": "PLANNED",
+    "description": "Phase 2C: Planned.",
     "isActive": true,
     "polygonGeoJson": {
       "type": "Polygon",

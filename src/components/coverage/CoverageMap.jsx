@@ -60,6 +60,40 @@ function getPolygonStyle(status) {
   };
 }
 
+function getZoneLabel(zone) {
+  const phase = zone.name.replace('Southview ', '');
+  const statusLabel =
+    zone.status === 'LIVE'
+      ? 'Live'
+      : zone.status === 'IN_PROGRESS'
+        ? 'In Progress'
+        : zone.status === 'PLANNED'
+          ? 'Planned'
+          : 'Not Started';
+
+  return { phase, statusLabel };
+}
+
+function getZoneCenter(zone) {
+  return L.geoJSON(zone.polygonGeoJson).getBounds().getCenter();
+}
+
+function createZoneLabelIcon(zone) {
+  const { phase, statusLabel } = getZoneLabel(zone);
+
+  return L.divIcon({
+    className: 'coverage-zone-label',
+    html: `
+      <div class="coverage-zone-label__inner">
+        <strong>${phase}</strong>
+        <span>${statusLabel}</span>
+      </div>
+    `,
+    iconSize: [132, 54],
+    iconAnchor: [66, 27],
+  });
+}
+
 // ── FlyToLocation: flies map to a position when it changes ───────────────────
 function FlyToLocation({ position }) {
   const map = useMap();
@@ -153,6 +187,20 @@ const CoverageMap = ({ selectedPosition, onMapClick, selectedStatus }) => {
             }}
           />
         ))}
+
+        {activeZones.map((zone) => {
+          const center = getZoneCenter(zone);
+
+          return (
+            <Marker
+              key={`${zone.id}-label`}
+              position={center}
+              icon={createZoneLabelIcon(zone)}
+              interactive={false}
+              keyboard={false}
+            />
+          );
+        })}
 
         {/* ── Selected location marker ── */}
         {selectedPosition && (
