@@ -21,7 +21,7 @@ const Screen4 = () => {
   return (
     <main className="bg-white pb-20">
       <section
-        className="relative flex min-h-[680px] items-center overflow-hidden pt-28"
+        className="relative flex min-h-[680px] items-center overflow-hidden pt-36"
         style={{
           backgroundImage:
             'linear-gradient(90deg, rgba(1,2,48,0.94) 0%, rgba(3,5,104,0.78) 43%, rgba(3,5,104,0.42) 72%, rgba(3,5,104,0.2) 100%), url(https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&w=1800&q=85)',

@@ -11,6 +11,8 @@ import SignUpPage from './screens/SignUpPage';
 import DocumentPage from './screens/DocumentPage';
 import SupportPage from './screens/SupportPage';
 import GalleryPage from './screens/GalleryPage';
+import AboutPage from './screens/AboutPage';
+import PartnerPage from './screens/PartnerPage';
 
 function App() {
   return (
@@ -19,6 +21,10 @@ function App() {
         <Route path="/" element={<Layout />}>
           {/* Home */}
           <Route index element={<Screen1 />} />
+          <Route path="about" element={<AboutPage />} />
+          <Route path="about-us" element={<Navigate to="/about" replace />} />
+          <Route path="partner-us" element={<PartnerPage />} />
+          <Route path="developers-estates" element={<Navigate to="/partner-us" replace />} />
 
           {/* Fibre Plans */}
           <Route path="fibre-plans" element={<Screen3 />} />

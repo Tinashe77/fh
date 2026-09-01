@@ -1,96 +1,134 @@
-import { useLocation } from 'react-router-dom';
-import CoverageSection from '../components/coverage/CoverageSection';
+import { Link } from 'react-router-dom';
 
-const journeySteps = [
+const connectionTypes = [
   {
-    icon: 'location_on',
-    title: 'Check Availability',
-    text: "Enter your address to see if we're in your area.",
+    icon: 'home',
+    title: 'Residential Suburbs',
+    text: 'End-to-end fibre connectivity for standalone homes. Our non-invasive trenching technology ensures minimal disruption to your driveway and garden.',
+    points: ['Non-invasive micro-trenching', 'Same-day activation options', 'Standard 20m free cabling'],
   },
   {
-    icon: 'inventory_2',
-    title: 'Choose Your Plan',
-    text: 'Select the perfect fibre plan for your needs.',
+    icon: 'apartment',
+    title: 'Multi-Dwelling Units',
+    text: 'Customized infrastructure for apartment blocks and gated communities. We manage the backbone installation to provide every resident with gigabit speeds.',
+    points: ['Building management liaison', 'Internal riser optimization', 'Zero cost to body corporate'],
   },
   {
-    icon: 'event_available',
-    title: 'Book Installation',
-    text: "Pick a convenient date. We'll do the rest.",
+    icon: 'storefront',
+    title: 'Commercial Property',
+    text: 'High-availability connectivity for office parks and retail spaces. Scalable bandwidth that grows with your business.',
+    points: ['Dedicated service level agreements', 'Redundant pathway design', 'Priority technical support'],
   },
   {
-    icon: 'wifi',
-    title: 'Get Connected',
-    text: 'Enjoy fast, reliable internet every day.',
+    icon: 'other_houses',
+    title: 'Property Developers',
+    text: 'Future-proof your greenfield developments. We partner with developers to integrate fibre infrastructure during the construction phase.',
+    points: ['Pre-wiring during construction', 'Value-add for property sales', 'Turnkey utility management'],
   },
 ];
 
-const Screen2 = () => {
-  const location = useLocation();
-  const shouldAutoLocate = new URLSearchParams(location.search).get('locate') === '1';
+const steps = [
+  {
+    icon: 'location_on',
+    title: 'Check Coverage',
+    text: 'Confirm availability for your area, building or Southview phase.',
+  },
+  {
+    icon: 'assignment_turned_in',
+    title: 'Choose Your Plan',
+    text: 'Pick the fibre package that fits your home or business.',
+  },
+  {
+    icon: 'contact_page',
+    title: 'Sign Up',
+    text: 'Share your details and complete the simple registration steps.',
+  },
+  {
+    icon: 'router',
+    title: 'Get Connected',
+    text: 'Fibrehood schedules installation and activates your service.',
+  },
+];
 
-  return (
-    <main className="gc-page">
-      <section className="gc-hero">
-        <div className="gc-hero-inner">
-          <div className="gc-hero-copy">
-            <p className="gc-eyebrow">Get Connected</p>
-            <h1>
-              Let&apos;s Get You
-              <span>Connected.</span>
-            </h1>
-            <p className="gc-hero-text">
-              Getting started with Fibrehood is simple. Choose your connection type, check availability and we&apos;ll handle the rest.
-            </p>
-          </div>
+const Screen2 = () => (
+  <main className="connect-page">
+    <section className="connect-hero">
+      <span className="material-symbols-outlined connect-float connect-float--cap">school</span>
+      <span className="material-symbols-outlined connect-float connect-float--wifi">wifi</span>
+      <span className="material-symbols-outlined connect-float connect-float--shop">storefront</span>
+      <span className="material-symbols-outlined connect-float connect-float--people">groups</span>
+      <div className="connect-shell connect-hero__inner">
+        <div className="connect-hero__copy">
+          <h1>
+            Let&apos;s Get You
+            <span>
+              Connected<span className="connect-period">.</span>
+            </span>
+          </h1>
+          <p>
+            Getting started with Fibrehood is simple. Choose your connection type, check availability and we&apos;ll handle the rest.
+          </p>
+          <Link className="connect-primary" to="/sign-up">
+            Sign Up Now
+            <span className="material-symbols-outlined">arrow_forward</span>
+          </Link>
+        </div>
+      </div>
+    </section>
 
-          <div className="gc-journey">
-            {journeySteps.map((step) => (
-              <article className="gc-journey-item" key={step.title}>
-                <span className="material-symbols-outlined">{step.icon}</span>
-                <h2>{step.title}</h2>
-                <p>{step.text}</p>
-              </article>
+    <section className="connect-shell connect-solutions" aria-label="Connection types">
+      {connectionTypes.map((item) => (
+        <article className="connect-solution-card" key={item.title}>
+          <span className="material-symbols-outlined connect-solution-icon">{item.icon}</span>
+          <h2>{item.title}</h2>
+          <p>{item.text}</p>
+          <ul>
+            {item.points.map((point) => (
+              <li key={point}>
+                <span className="material-symbols-outlined">check_circle</span>
+                {point}
+              </li>
             ))}
-          </div>
-        </div>
-      </section>
+          </ul>
+          <Link className="connect-card-btn" to="/coverage?locate=1">
+            Express Interest
+            <span className="material-symbols-outlined">arrow_forward</span>
+          </Link>
+        </article>
+      ))}
+    </section>
 
-      <section className="gc-flow-intro">
-        <div>
-          <p>Start here</p>
-          <h2>Check your location first.</h2>
-          <span>
-            Enter your suburb, estate, apartment or street address. If fibre is live, you can request connection immediately. If rollout is still underway or planned, you can register interest so the team can follow up.
-          </span>
-        </div>
-      </section>
+    <section className="connect-shell connect-how">
+      <p className="connect-eyebrow">How it works</p>
+      <h2>Four simple steps to get connected.</h2>
+      <div className="connect-steps">
+        {steps.map((step, index) => (
+          <article className="connect-step" key={step.title}>
+            <strong>{String(index + 1).padStart(2, '0')}</strong>
+            <span className="material-symbols-outlined connect-step-icon">{step.icon}</span>
+            <h3>{step.title}</h3>
+            <p>{step.text}</p>
+          </article>
+        ))}
+      </div>
+    </section>
 
-      <CoverageSection autoLocate={shouldAutoLocate} />
-
-      <section className="gc-shell">
-        <section className="gc-contact-band">
-          <div className="gc-contact-copy">
-            <span className="material-symbols-outlined">support_agent</span>
-            <div>
-              <h2>Prefer to talk to our team?</h2>
-              <p>We&apos;re here to help you every step of the way.</p>
-            </div>
-          </div>
-          <a className="gc-contact-button" href="mailto:support@fibrehood.co.zw">Contact Us</a>
-          <div className="gc-contact-details">
-            <a href="tel:+263784416605">
-              <span className="material-symbols-outlined">call</span>
-              +263 784 416 605
-            </a>
-            <a href="mailto:support@fibrehood.co.zw">
-              <span className="material-symbols-outlined">mail</span>
-              support@fibrehood.co.zw
-            </a>
-          </div>
-        </section>
-      </section>
-    </main>
-  );
-};
+    <section className="connect-shell connect-cta">
+      <span className="material-symbols-outlined connect-cta-icon">support_agent</span>
+      <div>
+        <h2>Ready to get connected?</h2>
+        <p>Our team is standing by to bring fast, reliable fibre internet to your location.</p>
+      </div>
+      <a className="connect-outline" href="mailto:support@fibrehood.co.zw">
+        <span className="material-symbols-outlined">headset_mic</span>
+        Talk to Our Team
+      </a>
+      <Link className="connect-yellow" to="/sign-up">
+        Sign Up Now
+        <span className="material-symbols-outlined">arrow_forward</span>
+      </Link>
+    </section>
+  </main>
+);
 
 export default Screen2;

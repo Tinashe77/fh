@@ -16,7 +16,7 @@ const contactChannels = [
 const SupportPage = () => {
   return (
     <main className="bg-white pb-20">
-      <section className="relative flex min-h-[430px] items-center overflow-hidden bg-primary-container pt-28">
+      <section className="relative flex min-h-[430px] items-center overflow-hidden bg-primary-container pt-36">
         <div className="absolute inset-0 bg-[linear-gradient(120deg,rgba(3,5,104,0.98),rgba(3,5,104,0.82),rgba(253,204,0,0.20))]" />
         <div
           className="pointer-events-none absolute inset-0 opacity-[0.055]"

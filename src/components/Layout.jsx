@@ -5,6 +5,7 @@ import Footer from './Footer';
 
 const Layout = () => {
   const location = useLocation();
+  const isStandaloneSignup = location.pathname === '/sign-up';
 
   useEffect(() => {
     if (!location.hash) {
@@ -20,11 +21,11 @@ const Layout = () => {
 
   return (
     <div className="flex flex-col min-h-screen">
-      <Navbar />
+      {!isStandaloneSignup && <Navbar />}
       <div className="flex-1">
         <Outlet />
       </div>
-      <Footer />
+      {!isStandaloneSignup && <Footer />}
     </div>
   );
 };

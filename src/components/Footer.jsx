@@ -79,10 +79,10 @@ const Footer = () => {
             <h4 className="text-yellow-400 font-extrabold uppercase tracking-widest text-[11px]">Company</h4>
             <ul className="space-y-3">
               {[
-                { label: 'About Us', to: '/' },
+                { label: 'About Us', to: '/about' },
                 { label: 'Fibre Plans', to: '/fibre-plans' },
                 { label: 'Get Connected', to: '/get-connected' },
-                { label: 'Developers & Estates', to: '/#developers-estates' },
+                { label: 'Partner Us', to: '/partner-us' },
                 { label: 'Southview Project', to: '/southview' },
                 { label: 'Gallery', to: '/gallery' },
               ].map(({ label, to }) => (

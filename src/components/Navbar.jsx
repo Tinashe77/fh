@@ -1,65 +1,20 @@
-import { useState, useRef } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 
 const navItems = [
-  {
-    name: 'Home',
-    path: '/',
-  },
-  {
-    name: 'Fibre Plans',
-    path: '/fibre-plans',
-    sub: [
-      { name: 'Residential', path: '/fibre-plans/residential' },
-      { name: 'Business', path: '/fibre-plans/business' },
-    ],
-  },
-  {
-    name: 'Coverage',
-    path: '/coverage',
-    sub: [
-      { name: 'Coverage Map', path: '/coverage' },
-      { name: 'Our Network', path: '/coverage' },
-      { name: 'Projects', path: '/southview' },
-      { name: 'Southview Project', path: '/southview' },
-    ],
-  },
-  {
-    name: 'Get Connected',
-    path: '/get-connected',
-    sub: [
-      { name: 'Get Connected Overview', path: '/get-connected' },
-      { name: 'Residential Suburbs', path: '/get-connected/residential-suburbs' },
-      { name: 'Multi Dwelling Units', path: '/get-connected/multi-dwelling-units' },
-      { name: 'Commercial Property', path: '/get-connected/commercial-property' },
-    ],
-  },
-  { name: 'Developers & Estates', path: '/#developers-estates' },
+  { name: 'Home', path: '/' },
+  { name: 'Fibre Plans', path: '/fibre-plans' },
+  { name: 'Coverage', path: '/coverage' },
+  { name: 'Get Connected', path: '/get-connected' },
+  { name: 'Partner Us', path: '/partner-us' },
   { name: 'Support', path: '/support' },
 ];
 
 const Navbar = () => {
   const location = useLocation();
-  const [openDropdown, setOpenDropdown] = useState(null);
-  const closeTimer = useRef(null);
-
-  const normalizePath = (path) => path.split('#')[0] || '/';
 
   const isPathActive = (path) => {
-    const normalized = normalizePath(path);
-    if (normalized === '/') return location.pathname === '/';
-    return location.pathname.startsWith(normalized);
-  };
-
-  const isItemActive = (item) => isPathActive(item.path) || item.sub?.some((sub) => isPathActive(sub.path));
-
-  const handleMouseEnter = (name) => {
-    clearTimeout(closeTimer.current);
-    setOpenDropdown(name);
-  };
-
-  const handleMouseLeave = () => {
-    closeTimer.current = setTimeout(() => setOpenDropdown(null), 120);
+    if (path === '/') return location.pathname === '/';
+    return location.pathname === path || location.pathname.startsWith(`${path}/`);
   };
 
   return (
@@ -77,55 +32,20 @@ const Navbar = () => {
         {/* Nav links */}
         <div className="hidden lg:flex items-center space-x-1">
           {navItems.map((item) => (
-            <div
+            <Link
               key={item.name}
-              className="relative"
-              onMouseEnter={() => item.sub && handleMouseEnter(item.name)}
-              onMouseLeave={handleMouseLeave}
+              to={item.path}
+              className={`relative flex items-center px-3 py-2 rounded-full text-sm transition-colors duration-200 font-semibold ${
+                isPathActive(item.path)
+                  ? 'text-blue-900 bg-blue-50'
+                  : 'text-blue-900/60 hover:text-blue-900 hover:bg-slate-50'
+              }`}
             >
-              <Link
-                to={item.path}
-                className={`flex items-center gap-1 px-3 py-2 rounded-full text-sm transition-colors duration-200 font-semibold ${
-                  isItemActive(item)
-                    ? 'text-blue-900 bg-blue-50'
-                    : 'text-blue-900/60 hover:text-blue-900 hover:bg-slate-50'
-                }`}
-              >
-                {item.name}
-                {item.sub && (
-                  <span
-                    className={`material-symbols-outlined text-[14px] transition-transform duration-200 ${
-                      openDropdown === item.name ? 'rotate-180' : ''
-                    }`}
-                  >
-                    expand_more
-                  </span>
-                )}
-                {isItemActive(item) && (
-                  <span className="absolute -bottom-[1px] left-1/2 -translate-x-1/2 w-1.5 h-1.5 rounded-full bg-yellow-400" />
-                )}
-              </Link>
-
-              {/* Dropdown */}
-              {item.sub && openDropdown === item.name && (
-                <div
-                  className="absolute top-full left-0 mt-2 py-2 rounded-2xl bg-white shadow-[0_12px_40px_rgba(3,5,104,0.14)] border border-slate-100 min-w-[200px] z-50"
-                  onMouseEnter={() => handleMouseEnter(item.name)}
-                  onMouseLeave={handleMouseLeave}
-                >
-                  {item.sub.map((sub) => (
-                    <Link
-                      key={sub.name}
-                      to={sub.path}
-                      className="flex items-center gap-2.5 px-5 py-2.5 text-sm text-blue-900/70 hover:text-blue-900 hover:bg-slate-50 transition-colors duration-150"
-                    >
-                      <span className="w-1.5 h-1.5 rounded-full bg-yellow-400 shrink-0" />
-                      {sub.name}
-                    </Link>
-                  ))}
-                </div>
+              {item.name}
+              {isPathActive(item.path) && (
+                <span className="absolute -bottom-[1px] left-1/2 -translate-x-1/2 w-1.5 h-1.5 rounded-full bg-yellow-400" />
               )}
-            </div>
+            </Link>
           ))}
         </div>
 
